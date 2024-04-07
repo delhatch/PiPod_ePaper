@@ -7,27 +7,6 @@ import RPi.GPIO as GPIO
 import sys
 import os
 
-done = False
-music = playback.music()
-music.enableEQ()
-view = display.view()
-menu = navigation.menu()
-PiPod = device.PiPod()
-clock = pygame.time.Clock()
-
-# Updating 6750 files takes 50 seconds
-#view.popUp("Updating Library")
-#music.updateLibrary()  # This creates the info.csv file by reading every .MP3 file metadata.
-menu.loadMetadata()   # This reads the info.csv file
-status = PiPod.getStatus()
-songMetadata = music.getStatus()
-
-# This timer is only used to update the screen during playback.
-displayUpdate = pygame.USEREVENT + 1
-pygame.time.set_timer(displayUpdate, 5000) # Update screen every 5 seconds.
-
-view.update(status, menu.menuDict, songMetadata)
-
 def needToUpdate():
     # Call every Class's method to see if they modified the screen
     need = False
@@ -48,6 +27,26 @@ def clearUpdateFlags():
     view.clearUpdateFlag()
     return
 
+done = False
+music = playback.music()
+music.enableEQ()
+view = display.view()
+menu = navigation.menu()
+PiPod = device.PiPod()
+clock = pygame.time.Clock()
+
+# Updating 6750 files takes 50 seconds
+#view.popUp("Updating Library")
+#music.updateLibrary()  # This creates the info.csv file by reading every .MP3 file metadata.
+menu.loadMetadata()   # This reads the info.csv file
+status = PiPod.getStatus()
+songMetadata = music.getStatus()
+
+# This timer is only used to update the screen during playback.
+displayUpdate = pygame.USEREVENT + 1
+pygame.time.set_timer(displayUpdate, 5000) # Update screen every 5 seconds.
+
+menu.setUpdateFlag()
 
 while not done:
     PiPod.scan_switches()

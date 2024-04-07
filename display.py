@@ -28,7 +28,7 @@ class view():
         self.dispWidth, self.dispHeight = (212,104)
         #self.font = pygame.font.Font("/home/drh/PiPod_Zero2W/Sofware/TerminusTTF-4.46.0.ttf", 18)
         self.textHeight15 = 15
-        self.textHeight19 = 19
+        self.textHeight19 = 18
         self.font15 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), self.textHeight15 )
         self.font19 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), self.textHeight19 )
         self.noRefresh = False
@@ -130,12 +130,16 @@ class view():
                 #text = self.font.render(item, True, secondaryColor)
                 item = '\u2192' + item
                 color = primaryColor
+                self.draw.text( (marginLeft, marginTop), item, font=self.font19, fill=color ) # 0 = black
+                marginTop += 23
             else:
                 #text = self.font.render(item, True, primaryColor)
                 color = primaryColor
+                self.draw.text( (marginLeft, marginTop), item, font=self.font15, fill=color ) # 0 = black
+                marginTop += 20
             #self.lcd.blit(text, (marginLeft, marginTop))
-            self.draw.text( (marginLeft, marginTop), item, font=self.font15, fill=color ) # 0 = black
-            marginTop += 21
+            #self.draw.text( (marginLeft, marginTop), item, font=self.font15, fill=color ) # 0 = black
+            #marginTop += 21
             index += 1
         #self.changedScreen = True
         return
