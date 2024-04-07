@@ -28,7 +28,7 @@ class view():
         self.dispWidth, self.dispHeight = (212,104)
         #self.font = pygame.font.Font("/home/drh/PiPod_Zero2W/Sofware/TerminusTTF-4.46.0.ttf", 18)
         self.textHeight15 = 15
-        self.textHeight19 = 22
+        self.textHeight19 = 19
         self.font15 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), self.textHeight15 )
         self.font19 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), self.textHeight19 )
         self.noRefresh = False
@@ -176,8 +176,8 @@ class view():
             #self.lcd.blit(artist, (10, 51))
             #self.lcd.blit(album, (10, 72))
             #self.lcd.blit(genre, (10, 93))
-            self.draw.text( (2,30), title, font=self.font15, fill=0 )
-            self.draw.text( (2,51), artist, font=self.font15, fill=0 )
+            self.draw.text( (2,30), title, font=self.font19, fill=0 )
+            self.draw.text( (2,51), artist, font=self.font19, fill=0 )
 
         # Time bar
         #pygame.draw.rect(self.lcd, primaryColor, (10, self.dispHeight - 18, self.dispWidth - 20, 15), 1)
