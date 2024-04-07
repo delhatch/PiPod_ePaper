@@ -45,6 +45,17 @@ class music():
             eqFreqs.append(vlc.libvlc_audio_equalizer_get_band_frequency(bandIndex))
         #print(f'Freq: {" ".join(map(str, eqFreqs))}')
         #print(f'Amp: {" ".join(map(str, eqAmps))}')
+        self.changedScreen = False
+
+    def query4Update(self):
+        if( self.changedScreen == True ):
+            return True
+        else:
+            return False
+
+    def clearUpdateFlag(self):
+        self.changedScreen = False
+        return
 
     def backup(self, backupAmount):
         mtime = self.player.get_time()
@@ -116,6 +127,7 @@ class music():
 
     def play(self):
         #print(currentSong)
+        self.changedScreen = True    # About to start playing a song, so update the screen.
         self.player.set_media(self.vlcInstance.media_new_path(self.playlist[self.currentSongIndex][0]))
         #print("About to play:", self.playlist[self.currentSongIndex][0] )
         self.player.play()
@@ -123,6 +135,7 @@ class music():
     def playAtIndex(self, index):
         self.currentSongIndex = index
         self.player.set_media(self.vlcInstance.media_new_path(self.playlist[self.currentSongIndex][0]))
+        self.changedScreen = True    # About to start playing a song, so update the screen.
         self.player.play()
 
     def playPause(self):
@@ -149,6 +162,7 @@ class music():
         self.playlist = [["", "", "", "", ""]]
         self.currentSongIndex = 0
         #self.player.stop()
+        self.changedScreen = True
 
     def next(self):
         if (self.currentSongIndex < len(self.playlist)-1) and (self.playbackMode != "Repeat1"):
@@ -164,12 +178,14 @@ class music():
         if self.volume <= 95:
             self.volume += 5
             self.alsa.setvolume(self.volume)
+            self.changedScreen = True    # Changed the volume, so update the screen.
             #print(self.volume)
 
     def volumeDown(self):
         if self.volume > 5:
             self.volume -= 5
             self.alsa.setvolume(self.volume)
+            self.changedScreen = True    # Changed the volume, so update the screen.
 
     def updateLibrary(self):
         self.playPause()

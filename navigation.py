@@ -20,26 +20,42 @@ class menu():
     }
 
     def __init__(self):
-        pass
+        self.changedScreen = False
+        return
+
+    def query4Update(self):
+        if( self.changedScreen == True ):
+            return True
+        else:
+            return False
+
+    def clearUpdateFlag(self):
+        self.changedScreen = False
+
+    def setUpdateFlag(self):
+        self.changedScreen = True
 
     def setSelectedItem( self, value ):
         self.menuDict["selectedItem"] = value
 
     def escape(self):
-        self.menuDict["selectedItem"] = 0
-        if self.menuDict["history"]:  # check if history is empty
+        self.changedScreen = True
+        self.menuDict["selectedItem"] = 0  # Select the first item on whatever list will be relevant.
+        if self.menuDict["history"]:  # If the menu history is not empty, back up one
             self.menuDict["current"] = self.menuDict["history"][-1::][0]
             self.menuDict["history"].pop()
         else:
-            self.menuDict["current"] = "musicController"
+            self.menuDict["current"] = "musicController"  # If no history, set to top screen
         return None
 
     def up(self):
+        self.changedScreen = True
         if self.menuDict["selectedItem"] > 0:
             self.menuDict["selectedItem"] -= 1
         return None
 
     def down(self):
+        self.changedScreen = True
         if self.menuDict["current"] == "Queue" and self.menuDict["selectedItem"] < len(self.menuDict[self.menuDict["current"]]):
             self.menuDict["selectedItem"] += 1
         elif self.menuDict["selectedItem"] < len(self.menuDict[self.menuDict["current"]]) - 1:
@@ -51,6 +67,7 @@ class menu():
         #print("Left. Screen =", self.menuDict["current"])
         if self.menuDict["current"] == "list" or self.menuDict["current"] == "Songs":  # move to previous letter in the alphabet
             #self.menuDict["Queue"].append(self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]])
+            self.changedScreen = True
             songInfo = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
             # Get first letter of selected song.
             firstL = songInfo[3][0]
@@ -73,6 +90,7 @@ class menu():
 
         elif self.menuDict["current"] == "Artists":  # Jump to next artist whos name is alphabetically greater.
             # Get first letter of the currently selected artist's name.
+            self.changedScreen = True
             artistName = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
             firstL = artistName[0]
             # Now scan up until find an Artist who's first letter is smaller than this one. Save that letter.
@@ -94,6 +112,7 @@ class menu():
 
         elif self.menuDict["current"] == "Albums":  # Jump to next Album whos name is alphabetically greater.
             # Get first letter of the currently selected Album's name.
+            self.changedScreen = True
             albumName = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
             firstL = albumName[0]
             # Now scan up until find an Album who's first letter is smaller than this one. Save that letter.
@@ -120,6 +139,7 @@ class menu():
         #print("Right. Screen =", self.menuDict["current"])
         if self.menuDict["current"] == "list" or self.menuDict["current"] == "Songs":  # move to next letter in the alphabet
             #self.menuDict["Queue"].append(self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]])
+            self.changedScreen = True
             songInfo = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
             #songTitle = songInfo[3]
             # Get first letter of selected song.
@@ -152,6 +172,7 @@ class menu():
 
         elif self.menuDict["current"] == "Artists":  # Jump to next artist whos name is alphabetically greater.
             # Get first letter of the currently selected artist's name.
+            self.changedScreen = True
             artistName = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
             firstL = artistName[0]
             if (firstL in alphaList) and (firstL != 'Z'):
@@ -179,6 +200,7 @@ class menu():
 
         elif self.menuDict["current"] == "Albums":  # move songs on the selected album to queue
             # Get first letter of the currently selected artist's name.
+            self.changedScreen = True
             albumName = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
             firstL = albumName[0]
             if (firstL in alphaList) and (firstL != 'Z'):
@@ -208,11 +230,14 @@ class menu():
 
     def gotomenu(self):
         if self.menuDict["current"] == "musicController":
+            self.changedScreen = True
             self.menuDict["selectedItem"] = 0
             self.menuDict["current"] = "Main"
         return None
 
     def select(self, playMode):
+        # The only use of 'playMode' is that if the list of songs is currently on the screen, then build the
+        #     song list que appropriate to the playback mode currently in place.
         #print("Entering select with", self.menuDict["current"] )
         if self.menuDict["current"] == "Artists":
             tempList = []
@@ -301,6 +326,7 @@ class menu():
                 return "Repeat1"
 
         else:
+            self.changedScreen = True
             #print("In 'else' with 'current' screen =", self.menuDict["current"] )
             if self.menuDict[self.menuDict["current"]]:  # Does current menu screen has sub-screens? If so, do:
                 self.menuDict["history"].append(self.menuDict["current"])  # update history
@@ -309,13 +335,13 @@ class menu():
             self.menuDict["selectedItem"] = 0
             #print("Exiting 'else' with 'current' screen =", self.menuDict["current"] )
             if self.menuDict["current"] == "Songs":
-                return "setSongSelectedItem"
+                return "setSongSelectedItem"          # Clicked on "Songs". If one is playing, change index so it is centered later.
             if self.menuDict["current"] == "Albums":
-                return "setAlbumSelectedItem"
+                return "setAlbumSelectedItem"         # Clicked on "Albums". Set index so this album is centered later.
             if self.menuDict["current"] == "Artists":
-                return "setArtistSelectedItem"
+                return "setArtistSelectedItem"        # Clicked on "Artists". As above.
             if self.menuDict["current"] == "Genres":
-                return "setGenreSelectedItem"
+                return "setGenreSelectedItem"         # Clicked on "Genre". As above.
 
         return None
 

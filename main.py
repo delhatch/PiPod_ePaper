@@ -22,24 +22,49 @@ menu.loadMetadata()   # This reads the info.csv file
 status = PiPod.getStatus()
 songMetadata = music.getStatus()
 
-# This timer is used to control the speed of the loop.
-# But we want to update the LCD screen 5 times per second.
+# This timer is only used to update the screen during playback.
 displayUpdate = pygame.USEREVENT + 1
-pygame.time.set_timer(displayUpdate, 4000) # Do loop 1/200mS = 5 times per second.
+pygame.time.set_timer(displayUpdate, 5000) # Update screen every 5 seconds.
 
 view.update(status, menu.menuDict, songMetadata)
+
+def needToUpdate():
+    # Call every Class's method to see if they modified the screen
+    need = False
+    if( view.query4Update() ):
+        print("display.py asked")
+        need = True
+    if( music.query4Update() ):
+        print("playback.py asked")
+        need = True
+    if( menu.query4Update() ):
+        print("navigation.py asked")
+        need = True
+    return need
+
+def clearUpdateFlags():
+    music.clearUpdateFlag()
+    menu.clearUpdateFlag()
+    view.clearUpdateFlag()
+    return
+
 
 while not done:
     PiPod.scan_switches()
     music.loop()    # Checks if song has ended, and starts playing next song on que (if not empty).
+
     for event in pygame.event.get():
+        # The following code only runs if an even shows up on the que.
+        # Each class will hold an internal flag to indicate if it modified the screen.
+        # This flag will be tested outside of this block of code (in the outer loop).
         if event.type == pygame.QUIT:
             done = True
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 if menu.menuDict["current"] == "musicController":
-                    isAsleep = PiPod.toggleSleep()
+                    # If at the menu top level, go into sleep mode.
+                    isAsleep = PiPod.toggleSleep()  # Set LCD backlight on/off as appropriate
                     if isAsleep == True:
                         view.setNoRefresh()
                     else:
@@ -102,8 +127,9 @@ while not done:
                         music.player.stop
                         music.updateLibrary()  # Re-create the info.csv file
                         menu.loadMetadata()    # Re-read the info.csv file
+                        menu.setUpdateFlag()
                         #music.clearQueue()    # TODO? If in, can't play a song after Library update.
-                    elif action == "toggleSleep":
+                    elif action == "toggleSleep": # TODO? Can remove this?
                         PiPod.toggleSleep()
                     elif action == "shutdown":
                         view.popUp("Shutdown")
@@ -116,6 +142,8 @@ while not done:
                         while True:
                             pass
                     elif action == "exit":
+                        view.clearAndDisplay()
+                        view.shutdownScreen()
                         sys.exit(0)
                     elif action == "playAtIndex":
                         if menu.menuDict["selectedItem"] == 0:
@@ -176,7 +204,8 @@ while not done:
                                 music.unshuffle()
 
         if event.type  == displayUpdate:
-            if PiPod.isAsleep() == False:
+            # This code only runs once every 5 seconds.
+            if( PiPod.isAsleep() == False and menu.menuDict["current"] == "musicController"):
                 #print(menu.menuDict["selectedItem"] )
                 status = PiPod.getStatus()         # Reads battery voltage, gets "status[2]" = backlight on/off
                 songMetadata = music.getStatus()   # Get song length, how far in, song info, vol, playlist, index of current song
@@ -186,5 +215,13 @@ while not done:
                 view.refresh()
         # The next line gets executed every time we check for an event on the que, no matter the event.
         pass
-    clock.tick(5)  # Limit the framerate to X FPS, to retain CPU resources
-
+    # Now we check to see if any Class has modified the screen.
+    if( needToUpdate() ):
+        clearUpdateFlags()
+        status = PiPod.getStatus()         # Reads battery voltage, gets "status[2]" = backlight on/off
+        songMetadata = music.getStatus()   # Get song length, how far in, song info, vol, playlist, index of current song
+        temp = view.update(status, menu.menuDict, songMetadata) # Creates the screen and writes to frame buffer
+        #menu.setSelectedItem( temp )
+        #print("Got back", temp )
+        view.refresh()
+    clock.tick(10)  # Code delays here until 1/10th of a second has passed.

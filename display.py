@@ -13,8 +13,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 noRefresh = False # If True, the screen will NOT refresh.
 displayPlayMode = "Normal"
-primaryColor = 0    # 0 = black
-secondaryColor = 50 # gray
+primaryColor = 0     # 0 = black
+secondaryColor = 255 # white
 
 class view():
     def __init__(self):
@@ -25,13 +25,10 @@ class view():
         pygame.init()
         pygame.key.set_repeat(500,100)  # This is only for attached PC keyboards. Can remove?
 
-        surfaceSize=(212,104)
-        self.sWidth = 212
-        self.sHeight = 104
         self.dispWidth, self.dispHeight = (212,104)
         #self.font = pygame.font.Font("/home/drh/PiPod_Zero2W/Sofware/TerminusTTF-4.46.0.ttf", 18)
         self.textHeight15 = 15
-        self.textHeight19 = 19
+        self.textHeight19 = 22
         self.font15 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), self.textHeight15 )
         self.font19 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), self.textHeight19 )
         self.noRefresh = False
@@ -39,7 +36,17 @@ class view():
         # Drawing on the display in Landscape mode
         self.Himage = Image.new('1', (self.epd.height, self.epd.width), 255)  # 255 = clear the frame
         self.draw = ImageDraw.Draw(self.Himage)
+        self.changedScreen = False
 
+    def query4Update(self):
+        if( self.changedScreen == True ):
+            return True
+        else:
+            return False
+
+    def clearUpdateFlag(self):
+        # Call this method once you are sure it's screen changes have been taken care of.
+        self.changedScreen = False
 
     def setPlayMode(self, PlayMode):
         self.displayPlayMode = PlayMode
@@ -74,10 +81,9 @@ class view():
         if self.noRefresh == False:
             # Wait for the screen to be available
             self.epd.ReadBusy()
-            #self.epd.Clear()
             # Refresh the e-Paper screen
             self.epd.display(self.epd.getbuffer(self.Himage))
-            #self.epd.sleep()
+        return
 
     def setNoRefresh(self):
         self.noRefresh = True
@@ -88,6 +94,14 @@ class view():
     def clear(self):
         # Sets all of the pixels in the Himage frame buffer to white.
         self.draw.rectangle( [(0,0),(self.dispWidth, self.dispHeight)], outline=255, fill=255 )
+
+    def clearAndDisplay(self):
+        self.epd.Clear()
+        return
+
+    def shutdownScreen(self):
+        #TODO: Put any shutdown code here
+        pass
 
     def popUp(self, text):
         #self.lcd.fill(backgroundColor)
@@ -114,7 +128,8 @@ class view():
                     item = '\u2192' + " Repeat 1 Song " + '\u2190'
             if index == selectedItem:
                 #text = self.font.render(item, True, secondaryColor)
-                color = secondaryColor
+                item = '\u2192' + item
+                color = primaryColor
             else:
                 #text = self.font.render(item, True, primaryColor)
                 color = primaryColor
@@ -122,8 +137,8 @@ class view():
             self.draw.text( (marginLeft, marginTop), item, font=self.font15, fill=color ) # 0 = black
             marginTop += 21
             index += 1
-
-        self.refresh()
+        #self.changedScreen = True
+        return
 
     def musicController(self, selectedItem, batLevel, chargeStatus, \
                         currentSong, currentTime, songLength, volume, queLength, queIndex):
@@ -182,3 +197,6 @@ class view():
         #self.lcd.blit(songLengthText, (10 + currentTimeText.get_width(), self.dispHeight - 39))
         self.draw.text( (1,self.dispHeight-16), currentTimeText, font=self.font15, fill=0 )
         self.draw.text( (self.dispWidth-37,self.dispHeight-16), songLengthText, font=self.font15, fill=0 )
+
+        #self.changedScreen = True
+        return
