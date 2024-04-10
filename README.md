@@ -16,6 +16,6 @@ This project takes the github.com/delhatch/PiPod project and replaces the LCD sc
 <p>With the e-Paper screen, during playback, the current draw is 210 mA.</p>
 <p>So the e-Paper screen reduces the current drain from the battery by 10 mA. Over one battery "full-charge play until discharged" cycle this equates to 15 more minutes of playtime. And that assumes the LCD backlight is OFF the entire time (so you cannot ever view the display) which is un-realistic. So the e-Paper screen is definitely a major improvement in battery life (playback time).</p>
 <h3>Instructions</h3>
-<li>To come soon. It basically follows the instructions in PiPod_Zero2W, but with the lite OS, and the need to install the wavershaer-epaper libraries. Also the wiring from the e-Paper module to the Pi Zero 2 W is unique, and critical. Diagram to come.</li>
+<li>To come soon. It basically follows the instructions in PiPod_Zero2W, but with the lite OS, and the need to install the wavershare-epaper libraries. Also the wiring from the e-Paper module to the Pi Zero 2 W is unique, and critical. Diagram to come.</li>
 <h3>Fix the Waveshare Bug</h3>
 <p>As part of the git clone of the waveshare-epaper repository, there will be a file in the lib section called epd2in13_V4.py. This file must be replaced with the file in this repository. There is a single-line bug fix in the ReadBusy(self) method that is corrected in the file located in this repository.</p>
