@@ -11,13 +11,13 @@ def needToUpdate():
     # Call every Class's method to see if they modified the screen
     need = False
     if( view.query4Update() ):
-        print("display.py asked")
+        #print("display.py asked")
         need = True
     if( music.query4Update() ):
-        print("playback.py asked")
+        #print("playback.py asked")
         need = True
     if( menu.query4Update() ):
-        print("navigation.py asked")
+        #print("navigation.py asked")
         need = True
     return need
 
@@ -90,6 +90,11 @@ while not done:
                     music.volumeDown()
                 elif menu.menuDict["current"] == "musicController":
                     music.backup( 5000 ) # Back up this many milliseconds
+                    menu.setUpdateFlag() # Indicate that the screen needs to be updated.
+                    for event in pygame.event.get():
+                        if event.type == pygame.KEYDOWN:
+                            if event.key == pygame.K_DOWN:
+                                music.backup( 5000 ) # Back up this many milliseconds
                     #music.shuffle()
                     #menu.menuDict["Queue"] = music.playlist
                 else:
@@ -205,13 +210,13 @@ while not done:
         if event.type  == displayUpdate:
             # This code only runs once every 5 seconds.
             if( PiPod.isAsleep() == False and menu.menuDict["current"] == "musicController"):
-                #print(menu.menuDict["selectedItem"] )
                 status = PiPod.getStatus()         # Reads battery voltage, gets "status[2]" = backlight on/off
                 songMetadata = music.getStatus()   # Get song length, how far in, song info, vol, playlist, index of current song
                 temp = view.update(status, menu.menuDict, songMetadata) # Creates the screen and writes to frame buffer
-                #menu.setSelectedItem( temp )
-                #print("Got back", temp )
-                view.refresh()
+                #view.setBaseImage()
+                temp = view.partialUpdate(status, menu.menuDict, songMetadata) # Only upates the time into song, and the bar.
+                view.partialRefresh()
+                #PiPod.turnOffScreenPower()
         # The next line gets executed every time we check for an event on the que, no matter the event.
         pass
     # Now we check to see if any Class has modified the screen.
@@ -223,4 +228,7 @@ while not done:
         #menu.setSelectedItem( temp )
         #print("Got back", temp )
         view.refresh()
+        # If just drew the top screen, set it as the base image for later partial updates.
+        if( menu.menuDict["current"] == "musicController"):
+            view.setBaseImage()
     clock.tick(10)  # Code delays here until 1/10th of a second has passed.

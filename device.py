@@ -38,6 +38,11 @@ class PiPod:
         self.pin23.direction = digitalio.Direction.OUTPUT
         self.pin23.value = True
 
+    def turnOffScreenPower(self):
+        self.pin23.value = False
+        print("Screen power is off")
+        return
+
     def scan_switches(self):
         event = self.keys.events.get()
         if event:
@@ -98,7 +103,7 @@ class PiPod:
         return 1
 
     def reboot(self):
-        os.system("sudo reboot now")
+        os.system("sudo reboot")
         return 1
 
     def VolUp(self):
