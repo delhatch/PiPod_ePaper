@@ -21,7 +21,7 @@ This project takes the github.com/delhatch/PiPod project and replaces the LCD sc
 <p>As part of the git clone of the waveshare-epaper repository, there will be a file in the lib section called epd2in13_V4.py. This file must be replaced with the file in this repository. There is a single-line bug fix in the ReadBusy(self) method that is corrected in the file located in this repository.</p>
 <h3>Wiring the e-Paper screen to the Pi Zero 2 W</h3>
 <p>The e-Paper display I am using is sold by Waveshare: 250x122, 2.13inch E-Ink display HAT for Raspberry Pi. SKU: 12915</p>
-<p>For any changes to the wiring scheme (moving signals to other GPIO pins, for example), the file "epdconfig" must be modified to match.</p>
+<p>For any changes to the wiring scheme (moving signals to other GPIO pins, for example), the file "epdconfig.py" must be modified to match. Note: This repository file replaces the /python/lib/waveshare/epdconfig.py file.</p>
 <table>
     <thead>
         <th>e-Paper Desc.</th>
