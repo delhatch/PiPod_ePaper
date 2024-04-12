@@ -14,7 +14,8 @@ This project takes the github.com/delhatch/PiPod project and replaces the LCD sc
 <p>With the LCD screen, with the backlight on, during playback, the current draw is 266 mA.</p>
 <p>With the LCD screen, with the backlight off, during playback, the current draw is 220 mA.</p>
 <p>With the e-Paper screen, during playback, the current draw is 210 mA.</p>
-<p>So the e-Paper screen reduces the current drain from the battery by 10 mA. Over one battery "full-charge play until discharged" cycle this equates to 15 more minutes of playtime. And that assumes the LCD backlight is OFF the entire time (so you cannot ever view the display) which is un-realistic. So the e-Paper screen is definitely a major improvement in battery life (playback time).</p>
+<p>So the e-Paper screen reduces the current drain from the battery by 10 mA. Over one battery "full-charge play until discharged" cycle this equates to 15 more minutes of playtime. And that assumes the LCD backlight is OFF the entire time (so you cannot ever view the display) which is un-realistic.</p>
+<p>So the e-Paper screen is definitely a major improvement in battery life (playback time), and useability.</p>
 <h3>Instructions</h3>
 <li>To come soon. It basically follows the instructions in PiPod_Zero2W, but with the lite OS, and the need to install the wavershare-epaper libraries. Also the wiring from the e-Paper module to the Pi Zero 2 W is unique, and critical. Diagram to come.</li>
 <h3>Fix the Waveshare Bug</h3>
