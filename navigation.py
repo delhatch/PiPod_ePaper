@@ -346,7 +346,7 @@ class menu():
         return None
 
     def loadMetadata(self):
-        file = open("info.csv", "rt")
+        file = open("/home/drh/info.csv", "rt")
         self.menuDict["Artists"] = []
         self.menuDict["Albums"] = []
         self.menuDict["Songs"] = []
