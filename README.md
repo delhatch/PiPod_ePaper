@@ -32,7 +32,7 @@ This project takes the github.com/delhatch/PiPod project and replaces the LCD sc
             <td>VCC</td>
             <td>1</td>
             <td>3.3V</td>
-            <td>2</td>
+            <td>1</td>
         </tr>
         <tr>
             <td>GND</td>
