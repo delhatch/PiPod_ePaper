@@ -22,59 +22,59 @@ This project takes the github.com/delhatch/PiPod project and replaces the LCD sc
 <h3>Wiring the e-Paper screen to the Pi Zero 2 W</h3>
 <table>
     <thead>
-        <th>e-Paper</th>
-        <th>Column 2</th>
-        <th>Column 3</th>
-        <th>Column 4</th>
+        <th>e-Paper Desc.</th>
+        <th>e-Paper Pin</th>
+        <th>Pi BCM NAME</th>
+        <th>Pi Connector Pin #</th>
     </thead>
     <tbody>
         <tr>
             <td>VCC</td>
-            <td>Row 1, Column 2</td>
-            <td>Row 1, Column 3</td>
-            <td>Row 1, Column 4</td>
+            <td>1</td>
+            <td>3.3V</td>
+            <td>2</td>
         </tr>
         <tr>
-            <td>Row 2, Column 1</td>
-            <td>Row 2, Column 2</td>
-            <td>Row 2, Column 3</td>
-            <td>Row 2, Column 4</td>
+            <td>GND</td>
+            <td>2</td>
+            <td>GND</td>
+            <td>6</td>
         </tr>
         <tr>
-            <td>Row 2, Column 1</td>
-            <td>Row 2, Column 2</td>
-            <td>Row 2, Column 3</td>
-            <td>Row 2, Column 4</td>
+            <td>DIN / MOSI</td>
+            <td>3</td>
+            <td>MOSI / GPIO10</td>
+            <td>19</td>
         </tr>
         <tr>
-            <td>Row 2, Column 1</td>
-            <td>Row 2, Column 2</td>
-            <td>Row 2, Column 3</td>
-            <td>Row 2, Column 4</td>
+            <td>SPI CLK</td>
+            <td>4</td>
+            <td>SCLK / GPIO11</td>
+            <td>23</td>
         </tr>
         <tr>
-            <td>Row 2, Column 1</td>
-            <td>Row 2, Column 2</td>
-            <td>Row 2, Column 3</td>
-            <td>Row 2, Column 4</td>
+            <td>CS</td>
+            <td>5</td>
+            <td>GPIO4</td>
+            <td>7</td>
         </tr>
         <tr>
-            <td>Row 2, Column 1</td>
-            <td>Row 2, Column 2</td>
-            <td>Row 2, Column 3</td>
-            <td>Row 2, Column 4</td>
+            <td>DC</td>
+            <td>6</td>
+            <td>GPIO15</td>
+            <td>10</td>
         </tr>
         <tr>
-            <td>Row 2, Column 1</td>
-            <td>Row 2, Column 2</td>
-            <td>Row 2, Column 3</td>
-            <td>Row 2, Column 4</td>
+            <td>RST</td>
+            <td>7</td>
+            <td>GPIO16</td>
+            <td>36</td>
         </tr>
         <tr>
-            <td>Row 2, Column 1</td>
-            <td>Row 2, Column 2</td>
-            <td>Row 2, Column 3</td>
-            <td>Row 2, Column 4</td>
+            <td>BUSY</td>
+            <td>8</td>
+            <td>GPIO14</td>
+            <td>8</td>
         </tr>
     </tbody>
 </table>
