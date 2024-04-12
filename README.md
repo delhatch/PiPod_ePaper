@@ -22,14 +22,14 @@ This project takes the github.com/delhatch/PiPod project and replaces the LCD sc
 <h3>Wiring the e-Paper screen to the Pi Zero 2 W</h3>
 <table>
     <thead>
-        <th>Column 1</th>
+        <th>e-Paper</th>
         <th>Column 2</th>
         <th>Column 3</th>
         <th>Column 4</th>
     </thead>
     <tbody>
         <tr>
-            <td>Row 1, Column 1</td>
+            <td>VCC</td>
             <td>Row 1, Column 2</td>
             <td>Row 1, Column 3</td>
             <td>Row 1, Column 4</td>
