@@ -21,70 +21,63 @@ This project takes the github.com/delhatch/PiPod project and replaces the LCD sc
 <p>As part of the git clone of the waveshare-epaper repository, there will be a file in the lib section called epd2in13_V4.py. This file must be replaced with the file in this repository. There is a single-line bug fix in the ReadBusy(self) method that is corrected in the file located in this repository.</p>
 <h3>Wiring the e-Paper screen to the Pi Zero 2 W</h3>
 <table>
-    <tr>
-        <th>Header 1</th>
-        <th>Header 2</th>
-        <th>Header 3</th>
-        <th>Header 4</th>
-        <th>Header 5</th>
-        <th>Header 6</th>
-        <th>Header 7</th>
-        <th>Header 8</th>
-        <th>Header 9</th>
-    </tr>
-    <tr>
-        <td>Row 1, Cell 1</td>
-        <td>Row 1, Cell 2</td>
-        <td>Row 1, Cell 3</td>
-        <td>Row 1, Cell 4</td>
-        <td>Row 1, Cell 5</td>
-        <td>Row 1, Cell 6</td>
-        <td>Row 1, Cell 7</td>
-        <td>Row 1, Cell 8</td>
-        <td>Row 1, Cell 9</td>
-    </tr>
-    <tr>
-        <td>Row 2, Cell 1</td>
-        <td>Row 2, Cell 2</td>
-        <td>Row 2, Cell 3</td>
-        <td>Row 2, Cell 4</td>
-        <td>Row 2, Cell 5</td>
-        <td>Row 2, Cell 6</td>
-        <td>Row 2, Cell 7</td>
-        <td>Row 2, Cell 8</td>
-        <td>Row 2, Cell 9</td>
-    </tr>
-    <tr>
-        <td>Row 3, Cell 1</td>
-        <td>Row 2, Cell 2</td>
-        <td>Row 2, Cell 3</td>
-        <td>Row 2, Cell 4</td>
-        <td>Row 2, Cell 5</td>
-        <td>Row 2, Cell 6</td>
-        <td>Row 2, Cell 7</td>
-        <td>Row 2, Cell 8</td>
-        <td>Row 2, Cell 9</td>
-    </tr><tr>
-        <td>Row 4, Cell 1</td>
-        <td>Row 2, Cell 2</td>
-        <td>Row 2, Cell 3</td>
-        <td>Row 2, Cell 4</td>
-        <td>Row 2, Cell 5</td>
-        <td>Row 2, Cell 6</td>
-        <td>Row 2, Cell 7</td>
-        <td>Row 2, Cell 8</td>
-        <td>Row 2, Cell 9</td>
-    </tr>
-  <tr>
-        <td>Row 5, Cell 1</td>
-        <td>Row 2, Cell 2</td>
-        <td>Row 2, Cell 3</td>
-        <td>Row 2, Cell 4</td>
-        <td>Row 2, Cell 5</td>
-        <td>Row 2, Cell 6</td>
-        <td>Row 2, Cell 7</td>
-        <td>Row 2, Cell 8</td>
-        <td>Row 2, Cell 9</td>
-    </tr>
+    <thead>
+        <th>Column 1</th>
+        <th>Column 2</th>
+        <th>Column 3</th>
+        <th>Column 4</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Row 1, Column 1</td>
+            <td>Row 1, Column 2</td>
+            <td>Row 1, Column 3</td>
+            <td>Row 1, Column 4</td>
+        </tr>
+        <tr>
+            <td>Row 2, Column 1</td>
+            <td>Row 2, Column 2</td>
+            <td>Row 2, Column 3</td>
+            <td>Row 2, Column 4</td>
+        </tr>
+        <tr>
+            <td>Row 2, Column 1</td>
+            <td>Row 2, Column 2</td>
+            <td>Row 2, Column 3</td>
+            <td>Row 2, Column 4</td>
+        </tr>
+        <tr>
+            <td>Row 2, Column 1</td>
+            <td>Row 2, Column 2</td>
+            <td>Row 2, Column 3</td>
+            <td>Row 2, Column 4</td>
+        </tr>
+        <tr>
+            <td>Row 2, Column 1</td>
+            <td>Row 2, Column 2</td>
+            <td>Row 2, Column 3</td>
+            <td>Row 2, Column 4</td>
+        </tr>
+        <tr>
+            <td>Row 2, Column 1</td>
+            <td>Row 2, Column 2</td>
+            <td>Row 2, Column 3</td>
+            <td>Row 2, Column 4</td>
+        </tr>
+        <tr>
+            <td>Row 2, Column 1</td>
+            <td>Row 2, Column 2</td>
+            <td>Row 2, Column 3</td>
+            <td>Row 2, Column 4</td>
+        </tr>
+        <tr>
+            <td>Row 2, Column 1</td>
+            <td>Row 2, Column 2</td>
+            <td>Row 2, Column 3</td>
+            <td>Row 2, Column 4</td>
+        </tr>
+    </tbody>
 </table>
+
+
 
