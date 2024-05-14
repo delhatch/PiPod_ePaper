@@ -33,6 +33,39 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <h3>Instructions</h3>
 <p>The bare PC board can be ordered at <a href="https://www.pcbway.com/project/shareproject/ePaper_PiPod_MP3_music_player_a6adf3e1.html">PCBWay</a></p>
 <li>I will post PCB files and instructions soon. It basically follows the instructions in PiPod_Zero2W, but with the lite OS, and the need to install the wavershare-epaper libraries.</li>
+<ul><li>Download the OS file "2024-03-15-raspios-bookworm-arm64-lite.img.xz" or newer.</li>
+<li>Using rufus-3.22.exe (or similar), burn the image to a 128GB micro-SD card.</li>
+<li>Assuming you have a fully-assembled PiPod hardware: Connect an HDMI monitor to the Pi Zero 2 W. Also connect a USB expander hub such as the SmartQ H302S to the Pi Zero usb connector. Connect a USB keyboard and mouse to the hub.</li>
+<li>Apply power to the USB connector at the bottom of the PiPod.</li>
+<li>Power-up the Pi Zero and go through the configuration screens. Create the user "pi" with a password of your choosing. Reboot.</li>
+<li>At the prompt: sudo raspi-config
+  <ul>
+    <li>Go into Menu Item #1. Enter the SSID and passphrase for your wi-fi.<li>
+    <li>Under menu S5 (Boot/Auto-login) select "Console Autologin"</li>
+    <li>Select "Back" to top screen, then "Finish" and then reboot.</li>
+  </ul></li>
+<li>Type sudo nano /boot/config.txt and make the following changes:
+  <ul>
+    <li>un-comment dtparam=spi=on (to turn on the SPI port)</li>
+    <li>comment-out the "dtparam=audio=on" line</li>
+    <li>add a line: dtoverlay=hifiberry-dac</li>
+    <li>un-comment dtparam=i2c_arm=on</li>
+    <li>If you are going to SSH music files into the PiPod, uncomment the SSH line.</li>
+    <li>Ensure that the "dtoverlay=disable-wifi" is NOT commented out (so wifi is ENABLED)
+      <ul>
+        <li>NOTE: After everything is configured and your PiPod is running, you will want to comment this line out, to disable wifi, to save the battery.</li>
+      </ul></li>
+    <li>Ensure the line "dtoverlay=disable-bt" is NOT commented out. Want to disable Bluetooth.
+    <li>At the bottom of the file, add the lines:</li>
+    <ul>
+      <li>dtoverlay=fbtft,spi0-0,ili9341,rotate=90</li>
+      <li>dtparam=bgr=on</li>
+      <li>dtparam=reset_pin=25</li>
+      <li>dtparam=dc_pin=24</li>
+      <li>dtparam=speed=32000000</li>
+    </ul>
+  </ul>
+</li>
 <li>Copy the pipod.service file to /home/pi/.config/systemd/user/.  (You may need to create the "systemd" and "user" folders.)</li>
 <li>Copy the file launch.sh to ~.</li>
 <li>Copy the file global.py to ~/PiPod_ePaper/Sofware/.</li>
