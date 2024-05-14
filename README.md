@@ -33,6 +33,15 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <h3>Instructions</h3>
 <p>The bare PC board can be ordered at <a href="https://www.pcbway.com/project/shareproject/ePaper_PiPod_MP3_music_player_a6adf3e1.html">PCBWay</a></p>
 <li>I will post PCB files and instructions soon. It basically follows the instructions in PiPod_Zero2W, but with the lite OS, and the need to install the wavershare-epaper libraries.</li>
+<li>Copy the pipod.service file to /home/pi/.config/systemd/user/.  (You may need to create the "systemd" and "user" folders.)</li>
+<li>Copy the file launch.sh to ~.</li>
+<li>Copy the file global.py to ~/PiPod_ePaper/Sofware/.</li>
+<li>At prompt type: systemctl --user enable pipod.service
+  <ul>
+    <li>This command will cause systemd to start the PiPod application on every power-up.</li>
+    <li>Another useful command (in case there are problems) is: systemctl --user status pipod.service</li>
+  </ul>
+</li>
 <h3>Fix the Waveshare Bug</h3>
 <p>As part of the git clone of the waveshare-epaper repository, there will be a file in the /python/lib/waveshare-epaper directory called epd2in13_V4.py. This file must be replaced with the file in this repository. There is a single-line bug fix in the ReadBusy(self) method that is corrected in the file located in this repository.</p>
 <h3>Wiring the e-Paper screen to the Pi Zero 2 W</h3>
