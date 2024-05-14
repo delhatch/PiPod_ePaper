@@ -98,18 +98,21 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 </li>
 <li>You should now be able to launch the PiPod software, with everything working.
   <ul>
-    <li>cd into the directory ~/PiPod_Zero2W/Sofware</li>
+    <li>cd into the directory ~/PiPod_ePaper/Sofware</li>
     <li>Type: python3 main.py</li>
   </ul>
 </li>
 <li>To have the PiPod automatically run the player app after a power-on cycle:
   <ul>
-    <li>Copy the pipod.service file into the folder ~/.config/systemd/user/ </li>
+    <li>Copy the pipod.service file into the folder ~/.config/systemd/user/
+    <ul>
+      <li>Note: You may need to create the "systemd" and "user" folders.</li>
+    </ul></li>
     <li>Copy the launch.sh file into the home folder ~/ </li>
-    <li>Copy the global.py file into the folder ~/PiPod_Zero2W/Sofware/ </li>
+    <li>Copy the global.py file into the folder ~/PiPod_ePaper/Sofware/ </li>
     <li>To activate the pipod.service file, at the prompt, type: systemctl --user enable pipod.service </li>
     <li>Make the changes to the display.py file as described in the NOTE below.
-    <li>Reboot. If there are problems, type: systemctl --user status pipod.service </li>
+    <li>Reboot. If there are problems, type: systemctl --user status pipod.service to see if the service launched.</li>
   </ul>
 </li>
 <h3>Fix the Waveshare Bug</h3>
