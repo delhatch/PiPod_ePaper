@@ -115,6 +115,8 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
     <li>Reboot. If there are problems, type: systemctl --user status pipod.service to see if the service launched.</li>
   </ul>
 </li>
+  <li>At this point, you probably want to disable the wifi to save power. sudo nano /boot/firmware/config.txt and enable the line "dtoverlay=disable-wifi"</li>
+</ul>
 <h3>Fix the Waveshare Bug</h3>
 <p>As part of the git clone of the waveshare-epaper repository, there will be a file in the /python/lib/waveshare-epaper directory called epd2in13_V4.py. This file must be replaced with the file in this repository. There is a single-line bug fix in the ReadBusy(self) method that is corrected in the file located in this repository.</p>
 <h3>Wiring the e-Paper screen to the Pi Zero 2 W</h3>
