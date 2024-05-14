@@ -1,6 +1,6 @@
 # PiPod_ePaper
 This project takes the github.com/delhatch/PiPod project and replaces the LCD screen with an e-Paper screen.
-![Alt text](https://github.com/delhatch/PiPod_ePaper/Pictures/blob/main/front_quarter_playing.jpg?raw=true)
+![Alt text](https://github.com/delhatch/PiPod_ePaper/blob/main/front_quarter_playing.jpg?raw=true)
 <h3>Motivation</h3>
 <p>The goal is to see how much power can be conserved by switching from a 2.2" 320x240 LCD screen to a 2.13" 250x122 e-Paper screen (from Waveshare).</p>
 <p>The LCD-based PiPod player, even with various power savings such as wi-fi off, bluetooth off, and lowering the CPU clock speed to 200 MHz, still has a power draw during playback (with the LCD backlight off) averaging 220 mA. So a 1200 mAh battery would run for 5.45 hours, at most.</p>
