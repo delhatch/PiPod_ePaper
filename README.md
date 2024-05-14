@@ -43,7 +43,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <table>
     <thead>
         <th>e-Paper Desc.</th>
-        <th>e-Paper Pin</th>
+        <th>e-Paper Module Pin</th>
         <th>Pi BCM NAME</th>
         <th>Pi Connector Pin #</th>
     </thead>
