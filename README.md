@@ -38,6 +38,8 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <h3>Wiring the e-Paper screen to the Pi Zero 2 W</h3>
 <p>The e-Paper display I am using is sold by Waveshare: 250x122, 2.13inch E-Ink display HAT for Raspberry Pi. SKU: 12915</p>
 <p>Waveshare's epdconfig.py file defines how the Raspi Pi I/O pins are connected to the e-paper screen. For the changes I made to the wiring scheme (moving signals to other GPIO pins, for example), the file "epdconfig.py" was modified to match. Therefore, this github repository file must be moved to replace the /python/lib/waveshare-epaper/epdconfig.py file. This is similar to how the original the waveshare file "epd2in13_V4" was replaced in the instructions above.</p>
+<p>The table below shows how the Raspi Pi was connected to the waveshare e-paper screen module. This is now obsolete because my PCB incorporates all necessary circuitry and connections. See the schematics in the /Hardware folder.</p>
+<p>I am keeping this table in the Readme.md for reference purposes, in case it is useful.</p>
 <table>
     <thead>
         <th>e-Paper Desc.</th>
