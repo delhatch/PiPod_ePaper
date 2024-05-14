@@ -70,14 +70,22 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   </ul>
 </li>
 <li>sudo reboot now</li>
-<li>Install the Adafruit Blinka library:</li>
+<li>Install the Adafruit Blinka library:
   <ul>
     <li>cd ~/ </li>
     <li>sudo apt install build-essential python3-pip python3-dev python3-smbus</li>
     <li>sudo pip install --break-system-packages Adafruit-Blinka</li>
   </ul>
+</li>
+<li>Install the waveshare e-Paper libraries:
+  <ul>
+    <li>cd ~/</li>
+    <li>git clone https://github.com/waveshare/e-Paper.git</li>
+  </ul>
+<li>sudo reboot</li>
+<li>Clone this repository: cd ~/ then type: git clone https://github.com/delhatch/PiPod_ePaper.git</li>
 <li>Copy the pipod.service file to /home/pi/.config/systemd/user/.  (You may need to create the "systemd" and "user" folders.)</li>
-<li>Copy the file launch.sh to ~.</li>
+<li>Copy the file launch.sh to ~/.</li>
 <li>Copy the file global.py to ~/PiPod_ePaper/Sofware/.</li>
 <li>At prompt type: systemctl --user enable pipod.service
   <ul>
