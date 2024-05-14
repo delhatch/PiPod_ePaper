@@ -56,15 +56,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
         <ul>
           <li>NOTE: After everything is configured and your PiPod is running, you will want to comment this line out, to disable wifi, to save the battery.</li>
         </ul></li>
-      <li>Ensure the line "dtoverlay=disable-bt" is NOT commented out. Want to disable Bluetooth.
-      <li>At the bottom of the file, add the lines:</li>
-      <ul>
-        <li>dtoverlay=fbtft,spi0-0,ili9341,rotate=90</li>
-        <li>dtparam=bgr=on</li>
-        <li>dtparam=reset_pin=25</li>
-        <li>dtparam=dc_pin=24</li>
-        <li>dtparam=speed=32000000</li>
-      </ul>
+      <li>Ensure the line "dtoverlay=disable-bt" is NOT commented out. Want to disable Bluetooth.</li>
   </ul>
 </li>
   <li>sudo reboot now</li>
