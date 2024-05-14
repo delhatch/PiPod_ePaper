@@ -10,7 +10,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
    <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/back1.jpg" width="400" /></td>
   </tr>
   <tr>
-   <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/back2.jpg" width="400" /></td>
+   <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/back_bare.jpg" width="400" /></td>
    <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/back3.jpg" width="400" /></td>
   </tr>
 </table>
