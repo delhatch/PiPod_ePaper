@@ -67,6 +67,24 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
       </ul>
   </ul>
 </li>
+  <li>Enter the following lines to install the required packages:
+  <ul>
+    <li>sudo apt install python3-pygame</li>
+    <li>sudo apt install git</li>
+    <li>sudo apt install python3-vlc</li>
+    <li>sudo apt install python3-alsaaudio</li>
+    <li>sudo apt install python3-taglib</li>
+  </ul>
+</li>
+<li>sudo reboot now</li>
+<li>Install the Adafruit GPIO library:</li>
+  <ul>
+    <li>cd ~/ </li>
+    <li>sudo apt install build-essential python3-pip python3-dev python3-smbus</li>
+    <li>git clone https://github.com/adafruit/Adafruit_Python_GPIO.git</li>
+    <li>cd Adafruit_Python_GPIO</li>
+    <li>sudo python3 setup.py install</li>
+  </ul>
 <li>Copy the pipod.service file to /home/pi/.config/systemd/user/.  (You may need to create the "systemd" and "user" folders.)</li>
 <li>Copy the file launch.sh to ~.</li>
 <li>Copy the file global.py to ~/PiPod_ePaper/Sofware/.</li>
