@@ -1,0 +1,16 @@
+[Unit]
+Description=Launches PiPod MP3 player on power-up.
+#Requires=graphical.target
+After=default.target
+#AllowIsolate=yes
+
+[Service]
+#StandardOutput=console
+Type=simple
+#User=drh
+ExecStart=/home/drh/launch.sh
+#ExecStart=/usr/bin/python3 /home/drh/PiPod_Zero2W/Sofware/l.py
+#Restart=always
+
+[Install]
+WantedBy=default.target
