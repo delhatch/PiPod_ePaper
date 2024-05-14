@@ -15,8 +15,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   </tr>
 </table>
 <h3>Motivation</h3>
-<p>The goal is to see how much power can be conserved by switching from a 2.2" 320x240 LCD screen to a 2.13" 250x122 e-Paper screen (from Waveshare).</p>
-<p>This version uses the same 1200 mAh battery and can play music continuously for 4.3 straight hours.</p>
+<p>The goal is to see how much power can be conserved by switching from a 2.2" 320x240 LCD screen to a 2.13" 250x122 e-Paper screen (from Waveshare). This version uses the same 1200 mAh battery and can play music continuously for 4.3 straight hours.</p>
 <p>In addition to using an e-paper screen, I also added a headphone amplifier based on the TP6113 IC.</p>
 <h3>Project Derivation</h3>
 <p>This project is derived from github.com/delhatch/PiPod_Zero2W. I then applied (copied over) the python files from the /PiPod project, because I like that UI better. Then I modified those python files to create the set here. To create this version, clone the PiPod_Zero2W project, then replace the corresponding python files from those in this repository.</p>
