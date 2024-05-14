@@ -80,10 +80,10 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <li>Install the waveshare e-Paper libraries:
   <ul>
     <li>cd ~/</li>
-    <li>git clone 'https://github.com/waveshare/e-Paper.git'</li>
+    <li>git clone https://github&#46;com/waveshare/e-Paper.git</li>
   </ul>
 <li>sudo reboot</li>
-<li>Clone this repository: cd ~/ then type: git clone https://github.com/delhatch/PiPod_ePaper.git</li>
+<li>Clone this repository: cd ~/ then type: git clone https://github&#46;com/delhatch/PiPod_ePaper.git</li>
 <li>Copy the pipod.service file to /home/pi/.config/systemd/user/.  (You may need to create the "systemd" and "user" folders.)</li>
 <li>Copy the file launch.sh to ~/.</li>
 <li>Copy the file global.py to ~/PiPod_ePaper/Sofware/.</li>
