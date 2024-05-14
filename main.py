@@ -1,3 +1,4 @@
+
 import playback
 import display
 import navigation
@@ -137,9 +138,10 @@ while not done:
                         PiPod.toggleSleep()
                     elif action == "shutdown":
                         view.popUp("Shutdown")
+                        #os.system("systemctl --user stop pipod.service")
                         os.system("sudo shutdown now")
-                        while True:
-                            pass
+                        #while True:
+                            #pass
                     elif action == "reboot":
                         view.popUp("Rebooting")
                         os.system("sudo reboot")

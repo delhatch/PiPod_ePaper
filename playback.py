@@ -5,7 +5,8 @@ import os
 import csv
 import taglib
 
-MY_EQ = [10,8,3,0,0,0,0,0,7,10]
+# 32 Hz, 64, 128, 256, 512, 1 kHz, 2 kHz, 4, 8, 16 kHz
+MY_EQ = [10,8,3,0,0,0,0,0,7,10]  # gain, in dB, for each band.
 eqFreqs = []
 
 class music():
@@ -27,7 +28,7 @@ class music():
     GenreEmptyField = 0
 
     def __init__(self):
-        self.setPlaybackMode("Normal")
+        self.setPlaybackMode("Shuffle")
         self.vlcInstance = vlc.Instance('--no-video --quiet')
         self.player = self.vlcInstance.media_player_new()
         self.alsa = alsaaudio.Mixer(alsaaudio.mixers()[0])
