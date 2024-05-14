@@ -20,8 +20,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <h3>Project Derivation</h3>
 <p>This project is derived from github.com/delhatch/PiPod_Zero2W. I then applied (copied over) the python files from the /PiPod project, because I like that UI better. Then I modified those python files to create the set here. To create this version, clone the PiPod_Zero2W project, then replace the corresponding python files from those in this repository.</p>
 <h3>Structural Changes</h3>
-<p>I have changed the OS to the "lite" version: 2024-03-15-raspios-bookworm-arm64-lite.img.xz</p>
-<p>This change reduces power consumption by ~20 mA, which is a 9% savings, so reasonably significant.</p>
+<p>I have changed the OS to the "lite" version: 2024-03-15-raspios-bookworm-arm64-lite.img.xz This change reduces power consumption by ~20 mA, which is a 9% savings, so reasonably significant.</p>
 <p>Also moved from Pygame to Pillow for the screen graphics.</p>
 <h3>Status</h3>
 <p>As of 13 May 2024, I have created a new PCB that hosts the e-Paper screen, and everything works well. The screen software does partial-screen updates on the top-level screen, giving flicker-free updates.</p>
