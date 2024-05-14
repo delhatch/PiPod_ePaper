@@ -31,6 +31,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <p>So the e-Paper screen reduces the current drain from the battery by 10 mA. Over one battery "full-charge play until discharged" cycle this equates to 15 more minutes of playtime. And that assumes the LCD backlight is OFF the entire time (so you cannot ever view the display) which is un-realistic.</p>
 <p>So the e-Paper screen is definitely a major improvement in battery life (playback time), and useability.</p>
 <h3>Instructions</h3>
+<p>These instructions are still a work-in-progress, and have not been tested yet.</p>
 <p>The bare PC board can be ordered at <a href="https://www.pcbway.com/project/shareproject/ePaper_PiPod_MP3_music_player_a6adf3e1.html">PCBWay</a></p>
 <ul>
   <li>Download the OS file "2024-03-15-raspios-bookworm-arm64-lite.img.xz" or newer.</li>
