@@ -89,13 +89,27 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   </ul>
 <li>sudo reboot</li>
 <li>Clone this repository: cd ~/ then type: git clone https://github&#46;com/delhatch/PiPod_ePaper.git</li>
-<li>Copy the pipod.service file to /home/pi/.config/systemd/user/.  (You may need to create the "systemd" and "user" folders.)</li>
-<li>Copy the file launch.sh to ~/.</li>
-<li>Copy the file global.py to ~/PiPod_ePaper/Sofware/.</li>
-<li>At prompt type: systemctl --user enable pipod.service
+<li>Create the directory ~/Music</li>
+<li>Move your music files into this Music directory. You can do this two ways:
   <ul>
-    <li>This command will cause systemd to start the PiPod application on every power-up.</li>
-    <li>Another useful command (in case there are problems) is: systemctl --user status pipod.service</li>
+    <li>Insert a USB Flash stick into the USB hub, and cp the files over.</li>
+    <li>Type "ifconfig" (no quotes) and note the IP address. Use the application WinSCP, and use the SFTP protocol, to copy media files from a Windows computer to the PiPod.</li>
+  </ul>
+</li>
+<li>You should now be able to launch the PiPod software, with everything working.
+  <ul>
+    <li>cd into the directory ~/PiPod_Zero2W/Sofware</li>
+    <li>Type: python3 main.py</li>
+  </ul>
+</li>
+<li>To have the PiPod automatically run the player app after a power-on cycle:
+  <ul>
+    <li>Copy the pipod.service file into the folder ~/.config/systemd/user/ </li>
+    <li>Copy the launch.sh file into the home folder ~/ </li>
+    <li>Copy the global.py file into the folder ~/PiPod_Zero2W/Sofware/ </li>
+    <li>To activate the pipod.service file, at the prompt, type: systemctl --user enable pipod.service </li>
+    <li>Make the changes to the display.py file as described in the NOTE below.
+    <li>Reboot. If there are problems, type: systemctl --user status pipod.service </li>
   </ul>
 </li>
 <h3>Fix the Waveshare Bug</h3>
