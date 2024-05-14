@@ -24,7 +24,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <p>I have changed the OS to the "lite" version: 2024-03-15-raspios-bookworm-arm64-lite.img.xz</p>
 <p>This change reduces power consumption by ~20 mA, which is a 9% savings, so reasonably significant.</p>
 <h3>Status</h3>
-<p>As of 13 May 2024, I have created a new PCB that hosts the e-Paper screen, and everything works well. The screen software is doing partial-screen updates on the top-level screen, giving flicker-free updates.</p>
+<p>As of 13 May 2024, I have created a new PCB that hosts the e-Paper screen, and everything works well. The screen software does partial-screen updates on the top-level screen, giving flicker-free updates.</p>
 <h3>Power Savings</h3>
 <p>With the LCD screen, with the backlight on, during playback, the current drawn is 266 mA.</p>
 <p>With the LCD screen, with the backlight off, during playback, the current drawn is 220 mA.</p>
