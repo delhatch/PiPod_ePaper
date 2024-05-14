@@ -40,7 +40,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   <li>Power-up the Pi Zero and go through the configuration screens. Create the user "pi" with a password of your choosing. Reboot.</li>
   <li>At the prompt: sudo raspi-config
     <ul>
-      <li>Go into Menu Item #1. Enter the SSID and passphrase for your wi-fi.<li>
+      <li>Go into Menu Item #1. Enter the SSID and passphrase for your wi-fi.</li>
       <li>Under menu S5 (Boot/Auto-login) select "Console Autologin"</li>
       <li>Select "Back" to top screen, then "Finish" and then reboot.</li>
     </ul></li>
