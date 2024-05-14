@@ -63,7 +63,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   <li>Verify that the audio is working. Plug headphones into the PiPod and type:
     <ul>
       <li>speaker-test -c2</li>
-      <li>If audio is not heard, you may need to go the GUI, right-click on the speaker icon (upper right) and change to the line "snd_rpi_hifiberry_dac"</li>
+      <li>If audio is not heard, you may need to (TODO: raspi-config or config.txt?) and change to the line "snd_rpi_hifiberry_dac"?</li>
     </ul></li>
   <li>Enter the following lines to install the required packages:
   <ul>
