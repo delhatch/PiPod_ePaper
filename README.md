@@ -27,7 +27,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <h3>Power Savings</h3>
 <p>With the LCD screen, with the backlight on, during playback, the current drawn is 266 mA.</p>
 <p>With the LCD screen, with the backlight off, during playback, the current drawn is 220 mA.</p>
-<p>With the e-Paper screen, during playback, the current drawn is 210 mA. (TODO: Needs to be updated with data from the new PCB.)</p>
+<p>With the e-Paper screen, during playback, the current drawn is 210 mA. (TODO: Needs to be updated using the new PCB.)</p>
 <p>So the e-Paper screen reduces the current drain from the battery by 10 mA. Over one battery "full-charge play until discharged" cycle this equates to 15 more minutes of playtime. And that assumes the LCD backlight is OFF the entire time (so you cannot ever view the display) which is un-realistic.</p>
 <p>So the e-Paper screen is definitely a major improvement in battery life (playback time), and useability.</p>
 <h3>Instructions</h3>
