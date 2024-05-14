@@ -33,7 +33,6 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <h3>Instructions</h3>
 <p>The bare PC board can be ordered at <a href="https://www.pcbway.com/project/shareproject/ePaper_PiPod_MP3_music_player_a6adf3e1.html">PCBWay</a></p>
 <ul>
-  <li>I will post PCB files and instructions soon. It basically follows the instructions in PiPod_Zero2W, but with the lite OS, and the need to install the wavershare-epaper libraries.</li>
   <li>Download the OS file "2024-03-15-raspios-bookworm-arm64-lite.img.xz" or newer.</li>
   <li>Using rufus-3.22.exe (or similar), burn the image to a 128GB micro-SD card.</li>
   <li>Assuming you have a fully-assembled PiPod hardware: Connect an HDMI monitor to the Pi Zero 2 W. Also connect a USB expander hub such as the SmartQ H302S to the Pi Zero usb connector. Connect a USB keyboard and mouse to the hub.</li>
