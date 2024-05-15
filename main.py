@@ -193,13 +193,14 @@ while not done:
 
         if event.type  == displayUpdate:
             # This code only runs once every 5 seconds.
-            status = PiPod.getStatus()         # Reads battery voltage
-            songMetadata = music.getStatus()   # Get song length, how far in, song info, vol, playlist, index of current song
-            temp = view.update(status, menu.menuDict, songMetadata) # Creates the screen and writes to frame buffer
-            #view.setBaseImage()
-            temp = view.partialUpdate(status, menu.menuDict, songMetadata) # Only upates the time into song, and the bar.
-            view.partialRefresh()
-            #PiPod.turnOffScreenPower()
+            if( menu.menuDict["current"] == "musicController" ):
+                status = PiPod.getStatus()         # Reads battery voltage
+                songMetadata = music.getStatus()   # Get song length, how far in, song info, vol, playlist, index of current song
+                temp = view.update(status, menu.menuDict, songMetadata) # Creates the screen and writes to frame buffer
+                #view.setBaseImage()
+                temp = view.partialUpdate(status, menu.menuDict, songMetadata) # Only upates the time into song, and the bar.
+                view.partialRefresh()
+                #PiPod.turnOffScreenPower()
         # The next line gets executed every time we check for an event on the que, no matter the event.
         pass
     # Now we check to see if any Class has modified the screen.
