@@ -13,7 +13,7 @@ class music():
     playbackMode = "Shuffle"        # mode = Normal, Shuffle, Repeat1
     UseMeta = False  # If False, use MP3 filename as the source of title/artist metadata.
                      # If True,  use the metadata inside the MP3 file.
-    volume = 60      # alsaaudio volume
+    volume = 50      # alsaaudio volume
     playlist = [["", "", "", "", ""]]
     volVLC = 0
     currentSongIndex = 0

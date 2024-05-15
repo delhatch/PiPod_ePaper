@@ -21,7 +21,6 @@ KEY_PINS = (
 )
 
 class PiPod:
-    sleep = 0
     # Create a list of battery voltage values. Will use to low-pass filter the ADC values.
     lp=[]
     for i in range(15):
@@ -30,18 +29,7 @@ class PiPod:
     def __init__(self):
         # Initialize ADC
         self.adc = Adafruit_ADS1x15.ADS1115(address=0x48,busnum=1)
-
         self.keys = keypad.Keys( KEY_PINS, value_when_pressed = False, pull = True )
-
-        # Set backlight pin as output and turn it on
-        self.pin23 = digitalio.DigitalInOut(board.D23)
-        self.pin23.direction = digitalio.Direction.OUTPUT
-        self.pin23.value = True
-
-    def turnOffScreenPower(self):
-        self.pin23.value = False
-        print("Screen power is off")
-        return
 
     def scan_switches(self):
         event = self.keys.events.get()
@@ -67,7 +55,7 @@ class PiPod:
         return
 
     def getStatus(self):
-        status = [0, 0, 0]
+        status = [0, 0]
         #Note: adc0 = external USB voltage
         #Note: adc1 = internal battery voltage
         adc0 = self.adc.read_adc(0, gain=1) * Vadj * 1.005 #observed adjustment
@@ -77,34 +65,7 @@ class PiPod:
         adc1 = sum(self.lp) / len(self.lp)  # calculate the average value.
         status[0] = adc0 > 4.5
         status[1] = "%.2f" % round(adc1, 2)
-        status[2] = self.sleep
-
         return status
-
-    def toggleSleep(self):
-        if self.sleep == 0:
-            #GPIO.output(23, GPIO.LOW)
-            self.pin23.value = False   # Turn off backlight LED
-            self.sleep = 1
-            return True
-        else:
-            #GPIO.output(23, GPIO.HIGH)
-            self.pin23.value = True   # Turn on backlight LED
-            self.sleep = 0
-            return False
-
-    def isAsleep(self):
-        return (self.sleep == 1)
-
-    def shutdown(self):
-        os.system("sudo shutdown now")
-        while True:
-            pass
-        return 1
-
-    def reboot(self):
-        os.system("sudo reboot")
-        return 1
 
     def VolUp(self):
         volUpEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_u)
