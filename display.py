@@ -38,6 +38,13 @@ class view():
         self.draw = ImageDraw.Draw(self.Himage)
         self.changedScreen = False
 
+    def shutdownImage(self):
+        myImage = Image.open('/home/drh/music1.bmp')
+        # Wait for the screen to be available
+        self.epd.ReadBusy()
+        self.epd.display(self.epd.getbuffer(myImage))
+        return
+
     def setBaseImage(self):
         self.epd.displayPartBaseImage( self.epd.getbuffer(self.Himage) )
 
@@ -94,19 +101,17 @@ class view():
         )
 
     def refresh(self):
-        if self.noRefresh == False:
-            # Wait for the screen to be available
-            self.epd.ReadBusy()
-            # Refresh the e-Paper screen
-            self.epd.display(self.epd.getbuffer(self.Himage))
+        # Wait for the screen to be available
+        self.epd.ReadBusy()
+        # Refresh the e-Paper screen
+        self.epd.display(self.epd.getbuffer(self.Himage))
         return
 
     def partialRefresh(self):
-        if self.noRefresh == False:
-            # Wait for the screen to be available
-            self.epd.ReadBusy()
-            # Refresh the e-Paper screen
-            self.epd.displayPartial(self.epd.getbuffer(self.Himage))
+        # Wait for the screen to be available
+        self.epd.ReadBusy()
+        # Refresh the e-Paper screen
+        self.epd.displayPartial(self.epd.getbuffer(self.Himage))
         return
 
     def setNoRefresh(self):

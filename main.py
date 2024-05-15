@@ -127,7 +127,8 @@ while not done:
                         menu.setUpdateFlag()
                         #music.clearQueue()    # TODO? If in, can't play a song after Library update.
                     elif action == "shutdown":
-                        view.popUp("Shutting down now\nThank You\nFor Playing.")
+                        #view.popUp("Shutting down now\nThank You\nFor Playing.")
+                        view.shutdownImage()
                         os.system("sudo shutdown now")
                     elif action == "exit":
                         view.clearAndDisplay()
