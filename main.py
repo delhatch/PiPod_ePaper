@@ -41,7 +41,7 @@ try:
     with open("/home/drh/info.csv", "r") as myFile:
         myFile.close()
 except FileNotFoundError:
-    view.popUp("Updating Library")
+    view.popUp("Updating Library\nPlease Wait...")
     music.updateLibrary()  # This creates the info.csv file by reading every .MP3 file metadata.
 menu.loadMetadata()   # This reads the info.csv file
 status = PiPod.getStatus()
@@ -127,7 +127,7 @@ while not done:
                         menu.setUpdateFlag()
                         #music.clearQueue()    # TODO? If in, can't play a song after Library update.
                     elif action == "shutdown":
-                        view.popUp("Shutdown")
+                        view.popUp("Shutting down now\nThank You\nFor Playing.")
                         os.system("sudo shutdown now")
                     elif action == "exit":
                         view.clearAndDisplay()
@@ -184,6 +184,7 @@ while not done:
                         view.setPlayMode( action ) # Used to show the current play mode on the "set mode" screen
                         currentMode = music.getPlaybackMode()
                         if( currentMode != action ):
+                            menu.setUpdateFlag()
                             music.setPlaybackMode(action)
                             # Now fill the playback que according to the new Playback Mode
                             if action == "Shuffle":
@@ -193,7 +194,7 @@ while not done:
 
         if event.type  == displayUpdate:
             # This code only runs once every 5 seconds.
-            if( menu.menuDict["current"] == "musicController" ):
+            if ( menu.menuDict["current"] == "musicController" ):
                 status = PiPod.getStatus()         # Reads battery voltage
                 songMetadata = music.getStatus()   # Get song length, how far in, song info, vol, playlist, index of current song
                 temp = view.update(status, menu.menuDict, songMetadata) # Creates the screen and writes to frame buffer

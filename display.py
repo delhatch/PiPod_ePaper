@@ -128,11 +128,20 @@ class view():
         pass
 
     def popUp(self, text):
-        #self.lcd.fill(backgroundColor)
-        #text = self.font.render(text, True, primaryColor)
-        #self.lcd.blit(text, ((self.dispWidth - text.get_width()) / 2, (self.dispHeight - text.get_height()) / 2))
         self.clear()
-        self.draw.text( ( ((self.dispWidth - 40)/2), (self.dispHeight - 10)/2 ), text, font=self.font15, fill=0 )
+        newline_index = text.find('\n')
+        if ( newline_index != -1 ):
+            line1 = text[:newline_index]
+            numlines = 1 + text.count('\n')
+        else:
+            line1 = text
+            numlines = 1
+        if( numlines <= 4 ):
+            twidth, theight = self.draw.textsize( line1, font = self.font15 )
+            #self.draw.text( ( (self.dispWidth/2) - (twidth/2), (self.dispHeight - 10)/2 ), text, font=self.font15, fill=0 )
+            self.draw.multiline_text( ( (self.dispWidth/2) - (twidth/2), (self.dispHeight/2)-(10*numlines) ), text, fill=0, font=self.font15, spacing=4, align="center" )
+        else:
+            self.draw.text( (0,0), "Too many lines in popUp()", fill=0, font=self.font15 )
         self.refresh()
 
     def listView(self, menu, selectedItem):

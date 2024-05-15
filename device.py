@@ -25,6 +25,15 @@ class PiPod:
     lp=[]
     for i in range(15):
         lp.append(0.0)
+    # Create the events that will be put on the que when the key is pressed.
+    volUpEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_u)
+    volDownEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_d)
+    upEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_UP)
+    downEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_DOWN)
+    leftEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_LEFT)
+    rightEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_RIGHT)
+    returnEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_RETURN)
+    escapeEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_ESCAPE)
 
     def __init__(self):
         # Initialize ADC
@@ -68,33 +77,25 @@ class PiPod:
         return status
 
     def VolUp(self):
-        volUpEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_u)
-        pygame.event.post(volUpEvent)
+        pygame.event.post(self.volUpEvent)
 
     def VolDown(self):
-        volDownEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_d)
-        pygame.event.post(volDownEvent)
+        pygame.event.post(self.volDownEvent)
 
     def UpArrow(self):
-        upEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_UP)
-        pygame.event.post(upEvent)
+        pygame.event.post(self.upEvent)
 
     def DownArrow(self):
-        downEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_DOWN)
-        pygame.event.post(downEvent)
+        pygame.event.post(self.downEvent)
 
     def LeftArrow(self):
-        leftEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_LEFT)
-        pygame.event.post(leftEvent)
+        pygame.event.post(self.leftEvent)
 
     def RightArrow(self):
-        rightEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_RIGHT)
-        pygame.event.post(rightEvent)
+        pygame.event.post(self.rightEvent)
 
     def Return(self):
-        returnEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_RETURN)
-        pygame.event.post(returnEvent)
+        pygame.event.post(self.returnEvent)
 
     def Escape(self):
-        escapeEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_ESCAPE)
-        pygame.event.post(escapeEvent)
+        pygame.event.post(self.escapeEvent)
