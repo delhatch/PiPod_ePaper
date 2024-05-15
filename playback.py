@@ -10,7 +10,7 @@ MY_EQ = [10,8,3,0,0,0,0,0,7,10]  # gain, in dB, for each band.
 eqFreqs = []
 
 class music():
-    playbackMode = ""        # mode = Normal, Shuffle, Repeat1
+    playbackMode = "Shuffle"        # mode = Normal, Shuffle, Repeat1
     UseMeta = False  # If False, use MP3 filename as the source of title/artist metadata.
                      # If True,  use the metadata inside the MP3 file.
     volume = 60      # alsaaudio volume
@@ -28,7 +28,6 @@ class music():
     GenreEmptyField = 0
 
     def __init__(self):
-        self.setPlaybackMode("Shuffle")
         self.vlcInstance = vlc.Instance('--no-video --quiet')
         self.player = self.vlcInstance.media_player_new()
         self.alsa = alsaaudio.Mixer(alsaaudio.mixers()[0])

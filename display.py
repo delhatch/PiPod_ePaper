@@ -12,7 +12,7 @@ import time
 from PIL import Image, ImageDraw, ImageFont
 
 noRefresh = False # If True, the screen will NOT refresh.
-displayPlayMode = "Normal"
+displayPlayMode = ""
 primaryColor = 0     # 0 = black
 secondaryColor = 255 # white
 
@@ -32,7 +32,7 @@ class view():
         self.font15 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), self.textHeight15 )
         self.font19 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), self.textHeight19 )
         self.noRefresh = False
-        self.displayPlayMode = "Normal"
+        self.displayPlayMode = ""
         # Drawing on the display in Landscape mode
         self.Himage = Image.new('1', (self.epd.height, self.epd.width), 255)  # 255 = clear the frame
         self.draw = ImageDraw.Draw(self.Himage)
@@ -137,35 +137,45 @@ class view():
 
     def listView(self, menu, selectedItem):
         self.clear()
+        color = primaryColor
         index = 0
         marginTop = (self.dispHeight - 9) / 2 - (21 * selectedItem)  # text height 18/2=9
         marginLeft = 10
         marginTop += 21 * (selectedItem - 12 if selectedItem > 12 else 0)
         index += (selectedItem - 12 if selectedItem > 12 else 0)
+        print(self.displayPlayMode)
         for item in menu[
-                    selectedItem - 12 if selectedItem > 12 else 0:selectedItem + 12]:  # I'm sorry, if selected item is more then 4 start slicing the list
+                    selectedItem - 12 if selectedItem > 12 else 0:selectedItem + 12]:  # If > 4 items in list, start slicing the displayed list
+            # This adds a character to mark the current playback mode, so it can be displayed in underline mode. Gets stripped later.
             if ( item == "Normal") and ( self.displayPlayMode == "Normal" ):
-                    item = '\u2192' + " Normal " + '\u2190'
+                    item = '\u2193' + "Normal"
             elif ( item == "Shuffle") and ( self.displayPlayMode == "Shuffle" ):
-                    item = '\u2192' + " Shuffle " + '\u2190'
+                    item = '\u2193' + "Shuffle"
             elif ( item == "Repeat 1 Song") and ( self.displayPlayMode == "Repeat1" ):
-                    item = '\u2192' + " Repeat 1 Song " + '\u2190'
+                    item = '\u2193' + "Repeat 1 Song"
             if index == selectedItem:
-                #text = self.font.render(item, True, secondaryColor)
-                item = '\u2192' + item
-                color = primaryColor
-                self.draw.text( (marginLeft, marginTop), item, font=self.font19, fill=color ) # 0 = black
+                if item[0] == '\u2193':
+                    shortItem = item[1:]
+                    item = '\u2192' + shortItem
+                    twidth, theight = self.draw.textsize(item, font=self.font19)
+                    lx, ly = marginLeft, marginTop + theight
+                    self.draw.text( (marginLeft, marginTop), item, font=self.font19, fill=color) # 0 = black
+                    self.draw.line( (lx + 18, ly, lx + twidth, ly), fill=color)
+                else:
+                    item = '\u2192' + item
+                    self.draw.text( (marginLeft, marginTop), item, font=self.font19, fill=color)
                 marginTop += 23
             else:
-                #text = self.font.render(item, True, primaryColor)
-                color = primaryColor
-                self.draw.text( (marginLeft, marginTop), item, font=self.font15, fill=color ) # 0 = black
+                if item[0] == '\u2193':
+                    shortItem = item[1:]
+                    twidth, theight = self.draw.textsize(shortItem, font=self.font15)
+                    lx, ly = marginLeft, marginTop + theight
+                    self.draw.text( (marginLeft, marginTop), shortItem, font=self.font15, fill=color) # 0 = black
+                    self.draw.line( (lx, ly, lx + twidth, ly), fill=color)
+                else:
+                    self.draw.text( (marginLeft, marginTop), item, font=self.font15, fill=color, underline=False)
                 marginTop += 20
-            #self.lcd.blit(text, (marginLeft, marginTop))
-            #self.draw.text( (marginLeft, marginTop), item, font=self.font15, fill=color ) # 0 = black
-            #marginTop += 21
             index += 1
-        #self.changedScreen = True
         return
 
     def musicController(self, selectedItem, batLevel, chargeStatus, \

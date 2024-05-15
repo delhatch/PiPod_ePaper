@@ -37,11 +37,18 @@ PiPod = device.PiPod()
 clock = pygame.time.Clock()
 
 # Updating 6750 files takes 50 seconds
-#view.popUp("Updating Library")
-#music.updateLibrary()  # This creates the info.csv file by reading every .MP3 file metadata.
+try:
+    with open("info.csv", "r") as myFile:
+        myFile.close()
+except FileNotFoundError:
+    view.popUp("Updating Library")
+    music.updateLibrary()  # This creates the info.csv file by reading every .MP3 file metadata.
 menu.loadMetadata()   # This reads the info.csv file
 status = PiPod.getStatus()
 songMetadata = music.getStatus()
+
+#Set the display of the playback mode to match the actual playback mode.
+view.setPlayMode( music.getPlaybackMode() )
 
 # This timer is only used to update the screen during playback.
 displayUpdate = pygame.USEREVENT + 1
