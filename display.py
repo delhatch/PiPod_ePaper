@@ -157,7 +157,7 @@ class view():
         marginLeft = 10
         marginTop += 21 * (selectedItem - 12 if selectedItem > 12 else 0)
         index += (selectedItem - 12 if selectedItem > 12 else 0)
-        print(self.displayPlayMode)
+        #print(self.displayPlayMode)
         for item in menu[
                     selectedItem - 12 if selectedItem > 12 else 0:selectedItem + 12]:  # If > 4 items in list, start slicing the displayed list
             # This adds a character to mark the current playback mode, so it can be displayed in underline mode. Gets stripped later.

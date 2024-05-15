@@ -178,14 +178,14 @@ class music():
         if self.volume <= 95:
             self.volume += 5
             self.alsa.setvolume(self.volume)
-            self.changedScreen = True    # Changed the volume, so update the screen.
+            #self.changedScreen = True    # Changed the volume, so update the screen.
             #print(self.volume)
 
     def volumeDown(self):
         if self.volume > 5:
             self.volume -= 5
             self.alsa.setvolume(self.volume)
-            self.changedScreen = True    # Changed the volume, so update the screen.
+            #self.changedScreen = True    # Changed the volume, so update the screen.
 
     def updateLibrary(self):
         self.playPause()
