@@ -38,15 +38,10 @@ logger = logging.getLogger(__name__)
 
 class RaspberryPi:
     # Pin definition
-#*    RST_PIN  = 17
     RST_PIN  = 16
-#    CS_PIN   = 8
     CS_PIN   = 4
-#    BUSY_PIN = 24
     BUSY_PIN = 14
-#    PWR_PIN  = 18  GPIO18 = PCM I2C CLK. I Assume this is NOT OK to use.
     PWR_PIN  = 23
-#    DC_PIN   = 25
     DC_PIN = 15
 
     def __init__(self):
