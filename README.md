@@ -72,13 +72,20 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
     <li>sudo apt install python3-vlc</li>
     <li>sudo apt install python3-alsaaudio</li>
     <li>sudo apt install python3-taglib</li>
+    <li>sudo apt install python3-spidev</li>
+    <li>sudo apt install python3-gpiozero</li>
+    <li>sudo apt install python3-pip</li>
+    <li>sudo apt install python3-pil</li>
+    <li>sudo apt install python3-numpy</li>
+    <li>sudo pip3 install RPi.GPIO</li>
+    <li>sudo pip3 install spidev</li>
   </ul>
 </li>
 <li>sudo reboot now</li>
 <li>Install the Adafruit Blinka library:
   <ul>
     <li>cd ~/ </li>
-    <li>sudo apt install build-essential python3-pip python3-dev python3-smbus</li>
+    <li>sudo apt install build-essential python3-dev python3-smbus</li>
     <li>sudo pip install --break-system-packages Adafruit-Blinka</li>
   </ul>
 </li>
@@ -86,6 +93,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   <ul>
     <li>cd ~/</li>
     <li>git clone https://github&#46;com/waveshare/e-Paper.git</li>
+    <li>sudo pip intall --break-system-packages waveshare-epaper epd-library</li>
   </ul>
 <li>sudo reboot</li>
 <li>Clone this repository: cd ~/ then type: git clone https://github&#46;com/delhatch/PiPod_ePaper.git</li>
