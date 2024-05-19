@@ -118,7 +118,6 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
     <li>Copy the launch.sh file into the home folder ~/ </li>
     <li>Copy the global.py file into the folder ~/PiPod_ePaper/Sofware/ </li>
     <li>To activate the pipod.service file, at the prompt, type: systemctl --user enable pipod.service </li>
-    <li>Make the changes to the display.py file as described in the NOTE below.
     <li>Reboot. If there are problems, type: systemctl --user status pipod.service to see if the service launched.</li>
   </ul>
 </li>
