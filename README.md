@@ -15,7 +15,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   </tr>
 </table>
 <h3>Motivation</h3>
-<p>The goal is to see how much power can be conserved by switching from a 2.2" 320x240 LCD screen to a 2.13" 250x122 e-Paper screen (from Waveshare). This version uses the same 1200 mAh battery and can play music continuously for 4.3 straight hours.</p>
+<p>The goal is to see how much power can be conserved by switching from a 2.2" 320x240 LCD screen to a 2.13" 250x122 e-Paper screen (from Waveshare). This version uses the same 1200 mAh battery and can play music continuously for over 4.5 straight hours.</p>
 <p>In addition to using an e-paper screen, I also added a headphone amplifier based on the TP6113 IC.</p>
 <h3>Project Derivation</h3>
 <p>This project is derived from github.com/delhatch/PiPod_Zero2W. I then applied (copied over) the python files from the /PiPod project, because I like that UI better. Then I modified those python files to create the set here. To create this version, clone the PiPod_Zero2W project, then replace the corresponding python files from those in this repository.</p>
@@ -27,7 +27,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <h3>Power Savings</h3>
 <p>With the LCD screen, with the backlight on, during playback, the current drawn is 266 mA.</p>
 <p>With the LCD screen, with the backlight off, during playback, the current drawn is 220 mA.</p>
-<p>With the e-Paper screen, during playback, the current drawn is 210 mA. (TODO: Needs to be updated using the new PCB.)</p>
+<p>With the e-Paper screen, during playback, the current drawn is 192 mA.</p>
 <p>So the e-Paper screen reduces the current drain from the battery by 10 mA. Over one battery "full-charge play until discharged" cycle this equates to 15 more minutes of playtime. And that assumes the LCD backlight is OFF the entire time (so you cannot ever view the display) which is un-realistic.</p>
 <p>So the e-Paper screen is definitely a major improvement in battery life (playback time), and useability.</p>
 <h3>Instructions</h3>
