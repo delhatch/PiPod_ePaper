@@ -28,7 +28,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <p>With the LCD screen, with the backlight on, during playback, the current drawn is <b>266 mA</b>.</p>
 <p>With the LCD screen, with the backlight off, during playback, the current drawn is <b>220 mA</b>.</p>
 <p>With the e-Paper screen, during playback, the current drawn is <b>192 mA</b>.</p>
-<p>So the e-Paper screen is definitely a major improvement in battery life (playback time), and useability, because there is no anxiety about leaving an LCD backlight on.</p>
+<p>So the e-Paper screen is definitely a major improvement in battery life (playback time), and also useability, because there is no anxiety about leaving an LCD backlight on.</p>
 <h3>Instructions</h3>
 <p>These instructions are still a work-in-progress, and have not been tested yet.</p>
 <p>The bare PC board can be ordered via this link at <a href="https://www.pcbway.com/project/shareproject/ePaper_PiPod_MP3_music_player_a6adf3e1.html">PCBWay</a></p>
