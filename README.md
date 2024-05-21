@@ -22,12 +22,14 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <h3>Structural Changes</h3>
 <p>I have changed the OS to the "lite" version: 2024-03-15-raspios-bookworm-arm64-lite.img.xz This change reduces power consumption by ~20 mA, which is a 9% savings, so reasonably significant.</p>
 <p>Also moved from Pygame to Pillow for the screen graphics.</p>
+<p>Then I replaced Pygame completely, since I was only using it for the key stroke buffer, and the Python keypad library was already taking care of that. Eliminating Pygame reduced power consumption by 9.2% when idle, and by 5.2% when playing music.</p>
 <h3>Status</h3>
 <p>As of 13 May 2024, I have created a new PCB that hosts the e-Paper screen, and everything works well. The screen software does partial-screen updates on the top-level screen, giving flicker-free updates.</p>
 <h3>Power Savings</h3>
 <p>With the LCD screen, with the backlight on, during playback, the current draw is <b>266 mA</b>.</p>
 <p>With the LCD screen, with the backlight off, during playback, the current draw is <b>220 mA</b>.</p>
 <p>With the e-Paper screen, during playback, the current draw is <b>192 mA</b>.</p>
+<p>Having eliminated Pygame, the current draw is down to only <b>171 mA</b>.</p>
 <p>So the e-Paper screen is definitely a major improvement in battery life (playback time), and also useability because there is no anxiety about leaving an LCD backlight on.</p>
 <h3>Instructions</h3>
 <p>These instructions are still a work-in-progress, and have not been tested yet.</p>
