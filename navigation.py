@@ -66,7 +66,6 @@ class menu():
         # TODO: Show letters across top of screen.
         #print("Left. Screen =", self.menuDict["current"])
         if self.menuDict["current"] == "list" or self.menuDict["current"] == "Songs":  # move to previous letter in the alphabet
-            #self.menuDict["Queue"].append(self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]])
             self.changedScreen = True
             songInfo = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
             # Get first letter of selected song.
@@ -138,7 +137,6 @@ class menu():
         # TODO: Show letters across top of screen.
         #print("Right. Screen =", self.menuDict["current"])
         if self.menuDict["current"] == "list" or self.menuDict["current"] == "Songs":  # move to next letter in the alphabet
-            #self.menuDict["Queue"].append(self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]])
             self.changedScreen = True
             songInfo = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
             #songTitle = songInfo[3]
@@ -147,7 +145,6 @@ class menu():
             # Increment to next letter.
             if (firstL in alphaList) and (firstL != 'Z'):
                 nextL = chr(ord(firstL) + 1)
-                #print("NextL =", nextL)
                 # Find index of the first song that starts with that letter, or greater.
                 index = self.menuDict["selectedItem"]
                 index += 1
@@ -289,7 +286,6 @@ class menu():
             elif( playMode == "Shuffle" ):
                 indexOfSelected = self.menuDict["selectedItem"]
                 self.menuDict["Queue"] = self.menuDict[self.menuDict["current"]]
-                #tempList = list(self.menuDict[self.menuDict["current"]])
                 self.menuDict["Queue"] = random.sample( self.menuDict["Queue"], len(self.menuDict["Queue"]) )
                 # Now put the selected song at the beginning of the que, so it plays first.
                 self.menuDict["Queue"].insert(0, self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]])

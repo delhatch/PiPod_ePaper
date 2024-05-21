@@ -197,12 +197,12 @@ class music():
             for file in files:
                 if file.endswith('.mp3') or file.endswith('.MP3') or file.endswith('.Mp3') or file.endswith('.m4a') or file.endswith('.wav') or file.endswith('.wma'):
                     fileList.append(os.path.join(path, file))
-                    #print(os.path.join(path, file))
 
         file = open("info.csv", "w", newline="")
         writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
 
         for i in fileList:
+            #TODO: .wav files are not handled well(?). Must use metadata derived from filename, only.(?)
             audiofile = taglib.File(i)
             song = audiofile.tags
             if self.UseMeta:  # Metadata source = metadata in the MP3 file.

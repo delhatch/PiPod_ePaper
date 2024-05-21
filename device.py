@@ -1,6 +1,5 @@
 import os
 import RPi.GPIO as GPIO
-import pygame
 import csv
 import Adafruit_ADS1x15
 import board
@@ -25,15 +24,7 @@ class PiPod:
     lp=[]
     for i in range(15):
         lp.append(0.0)
-    # Create the events that will be put on the que when the key is pressed.
-    volUpEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_u)
-    volDownEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_d)
-    upEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_UP)
-    downEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_DOWN)
-    leftEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_LEFT)
-    rightEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_RIGHT)
-    returnEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_RETURN)
-    escapeEvent = pygame.event.Event(pygame.KEYDOWN, key=pygame.K_ESCAPE)
+    pressedKey = -1
 
     def __init__(self):
         # Initialize ADC
@@ -44,23 +35,14 @@ class PiPod:
         event = self.keys.events.get()
         if event:
             if event.pressed:
-                key_number = event.key_number
-                if( key_number == 0 ):
-                    self.VolUp()
-                elif( key_number == 1 ):
-                    self.VolDown()
-                elif( key_number == 2 ):
-                    self.UpArrow()
-                elif( key_number == 3 ):
-                    self.DownArrow()
-                elif( key_number == 4 ):
-                    self.LeftArrow()
-                elif( key_number == 5 ):
-                    self.RightArrow()
-                elif( key_number == 6 ):
-                    self.Return()
-                elif( key_number == 7 ):
-                    self.Escape()
+                self.pressedKey = event.key_number
+        return
+
+    def getKeyPressed(self):
+        return self.pressedKey
+
+    def clearKeyPressed(self):
+        self.pressedKey = -1
         return
 
     def getStatus(self):
@@ -76,26 +58,3 @@ class PiPod:
         status[1] = "%.2f" % round(adc1, 2)
         return status
 
-    def VolUp(self):
-        pygame.event.post(self.volUpEvent)
-
-    def VolDown(self):
-        pygame.event.post(self.volDownEvent)
-
-    def UpArrow(self):
-        pygame.event.post(self.upEvent)
-
-    def DownArrow(self):
-        pygame.event.post(self.downEvent)
-
-    def LeftArrow(self):
-        pygame.event.post(self.leftEvent)
-
-    def RightArrow(self):
-        pygame.event.post(self.rightEvent)
-
-    def Return(self):
-        pygame.event.post(self.returnEvent)
-
-    def Escape(self):
-        pygame.event.post(self.escapeEvent)

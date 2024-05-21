@@ -1,4 +1,3 @@
-import pygame
 import os
 import sys
 
@@ -22,11 +21,7 @@ class view():
         self.epd.init()
         self.epd.Clear(0xff)
 
-        pygame.init()
-        pygame.key.set_repeat(500,100)  # This is only for attached PC keyboards. Can remove?
-
         self.dispWidth, self.dispHeight = (250,122)
-        #self.font = pygame.font.Font("/home/drh/PiPod_Zero2W/Sofware/TerminusTTF-4.46.0.ttf", 18)
         self.textHeight15 = 15
         self.textHeight19 = 18
         self.font15 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), self.textHeight15 )
@@ -143,7 +138,6 @@ class view():
             numlines = 1
         if( numlines <= 4 ):
             twidth, theight = self.draw.textsize( line1, font = self.font15 )
-            #self.draw.text( ( (self.dispWidth/2) - (twidth/2), (self.dispHeight - 10)/2 ), text, font=self.font15, fill=0 )
             self.draw.multiline_text( ( (self.dispWidth/2) - (twidth/2), (self.dispHeight/2)-(10*numlines) ), text, fill=0, font=self.font15, spacing=4, align="center" )
         else:
             self.draw.text( (0,0), "Too many lines in popUp()", fill=0, font=self.font15 )
@@ -157,7 +151,6 @@ class view():
         marginLeft = 10
         marginTop += 21 * (selectedItem - 12 if selectedItem > 12 else 0)
         index += (selectedItem - 12 if selectedItem > 12 else 0)
-        #print(self.displayPlayMode)
         for item in menu[
                     selectedItem - 12 if selectedItem > 12 else 0:selectedItem + 12]:  # If > 4 items in list, start slicing the displayed list
             # This adds a character to mark the current playback mode, so it can be displayed in underline mode. Gets stripped later.
@@ -240,9 +233,6 @@ class view():
                         currentSong, currentTime, songLength, volume, queLength, queIndex):
         # Draw a white rectangle over the "how far into current song" and the bar.
         self.draw.rectangle( [(0,self.dispHeight-15),(self.dispWidth-40,self.dispHeight)], outline=255 )  # No fill. No border.
-
-        #chargeText = str(batLevel)
-        #self.draw.text( (self.dispWidth - 40, 1), chargeText, font=self.font15, fill=0 )
 
         # Time bar
         self.draw.rectangle( [(40,self.dispHeight-15),(self.dispWidth-40,self.dispHeight-1)], outline=0 )  # No fill. Border rectangle.
