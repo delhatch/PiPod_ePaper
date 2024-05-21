@@ -36,7 +36,6 @@ menu = navigation.menu()
 PiPod = device.PiPod()
 clock = pygame.time.Clock()
 
-# Updating 6750 files takes 50 seconds
 try:
     with open("/home/drh/info.csv", "r") as myFile:
         myFile.close()
@@ -217,4 +216,4 @@ while not done:
         # If just drew the top screen, set it as the base image for later partial updates.
         if( menu.menuDict["current"] == "musicController"):
             view.setBaseImage()
-    clock.tick(10)  # Code delays here until 1/10th of a second has passed.
+    clock.tick(12)  # Code delays here until 1/12th of a second has passed.
