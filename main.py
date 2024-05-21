@@ -43,7 +43,6 @@ music.enableEQ()
 view = display.view()
 menu = navigation.menu()
 PiPod = device.PiPod()
-clock = pygame.time.Clock()
 
 updateScreenCounter = 0
 
