@@ -1,4 +1,3 @@
-
 import playback
 import display
 import navigation
@@ -47,7 +46,7 @@ PiPod = device.PiPod()
 updateScreenCounter = 0
 
 try:
-    with open("/home/drh/info.csv", "r") as myFile:
+    with open("/home/pi/info.csv", "r") as myFile:
         myFile.close()
 except FileNotFoundError:
     view.popUp("Updating Library\nPlease Wait...")
