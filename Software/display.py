@@ -34,7 +34,7 @@ class view():
         self.changedScreen = False
 
     def shutdownImage(self):
-        myImage = Image.open('/home/drh/music1.bmp')
+        myImage = Image.open('/home/pi/PiPod_ePaper/music1.bmp')
         # Wait for the screen to be available
         self.epd.ReadBusy()
         self.epd.display(self.epd.getbuffer(myImage))
