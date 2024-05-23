@@ -1,5 +1,5 @@
 #!/bin/bash
 
-cd /home/drh
-python3 /home/drh/PiPod_Zero2W/Sofware/global.py
+cd /home/pi
+python3 /home/pi/PiPod_ePaper/Software/global.py
 
