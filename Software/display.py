@@ -1,8 +1,8 @@
 import os
 import sys
 
-picdir = '/home/drh/e-Paper/RaspberryPi_JetsonNano/python/pic/'
-libdir = '/home/drh/e-Paper/RaspberryPi_JetsonNano/python/lib/'
+picdir = '/home/pi/e-Paper/RaspberryPi_JetsonNano/python/pic/'
+libdir = '/home/pi/e-Paper/RaspberryPi_JetsonNano/python/lib/'
 if os.path.exists(libdir):
     sys.path.append(libdir)
 
