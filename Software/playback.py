@@ -191,7 +191,7 @@ class music():
         self.playPause()
         fileList = []
         #print("Updating metadata")
-        musicPath = "/home/drh/Music/"
+        musicPath = "/home/pi/Music/"
 
         for path, dirs, files in os.walk(musicPath):
             for file in files:
@@ -231,7 +231,7 @@ class music():
 
             else:   # Metadata source = the MP3 filename string.
                 # MP3 filenames must look exactly like this:
-                #    "/home/path/user/Thisartist - Thistitle.mp3"
+                #    "/home/pi/Music/Thisartist - Thistitle.mp3"
                 artist = i.split(" -")
                 newartist = artist[0].split("/")
                 stringArtist = newartist[4].lstrip()
