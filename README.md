@@ -147,7 +147,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   </ul>
 </li>
   <li>At this point, you probably want to disable wifi, bluetooth, and reduce the CPU speed to save power.</li>
-  <li>To do this:
+  <li>To do this you can just use the config.txt file I use, which provided in this repository:
     <ul>
       <li>cd ~/PiPod_ePaper</li>
       <li>Note that the next line will over-write your config.txt file. If you want to make a backup copy, do so now.</li>
