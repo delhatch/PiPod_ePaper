@@ -44,13 +44,13 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   <li>Power-up and go through the configuration screens. Create the user "pi" with a password of your choosing. Reboot and log in.</li>
   <li>At the prompt: sudo raspi-config
     <ul>
-      <li>Go into Menu Item #1. Enter the SSID and passphrase for your wi-fi.</li>
-      <li>Select menu item #1, then select S5 (Boot/Auto-login) select and enable "Console Autologin", then select "Back"</li>
-      <li>From top menu, select #3 "Interface Options" the select and enable I1 "Enable SSH".</li>
-      <li>Then select and enable I4 "Enable I2C".</li>
+      <li>Go into Menu Item #1, then select S2. Enter the SSID and passphrase for your wi-fi.</li>
+      <li>Select menu item #1, then select S5 (Boot/Auto-login) select and enable "Console Autologin".</li>
+      <li>From the top menu, select #3 "Interface Options" then select and enable I1 "Enable SSH".</li>
+      <li>From the top menu, select #3 "Interface Options" then select and enable I4 "Enable I2C".</li>
       <li>Select "Back" to top screen, then "Finish" and then reboot.</li>
     </ul></li>
-  <li>Type sudo nano /boot/firmware/config.txt and make the following changes:
+  <li>Type: sudo nano /boot/firmware/config.txt and make the following changes:
     <ul>
       <li>If necessary, un-comment dtparam=spi=on (to turn on the SPI port)</li>
       <li>comment-out the "dtparam=audio=on" line</li>
@@ -102,7 +102,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   <ul>
     <li>cd ~/</li>
     <li>git clone https://github&#46;com/waveshare/e-Paper.git</li>
-    <li>sudo pip install --break-system-packages waveshare-epaper epd-library</li>
+    <li>sudo pip3 install --break-system-packages waveshare-epaper epd-library</li>
   </ul></li>
 <li>sudo reboot</li>
 <li>Now fetch the e-Paper MP3 player software from this repository:
