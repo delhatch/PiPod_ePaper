@@ -40,8 +40,8 @@ disable_overscan=1
 
 # Run as fast as firmware / board allows
 #arm_boost=1
-arm_freq=200
-core_freq=200
+arm_freq=150
+core_freq=150
 over_voltage=-4
 
 [cm4]
@@ -53,8 +53,3 @@ otg_mode=1
 [all]
 
 dtoverlay=hifiberry-dac
-#dtoverlay=fbtft,spi0-0,ili9341,rotate=90
-#dtparam=bgr=on
-#dtparam=reset_pin=25
-#dtparam=dc_pin=24
-#dtparam=speed=32000000
