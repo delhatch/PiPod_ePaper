@@ -154,12 +154,10 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
       <li>sudo mv -f config.txt /boot/firmware/.</li>
     </ul></li>
 </ul>
-<h3>Fix the Waveshare Bug</h3>
-<p>As part of the git clone of the waveshare-epaper repository, there will be a file in the /python/lib/waveshare-epaper directory called epd2in13_V4.py. This file must be replaced with the file in this repository. There is a single-line bug fix in the ReadBusy(self) method that is corrected in the file located in this repository.</p>
 <h3>Wiring the e-Paper screen to the Pi Zero 2 W</h3>
-<p>The e-Paper display I am using is sold by Waveshare: 250x122, 2.13inch E-Ink display HAT for Raspberry Pi. SKU: 12915</p>
-<p>Waveshare's epdconfig.py file defines how the Raspi Pi I/O pins are connected to the e-paper screen. For the changes I made to the wiring scheme (moving signals to other GPIO pins, for example), the file "epdconfig.py" was modified to match. Therefore, this github repository file must be moved to replace the /python/lib/waveshare-epaper/epdconfig.py file. This is similar to how the original the waveshare file "epd2in13_V4" was replaced in the instructions above.</p>
-<p>The table below shows how the Raspi Pi was connected to the waveshare e-paper screen module. This is now obsolete because my PCB incorporates all necessary circuitry and connections. See the schematics in the /Hardware folder.</p>
+<p>The e-Paper display I am using is sold by Waveshare: 250x122, 2.13inch E-Ink display. SKU: 12672</p>
+<p>Waveshare's epdconfig.py file defines how the Raspi Pi I/O pins are connected to the e-paper screen. I made to the wiring scheme (moving signals to other GPIO pins, for example), so the file "epdconfig.py" was modified to match. Therefore, this github repository file must be moved to replace the /python/lib/waveshare-epaper/epdconfig.py file. Doing this is part of the instructions above.</p>
+<p>The table below shows how the Raspi Pi was connected to the waveshare e-paper screen module. This is not important because the PCB incorporates all necessary circuitry and connections. See the schematics in the /Hardware folder.</p>
 <p>I am keeping this table in the Readme.md for reference purposes, in case it is useful.</p>
 <table>
     <thead>
