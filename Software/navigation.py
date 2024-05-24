@@ -353,16 +353,16 @@ class menu():
                 artistClear = row[1].lstrip()
                 albumClear = row[2].lstrip().lower().title()
                 genreClear = row[4].lstrip().lower().title()
-                if artistClear is not "":
+                if artistClear != "":
                     if artistClear not in self.menuDict["Artists"]:
                         self.menuDict["Artists"].append(artistClear)
-                if albumClear is not "":
+                if albumClear != "":
                     if albumClear not in self.menuDict["Albums"]:
                         self.menuDict["Albums"].append(albumClear)
-                if genreClear is not "":
+                if genreClear != "":
                     if genreClear not in self.menuDict["Genres"]:
                         self.menuDict["Genres"].append(genreClear)
-                if row[3].lstrip() is not "":
+                if row[3].lstrip() != "":
                     metadata.append(
                         [row[0], artistClear, albumClear, row[3].lstrip(), genreClear])  # [filename, artist, album, title, genre]
         finally:
