@@ -6,7 +6,7 @@
 dtparam=i2c_arm=on
 #dtparam=i2s=on
 dtparam=spi=on
-#dtoverlay=disable-wifi
+dtoverlay=disable-wifi
 dtoverlay=disable-bt
 
 # Enable audio (loads snd_bcm2835)
