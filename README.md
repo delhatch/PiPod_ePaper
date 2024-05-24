@@ -88,7 +88,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 </li>
 <li>Install the Adafruit_GPIO library:
   <ul>
-    <li>from the home directory (~/) type: git clone https://github&#46;com.adafruit/Adafruit_Python_GPIO.git</li>
+    <li>from the home directory (~/) type: git clone https://github&#46;com/adafruit/Adafruit_Python_GPIO.git</li>
     <li>cd Adafruit_Python_GPIO</li>
     <li>sudo python3 setup.py install</li>
   </ul>
