@@ -124,8 +124,13 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <li>Create the directory ~/Music</li>
 <li>Move your music files into this Music directory. You can do this two ways:
   <ul>
-    <li>Insert a USB Flash stick into the USB hub, and cp the files over.</li>
-    <li>Type "ifconfig" (no quotes) and note the IP address. Use the application WinSCP, and use the SFTP protocol, to copy media files from a Windows computer to the PiPod.</li>
+    <li>Method 1: Insert a USB Flash stick into the USB hub, and cp the files over.
+      <ul>
+        <li>sudo mount /dev/sda1 /mnt/usb (You'll need to sudo mkdir the /mnt/usb directory)</li>
+        <li>After copying, sudo umount /mnt/usb then remove the USB stick.</li>
+      </ul>
+    </li>
+    <li>Method 2 (this is easiest): Type "ifconfig" (no quotes) and note the IP address. Use the application WinSCP, and use the SFTP protocol, to copy media files from a Windows computer to the PiPod.</li>
   </ul>
 </li>
 <li>You should now be able to launch the PiPod software, with everything working.
