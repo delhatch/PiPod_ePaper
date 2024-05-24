@@ -61,46 +61,66 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   <li>sudo reboot</li>
   <li>Enter the following lines to install the required packages:
   <ul>
-    <li>sudo apt install python3-pygame</li>
-    <li>sudo apt install git</li>
-    <li>sudo apt install python3-vlc</li>
-    <li>sudo apt install python3-alsaaudio</li>
-    <li>sudo apt install pulseaudio</li>
-    <li>sudo apt install python3-taglib</li>
-    <li>sudo apt install python3-spidev</li>
-    <li>sudo apt install python3-gpiozero</li>
-    <li>sudo apt install python3-pip</li>
-    <li>sudo apt install python3-pil</li>
-    <li>sudo apt install python3-numpy</li>
-    <li>sudo pip3 install RPi.GPIO</li>
-    <li>sudo pip3 install spidev</li>
+    <li>sudo apt install python3</li>
+    <li>sudo apt install build-essential python3-dev python3-smbus -y</li>
+    <li>sudo apt install git -y</li>
+    <li>sudo apt install python3-vlc -y</li>
+    <li>sudo apt install python3-alsaaudio -y</li>
+    <li>sudo apt install pulseaudio -y</li>
+    <li>sudo apt install python3-taglib -y</li>
+    <li>sudo apt install python3-spidev -y</li>
+    <li>sudo apt install python3-gpiozero -y</li>
+    <li>sudo apt install python3-pip -y</li>
+    <li>sudo apt install python3-pil -y</li>
+    <li>sudo apt install python3-numpy -y</li>
   </ul>
 </li>
 <li>sudo reboot</li>
 <li>Verify that the audio is working. Plug headphones into the PiPod and type:
   <ul>
     <li>sudo raspi-config</li>
+    <li>Select line #1, then #2 "Audio"
     <li>Select snd_rpi_hifiberry_dac then Finish</li>
     <li>type: amixer set Master 50%</li>
     <li>type: speaker-test -c2</li>
     <li>Verify that audio is coming from the headphones and not the HDMI monitor.</li>
   </ul>
 </li>
+<li>Install the Adafruit_GPIO library:
+  <ul>
+    <li>from the home directory (~/) type: git clone https://github&#46;com.adafruit/Adafruit_Python_GPIO.git</li>
+    <li>cd Adafruit_Python_GPIO</li>
+    <li>sudo python3 setup.py install</li>
+  </ul>
 <li>Install the Adafruit Blinka library:
   <ul>
     <li>cd ~/ </li>
-    <li>sudo apt install build-essential python3-dev python3-smbus</li>
-    <li>sudo pip install --break-system-packages Adafruit-Blinka</li>
+    <li>sudo pip3 install --break-system-packages Adafruit-Blinka</li>
   </ul>
 </li>
 <li>Install the waveshare e-Paper libraries:
   <ul>
     <li>cd ~/</li>
     <li>git clone https://github&#46;com/waveshare/e-Paper.git</li>
-    <li>sudo pip intall --break-system-packages waveshare-epaper epd-library</li>
-  </ul>
+    <li>sudo pip install --break-system-packages waveshare-epaper epd-library</li>
+  </ul></li>
 <li>sudo reboot</li>
-<li>Clone this repository: cd ~/ then type: git clone https://github&#46;com/delhatch/PiPod_ePaper.git</li>
+<li>Now fetch the e-Paper MP3 player software from this repository:
+  <ul>
+    <li>Clone this repository: cd ~/ then type: git clone https://github&#46;com/delhatch/PiPod_ePaper.git</li>
+    <li>cd PiPod_ePaper</li>
+    <li>mv launch.sh ~/.</li>
+    <li>cd ~/</li>
+    <li>chmod 777 launch.sh</li>
+    <li>mkdir .config</li>
+    <li>mkdir .config/systemd</li>
+    <li>mkdir .config/systemd/user</li>
+    <li>cd PiPod_ePaper</li>
+    <li>mv pipod.service ~/.config/systemd/user/.</li>
+    <li>mv -f epd2in13_V4.py ~/e-Paper/RaspberryPi_JetsonNano/python/lib/waveshare_epd/.</li>
+    <li>mv -f epdconfig.py ~/e-Paper/RaspberryPi_JetsonNano/python/lib/waveshare_epd/.</li>
+  </ul>
+</li>
 <li>Create the directory ~/Music</li>
 <li>Move your music files into this Music directory. You can do this two ways:
   <ul>
