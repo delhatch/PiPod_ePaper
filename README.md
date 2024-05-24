@@ -137,6 +137,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   <ul>
     <li>cd into the directory ~/PiPod_ePaper/Software</li>
     <li>Type: python3 main.py</li>
+    <li>Note that when launching for the first time, it will scan the music files and create an index file. This may take a minute or two.</li>
   </ul>
 </li>
 <li>To have the PiPod automatically run the player automatically on power-on:
