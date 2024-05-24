@@ -130,23 +130,23 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 </li>
 <li>You should now be able to launch the PiPod software, with everything working.
   <ul>
-    <li>cd into the directory ~/PiPod_ePaper/Sofware</li>
+    <li>cd into the directory ~/PiPod_ePaper/Software</li>
     <li>Type: python3 main.py</li>
   </ul>
 </li>
-<li>To have the PiPod automatically run the player app after a power-on cycle:
+<li>To have the PiPod automatically run the player automatically on power-on:
   <ul>
-    <li>Copy the pipod.service file into the folder ~/.config/systemd/user/
-    <ul>
-      <li>Note: You may need to create the "systemd" and "user" folders.</li>
-    </ul></li>
-    <li>Copy the launch.sh file into the home folder ~/ </li>
-    <li>Copy the global.py file into the folder ~/PiPod_ePaper/Sofware/ </li>
     <li>To activate the pipod.service file, at the prompt, type: systemctl --user enable pipod.service </li>
     <li>Reboot. If there are problems, type: systemctl --user status pipod.service to see if the service launched.</li>
   </ul>
 </li>
-  <li>At this point, you probably want to disable the wifi to save power. sudo nano /boot/firmware/config.txt and enable the line "dtoverlay=disable-wifi"</li>
+  <li>At this point, you probably want to disable wifi, bluetooth, and reduce the CPU speed to save power.</li>
+  <li>To do this:
+    <ul>
+      <li>cd ~/PiPod_ePaper</li>
+      <li>Note that the next line will over-write your config.txt file. If you want to make a backup copy, do so now.</li>
+      <li>sudo mv -f config.txt /boot/firmware/.</li>
+    </ul></li>
 </ul>
 <h3>Fix the Waveshare Bug</h3>
 <p>As part of the git clone of the waveshare-epaper repository, there will be a file in the /python/lib/waveshare-epaper directory called epd2in13_V4.py. This file must be replaced with the file in this repository. There is a single-line bug fix in the ReadBusy(self) method that is corrected in the file located in this repository.</p>
