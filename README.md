@@ -41,7 +41,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   <li>Using rufus-3.22.exe (or similar), burn the image to a 128GB micro-SD card.</li>
   <li>Assuming you have a fully-assembled PiPod hardware: Connect an HDMI monitor to the Pi Zero 2 W. Also connect a USB expander hub such as the SmartQ H302S to the Pi Zero usb connector. Connect a USB keyboard and mouse to the hub.</li>
   <li>Apply power (from a plug-in USB power supply) to the USB connector at the bottom of the PiPod.</li>
-  <li>Power-up the Pi Zero and go through the configuration screens. Create the user "pi" with a password of your choosing. Reboot and log in.</li>
+  <li>Power-up and go through the configuration screens. Create the user "pi" with a password of your choosing. Reboot and log in.</li>
   <li>At the prompt: sudo raspi-config
     <ul>
       <li>Go into Menu Item #1. Enter the SSID and passphrase for your wi-fi.</li>
