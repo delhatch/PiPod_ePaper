@@ -19,19 +19,21 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <p>Using the project's standard 1200 mAh battery, the continuous play time is now <b>4 hours, 48 minutes</b>.</p>
 <p>In addition to using an e-paper screen, I also added a headphone amplifier based on the TP6113 IC. Note: This amplifier is rated at 40 mW, which does not sound like a lot of power, but even with inefficient headphones this equates to 108 dBSPL (equivalent to a gas lawn mower at 1m), which is far too loud for sustained listening. Watch your volume setting!</p>
 <h3>Project Derivation</h3>
-<p>This project is derived from github.com/delhatch/PiPod_Zero2W. I then applied (copied over) the python files from the /PiPod project, because I like that UI better. Then I modified those python files to create the set here. To create this version, clone the PiPod_Zero2W project, then replace the corresponding python files from those in this repository.</p>
+<p>This project is derived from github.com/delhatch/PiPod_Zero2W. This repository has changes to use the e-Paper screen, along with other minor bug fixes.</p>
 <h3>Structural Changes</h3>
 <p>I have changed the OS to the "lite" version: 2024-03-15-raspios-bookworm-arm64-lite.img.xz This change reduces power consumption by ~20 mA, which is a 9% savings, so reasonably significant.</p>
 <p>Also moved from Pygame to Pillow for the screen graphics.</p>
 <p>Then I got rid of Pygame completely, since I was only using it for the key stroke buffer, and the Python keypad library was already taking care of that. Eliminating Pygame reduced power consumption by 9.2% when idle, and by 5.2% when playing music.</p>
 <h3>Status</h3>
-<p>As of 13 May 2024, I have created a new PCB that hosts the e-Paper screen, and everything works well. The screen software does partial-screen updates on the top-level screen, giving flicker-free updates.</p>
+<p>As of 24 May 2024, I have created a new PCB that hosts the e-Paper screen, and everything works well (see Known Bugs). The case parts are now being fabricated -- there will probably be fixes needed abd I will update the case files in the future.</p>
 <h3>Power Savings</h3>
 <p>With the LCD screen, with the backlight on, during playback, the current draw is <b>266 mA</b>.</p>
 <p>With the LCD screen, with the backlight off, during playback, the current draw is <b>220 mA</b>.</p>
 <p>With the e-Paper screen, during playback, the current draw is <b>175 mA</b>.</p>
 <p>Having eliminated Pygame, the current draw is down to only <b>166 mA</b>.</p>
 <p>So the e-Paper screen is definitely a major improvement in battery life (playback time), and also useability because there is no anxiety about leaving an LCD backlight on.</p>
+<h3>Known Bugs</h3>
+<p>The locations of C28 and C29 interfere with the push-buttons. Fix: Solder one end of the caps directly to the headphone jack terminal, and use a short jumper wire (28-30 gauge wire) on the other end of the capacitor to connect it to the (now unused) pad of C29.</p>
 <h3>Instructions</h3>
 <p>These instructions are still a work-in-progress, and have not been tested yet.</p>
 <p>The bare PC board can be ordered via this link at <a href="https://www.pcbway.com/project/shareproject/ePaper_PiPod_MP3_music_player_a6adf3e1.html">PCBWay</a>. The BoM is part of this repository, under "Hardware." The case parts can also be ordered via that same link. I specified printing in Nylon: PA-12 with 35% glass fill.</p>
