@@ -148,8 +148,8 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 </li>
   <li>At this point, you probably want to disable wifi, bluetooth, and reduce the CPU speed to save power. To do this you can just use the config.txt file I use, which I provide in this repository:
     <ul>
+      <li>Note that the next line will over-write your /boot/firmware/config.txt file. If you want to make a backup copy, do so now.</li>
       <li>cd ~/PiPod_ePaper</li>
-      <li>Note that the next line will over-write your config.txt file. If you want to make a backup copy, do so now.</li>
       <li>sudo mv -f config.txt /boot/firmware/.</li>
     </ul></li>
 </ul>
