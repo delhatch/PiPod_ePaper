@@ -54,103 +54,103 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   <li>Type: <code?sudo nano /boot/firmware/config.txt</code> and make the following changes:
     <ul>
       <li>If necessary, un-comment <tt>dtparam=spi=on</tt> (to turn on the SPI port)</li>
-      <li>comment-out the "dtparam=audio=on" line</li>
-      <li>If necessary, un-comment out the line dtparam=12c_arm=on</li>
-      <li>At the end of the file, add a line: dtoverlay=hifiberry-dac</li>
+      <li>comment-out the <tt>dtparam=audio=on</tt> line</li>
+      <li>If necessary, un-comment out the line <tt>dtparam=12c_arm=on</tt></li>
+      <li>At the end of the file, add a line: <tt>dtoverlay=hifiberry-dac</tt></li>
   </ul>
 </li>
-  <li>sudo reboot</li>
+  <li><code>sudo reboot</code></li>
   <li>Enter the following lines to install the required packages:
   <ul>
-    <li>sudo apt install python3</li>
-    <li>sudo apt install build-essential python3-dev python3-smbus -y</li>
-    <li>sudo apt install git -y</li>
-    <li>sudo apt install python3-vlc -y</li>
-    <li>sudo apt install python3-alsaaudio -y</li>
-    <li>sudo apt install pulseaudio -y</li>
-    <li>sudo apt install python3-taglib -y</li>
-    <li>sudo apt install python3-spidev -y</li>
-    <li>sudo apt install python3-gpiozero -y</li>
-    <li>sudo apt install python3-pip -y</li>
-    <li>sudo apt install python3-pil -y</li>
-    <li>sudo apt install python3-numpy -y</li>
+    <li><code>sudo apt install python3</code></li>
+    <li><code>sudo apt install build-essential python3-dev python3-smbus -y</code></li>
+    <li><code>sudo apt install git -y</code></li>
+    <li><code>sudo apt install python3-vlc -y</code></li>
+    <li><code>sudo apt install python3-alsaaudio -y</code></li>
+    <li><code>sudo apt install pulseaudio -y</code></li>
+    <li><code>sudo apt install python3-taglib -y</code></li>
+    <li><code>sudo apt install python3-spidev -y</code></li>
+    <li><code>sudo apt install python3-gpiozero -y</code></li>
+    <li><code>sudo apt install python3-pip -y</code></li>
+    <li><code>sudo apt install python3-pil -y</code></li>
+    <li><code>sudo apt install python3-numpy -y</code></li>
   </ul>
 </li>
-<li>sudo reboot</li>
+<li><code>sudo reboot</code></li>
 <li>Verify that the audio is working. Plug headphones into the PiPod and type:
   <ul>
-    <li>sudo raspi-config</li>
+    <li><code>sudo raspi-config</code></li>
     <li>Select line #1, then #2 "Audio"
     <li>Select snd_rpi_hifiberry_dac then Finish</li>
-    <li>type: amixer set Master 50%</li>
-    <li>type: speaker-test -c2</li>
+    <li>type: <code>amixer set Master 50%</code></li>
+    <li>type: <code>speaker-test -c2</code></li>
     <li>Verify that audio is coming from the headphones and not the HDMI monitor.</li>
   </ul>
 </li>
 <li>Install the Adafruit_GPIO library:
   <ul>
-    <li>from the home directory (~/) type: git clone https://github&#46;com/adafruit/Adafruit_Python_GPIO.git</li>
-    <li>cd Adafruit_Python_GPIO</li>
-    <li>sudo python3 setup.py install</li>
+    <li>from the home directory (<code>~/</code>) type: <code>git clone https://github&#46;com/adafruit/Adafruit_Python_GPIO.git</code></li>
+    <li><code>cd Adafruit_Python_GPIO</code></li>
+    <li><code>sudo python3 setup.py install</code></li>
   </ul>
 <li>Install the Adafruit Blinka library:
   <ul>
-    <li>cd ~/ </li>
-    <li>sudo pip3 install --break-system-packages Adafruit-Blinka</li>
+    <li><code>cd ~/</code></li>
+    <li><code>sudo pip3 install --break-system-packages Adafruit-Blinka</code></li>
   </ul>
 </li>
 <li>Install the waveshare e-Paper libraries:
   <ul>
-    <li>cd ~/</li>
-    <li>git clone https://github&#46;com/waveshare/e-Paper.git</li>
-    <li>sudo pip3 install --break-system-packages waveshare-epaper epd-library</li>
+    <li><code>cd ~/</code></li>
+    <li><code>git clone https://github&#46;com/waveshare/e-Paper.git</code></li>
+    <li><code>sudo pip3 install --break-system-packages waveshare-epaper epd-library</code></li>
   </ul></li>
-<li>sudo reboot</li>
+<li><code>sudo reboot</code></li>
 <li>Now fetch the e-Paper MP3 player software from this repository:
   <ul>
-    <li>Clone this repository: cd ~/ then type: git clone https://github&#46;com/delhatch/PiPod_ePaper.git</li>
-    <li>cd PiPod_ePaper</li>
-    <li>mv launch.sh ~/.</li>
-    <li>cd ~/</li>
-    <li>chmod 777 launch.sh</li>
-    <li>mkdir .config/systemd</li>
-    <li>mkdir .config/systemd/user</li>
-    <li>cd PiPod_ePaper</li>
-    <li>mv pipod.service ~/.config/systemd/user/.</li>
-    <li>mv -f epd2in13_V4.py ~/e-Paper/RaspberryPi_JetsonNano/python/lib/waveshare_epd/.</li>
-    <li>mv -f epdconfig.py ~/e-Paper/RaspberryPi_JetsonNano/python/lib/waveshare_epd/.</li>
+    <li>Clone this repository: <code>cd ~/</code> then type: <code>git clone https://github&#46;com/delhatch/PiPod_ePaper.git</code></li>
+    <li><code>cd PiPod_ePaper</code></li>
+    <li><code>mv launch.sh ~/.</code></li>
+    <li><code>cd ~/</code></li>
+    <li><code>chmod 777 launch.sh</code></li>
+    <li><code>mkdir .config/systemd</code></li>
+    <li><code>mkdir .config/systemd/user</code></li>
+    <li><code>cd PiPod_ePaper</code></li>
+    <li><code>mv pipod.service ~/.config/systemd/user/.</code></li>
+    <li><code>mv -f epd2in13_V4.py ~/e-Paper/RaspberryPi_JetsonNano/python/lib/waveshare_epd/.</code></li>
+    <li><code>mv -f epdconfig.py ~/e-Paper/RaspberryPi_JetsonNano/python/lib/waveshare_epd/.</code></li>
   </ul>
 </li>
-<li>Create the directory ~/Music</li>
+<li>Create the directory: <code>mkdir ~/Music</code></li>
 <li>Move your music files into this Music directory. You can do this two ways:
   <ul>
     <li>Method 1: Insert a USB Flash stick into the USB hub, and cp the files over.
       <ul>
-        <li>sudo mount /dev/sda1 /mnt/usb (You'll need to sudo mkdir the /mnt/usb directory)</li>
-        <li>After copying, sudo umount /mnt/usb then remove the USB stick.</li>
+        <li><code>sudo mount /dev/sda1 /mnt/usb</code> (You'll need to sudo mkdir the /mnt/usb directory)</li>
+        <li>After copying, <code>sudo umount /mnt/usb</code> then remove the USB stick.</li>
       </ul>
     </li>
-    <li>Method 2 (this is easiest): Type "ifconfig" (no quotes) and note the IP address. Use the application WinSCP, and use the SFTP protocol, to copy media files from a Windows computer to the PiPod.</li>
+    <li>Method 2 (this is easiest): Type: <code>ifconfig</code> and note the IP address. Use the application WinSCP, and use the SFTP protocol, to copy media files from a Windows computer to the PiPod.</li>
   </ul>
 </li>
 <li>You should now be able to launch the PiPod software, with everything working.
   <ul>
-    <li>cd into the directory ~/PiPod_ePaper/Software</li>
-    <li>Type: python3 main.py</li>
+    <li>cd into the directory: <code>cd ~/PiPod_ePaper/Software</code></li>
+    <li>Type: <code>python3 main.py</code></li>
     <li>Note that when launching for the first time, it will scan the music files and create an index file. This may take a minute or two.</li>
   </ul>
 </li>
 <li>To have the PiPod automatically run the player automatically on power-on:
   <ul>
-    <li>To activate the pipod.service file, at the prompt, type: systemctl --user enable pipod.service </li>
-    <li>Reboot. If there are problems, type: systemctl --user status pipod.service to see if the service launched.</li>
+    <li>To activate the pipod.service file, at the prompt, type: <code>systemctl --user enable pipod.service</code></li>
+    <li>Reboot. If there are problems, type: <code>systemctl --user status pipod.service</code> to see if the service launched.</li>
   </ul>
 </li>
   <li>At this point, you probably want to disable wifi, bluetooth, and reduce the CPU speed to save power. To do this you can just use the config.txt file I use, which I provide in this repository:
     <ul>
       <li>Note that the next line will over-write your /boot/firmware/config.txt file. If you want to make a backup copy, do so now.</li>
-      <li>cd ~/PiPod_ePaper</li>
-      <li>sudo mv -f config.txt /boot/firmware/.</li>
+      <li><code>cd ~/PiPod_ePaper</code></li>
+      <li><code>sudo mv -f config.txt /boot/firmware/.</code></li>
     </ul></li>
 </ul>
 
