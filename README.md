@@ -51,9 +51,9 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
       <li>From the top menu, select #3 "Interface Options" then select and enable I4 "Enable I2C".</li>
       <li>Select "Back" to top screen, then "Finish" and then reboot.</li>
     </ul></li>
-  <li>Type: sudo nano /boot/firmware/config.txt and make the following changes:
+  <li>Type: <code?sudo nano /boot/firmware/config.txt</code> and make the following changes:
     <ul>
-      <li>If necessary, un-comment dtparam=spi=on (to turn on the SPI port)</li>
+      <li>If necessary, un-comment <tt>dtparam=spi=on</tt> (to turn on the SPI port)</li>
       <li>comment-out the "dtparam=audio=on" line</li>
       <li>If necessary, un-comment out the line dtparam=12c_arm=on</li>
       <li>At the end of the file, add a line: dtoverlay=hifiberry-dac</li>
