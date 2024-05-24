@@ -276,7 +276,7 @@ if sys.version_info[0] == 2:
     output = output.decode(sys.stdout.encoding)
 
 if "Raspberry" in output:
-    print("Found Raspberry in output")
+    #print("DRH Found Raspberry in output")
     implementation = RaspberryPi()
 elif os.path.exists('/sys/bus/platform/drivers/gpio-x3'):
     implementation = SunriseX3()
