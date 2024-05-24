@@ -25,7 +25,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <p>Also moved from Pygame to Pillow for the screen graphics.</p>
 <p>Then I got rid of Pygame completely, since I was only using it for the key stroke buffer, and the Python keypad library was already taking care of that. Eliminating Pygame reduced power consumption by 9.2% when idle, and by 5.2% when playing music.</p>
 <h3>Status</h3>
-<p>As of 24 May 2024, I have created a new PCB that hosts the e-Paper screen, and everything works well (see Known Bugs). The case parts are now being fabricated -- there will probably be fixes needed abd I will update the case files in the future.</p>
+<p>As of 24 May 2024, I have created a new PCB that hosts the e-Paper screen, and everything works well (see Known Bugs). The case parts are now being fabricated -- there will probably be fixes needed and I will update the case files in the future.</p>
 <h3>Power Savings</h3>
 <p>With the LCD screen, with the backlight on, during playback, the current draw is <b>266 mA</b>.</p>
 <p>With the LCD screen, with the backlight off, during playback, the current draw is <b>220 mA</b>.</p>
@@ -35,46 +35,37 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <h3>Known Bugs</h3>
 <p>The locations of C28 and C29 interfere with the push-buttons. Fix: Solder one end of the caps directly to the headphone jack terminal, and use a short jumper wire (28-30 gauge wire) on the other end of the capacitor to connect it to the (now unused) pad of C29.</p>
 <h3>Instructions</h3>
-<p>These instructions are still a work-in-progress, and have not been tested yet.</p>
 <p>The bare PC board can be ordered via this link at <a href="https://www.pcbway.com/project/shareproject/ePaper_PiPod_MP3_music_player_a6adf3e1.html">PCBWay</a>. The BoM is part of this repository, under "Hardware." The case parts can also be ordered via that same link. I specified printing in Nylon: PA-12 with 35% glass fill.</p>
 <ul>
   <li>Download the OS file "2024-03-15-raspios-bookworm-arm64-lite.img.xz" or newer.</li>
   <li>Using rufus-3.22.exe (or similar), burn the image to a 128GB micro-SD card.</li>
   <li>Assuming you have a fully-assembled PiPod hardware: Connect an HDMI monitor to the Pi Zero 2 W. Also connect a USB expander hub such as the SmartQ H302S to the Pi Zero usb connector. Connect a USB keyboard and mouse to the hub.</li>
-  <li>Apply power to the USB connector at the bottom of the PiPod.</li>
-  <li>Power-up the Pi Zero and go through the configuration screens. Create the user "pi" with a password of your choosing. Reboot.</li>
+  <li>Apply power (from a plug-in USB power supply) to the USB connector at the bottom of the PiPod.</li>
+  <li>Power-up the Pi Zero and go through the configuration screens. Create the user "pi" with a password of your choosing. Reboot and log in.</li>
   <li>At the prompt: sudo raspi-config
     <ul>
       <li>Go into Menu Item #1. Enter the SSID and passphrase for your wi-fi.</li>
-      <li>Under menu S5 (Boot/Auto-login) select "Console Autologin"</li>
+      <li>Select menu item #1, then select S5 (Boot/Auto-login) select and enable "Console Autologin", then select "Back"</li>
+      <li>From top menu, select #3 "Interface Options" the select and enable I1 "Enable SSH".</li>
+      <li>Then select and enable I4 "Enable I2C".</li>
       <li>Select "Back" to top screen, then "Finish" and then reboot.</li>
     </ul></li>
-  <li>Type sudo nano /boot/config.txt and make the following changes:
+  <li>Type sudo nano /boot/firmware/config.txt and make the following changes:
     <ul>
-      <li>un-comment dtparam=spi=on (to turn on the SPI port)</li>
+      <li>If necessary, un-comment dtparam=spi=on (to turn on the SPI port)</li>
       <li>comment-out the "dtparam=audio=on" line</li>
-      <li>add a line: dtoverlay=hifiberry-dac</li>
-      <li>un-comment dtparam=i2c_arm=on</li>
-      <li>If you are going to SSH music files into the PiPod, uncomment the SSH line.</li>
-      <li>Ensure that the "dtoverlay=disable-wifi" is NOT commented out (so wifi is ENABLED)
-        <ul>
-          <li>NOTE: After everything is configured and your PiPod is running, you will want to comment this line out, to disable wifi, to save the battery.</li>
-        </ul></li>
-      <li>Ensure the line "dtoverlay=disable-bt" is NOT commented out. Want to disable Bluetooth.</li>
+      <li>If necessary, un-comment out the line dtparam=12c_arm=on</li>
+      <li>At the end of the file, add a line: dtoverlay=hifiberry-dac</li>
   </ul>
 </li>
-  <li>sudo reboot now</li>
-  <li>Verify that the audio is working. Plug headphones into the PiPod and type:
-    <ul>
-      <li>speaker-test -c2</li>
-      <li>If audio is not heard, you may need to (TODO: raspi-config or config.txt?) and change to the line "snd_rpi_hifiberry_dac"?</li>
-    </ul></li>
+  <li>sudo reboot</li>
   <li>Enter the following lines to install the required packages:
   <ul>
     <li>sudo apt install python3-pygame</li>
     <li>sudo apt install git</li>
     <li>sudo apt install python3-vlc</li>
     <li>sudo apt install python3-alsaaudio</li>
+    <li>sudo apt install pulseaudio</li>
     <li>sudo apt install python3-taglib</li>
     <li>sudo apt install python3-spidev</li>
     <li>sudo apt install python3-gpiozero</li>
@@ -85,7 +76,16 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
     <li>sudo pip3 install spidev</li>
   </ul>
 </li>
-<li>sudo reboot now</li>
+<li>sudo reboot</li>
+<li>Verify that the audio is working. Plug headphones into the PiPod and type:
+  <ul>
+    <li>sudo raspi-config</li>
+    <li>Select snd_rpi_hifiberry_dac then Finish</li>
+    <li>type: amixer set Master 50%</li>
+    <li>type: speaker-test -c2</li>
+    <li>Verify that audio is coming from the headphones and not the HDMI monitor.</li>
+  </ul>
+</li>
 <li>Install the Adafruit Blinka library:
   <ul>
     <li>cd ~/ </li>
