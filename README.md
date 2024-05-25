@@ -115,7 +115,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <li><code>sudo reboot</code></li>
 <li>Now fetch the e-Paper MP3 player software from this repository:
   <ul>
-    <li>Clone this repository: <code>cd ~/</code> then type: <code>git clone https://github&#46;com/delhatch/PiPod_ePaper.git</code></li>
+    <li><code>cd ~/</code> then type: <code>git clone https://github&#46;com/delhatch/PiPod_ePaper.git</code></li>
     <li><code>cd PiPod_ePaper</code></li>
     <li><code>mv launch.sh ~/.</code></li>
     <li><code>cd ~/</code></li>
