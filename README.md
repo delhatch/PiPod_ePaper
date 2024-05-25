@@ -34,7 +34,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <p>So the e-Paper screen is definitely a major improvement in battery life (playback time), and also useability because there is no anxiety about leaving an LCD backlight on.</p>
 <h3>Known Bugs</h3>
 <p>The locations of C28 and C29 interfere with the push-buttons. Fix: Solder one end of the caps directly to the headphone jack terminal, and use a short jumper wire (28-30 gauge wire) on the other end of the capacitor to connect it to the (now unused) pad of C29.</p>
-<p>Note the black sharpie marks on the PCB -- these denote the "keep out" area to avoid clashing with the push-button switches.</p>
+<p>Note the black sharpie marks on the PCB -- these denote the component "keep out" area to avoid clashing with the push-button switches. (Items thinner than the push-button switches are OK, such as the added jumper wire.)</p>
 <table border="1">
   <tr>
    <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/patch.jpg" width="400" /></td>
