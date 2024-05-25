@@ -160,4 +160,9 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
       <li><code>sudo mv -f config.txt /boot/firmware/.</code></li>
     </ul></li>
 </ul>
-
+<h3>Operating Procedure</h3>
+<p>To charge the battery, slide the top power switch to the left. Connect a UCB power supply to the USB jack at the bottom of the PiPod. Applying power will stert the charging, and will also boot the PiPod.</p>
+<p>To shutdown the PiPod, press the up arrow to get into the menu tree. Press the down arrow to "Settings". Press the middle button. Press down arrow to "Shutdown". Press the middle button.</p>
+<p>To operate from battery power, slide the top power switch to the right. Wait for it to boot.</p>
+<p>While operating from battery power, you can plug (and unplug) the bottom USB jack into a power source to charge the battery.</p>
+<p>To shutdown from battery power, find and press the "Shutdown" command as above. After 5 seconds (and with the bottom USB jack <b>NOT</b> connected to a power source, slide the top power switch to the left.</p>
