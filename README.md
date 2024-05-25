@@ -35,12 +35,13 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <h3>Known Bugs</h3>
 <p>The locations of C28 and C29 interfere with the push-buttons. Fix: Solder one end of the caps directly to the headphone jack terminal, and use a short jumper wire (28-30 gauge wire) on the other end of the capacitor to connect it to the (now unused) pad of C29.</p>
 <h3>Instructions</h3>
-<p>Completion of these instructions takes about 36 minutes, not including the time transferring the music files.</p>
+<p>Completion of these instructions takes about 40 minutes, not including the time transferring the music files.</p>
 <p>The bare PC board can be ordered via this link at <a href="https://www.pcbway.com/project/shareproject/ePaper_PiPod_MP3_music_player_a6adf3e1.html">PCBWay</a>. The BoM is part of this repository, under "Hardware." The case parts can also be ordered via that same link. I specified printing in Nylon: PA-12 with 35% glass fill.</p>
 <ul>
   <li>Download the OS file "2024-03-15-raspios-bookworm-arm64-lite.img.xz" or newer.</li>
   <li>Using rufus-3.22.exe (or similar), burn the image to a 128GB micro-SD card.</li>
   <li>Assuming you have a fully-assembled PiPod hardware: Connect an HDMI monitor to the Pi Zero 2 W. Also connect a USB expander hub such as the SmartQ H302S to the Pi Zero usb connector. Connect a USB keyboard and mouse to the hub.</li>
+  <li>Insert the SD card into the Pi Zero 2 W slot.</li>
   <li>Apply power (from a plug-in USB power supply) to the USB connector at the bottom of the PiPod.</li>
   <li>Power-up and go through the configuration screens. Create the user "pi" with a password of your choosing. Reboot and log in.</li>
   <li>At the prompt: <code>sudo raspi-config</code>
