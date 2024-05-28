@@ -160,6 +160,27 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
       <li><code>cd ~/PiPod_ePaper</code></li>
       <li><code>sudo mv -f config.txt /boot/firmware/.</code></li>
     </ul></li>
+  <li>Or make those changes manually:
+  <ul>
+    <li><code>sudo nano /boot/firmware/config.txt</code></li>
+    <li>After the line "dtparam=spi=on add these new lines:
+    <ul>
+      <li><code>dtoverlay=disable-wifi</code></li>
+      <li><code>dtoverlay=disable-by</code></li>
+    </ul></li>
+    <li>Under the line "Enable DRM VC4 V3D driver, comment out the 2 lines that follow.</li>
+    <li>Comment out the line <code>display_auto_detect=1</code></li>
+    <li>Under the line "Run as fast as firmware board allows"
+      <ul>
+        <li>comment out <code>arm_boost=1</code></li>
+        <li>add the lines:
+          <ul>
+            <li><code>arm_freq=150</code></li>
+            <li><code>core_freq=150</code></li>
+            <li><code>over_voltage=-4</code></li>
+          </ul></li></li>
+      </ul>
+  </li>
 </ul>
 <h3>Operating Procedure</h3>
 <p>To charge the battery, slide the top power switch to the left. Connect a USB power supply to the USB jack at the bottom of the PiPod. Applying power will start charging the battery, and will also boot the PiPod.</p>
