@@ -166,7 +166,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
     <li>After the line "dtparam=spi=on add these new lines:
     <ul>
       <li><code>dtoverlay=disable-wifi</code></li>
-      <li><code>dtoverlay=disable-by</code></li>
+      <li><code>dtoverlay=disable-bt</code></li>
     </ul></li>
     <li>Under the line "Enable DRM VC4 V3D driver, comment out the 2 lines that follow.</li>
     <li>Comment out the line <code>display_auto_detect=1</code></li>
