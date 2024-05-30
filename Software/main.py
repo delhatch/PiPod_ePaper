@@ -60,13 +60,6 @@ view.setPlayMode( music.getPlaybackMode() )
 
 menu.setUpdateFlag()
 
-status = PiPod.getStatus()         # Reads battery voltage
-songMetadata = music.getStatus()   # Get song length, how far in, song info, vol, playlist, index of current song
-temp = view.update(status, menu.menuDict, songMetadata) # Creates the screen and writes to frame buffer
-#view.setBaseImage()
-temp = view.partialUpdate(status, menu.menuDict, songMetadata) # Only upates the time into song, and the bar.
-view.partialRefresh()
-
 while not done:
     PiPod.scan_switches()
     music.loop()    # Checks if song has ended, and starts playing next song on que (if not empty).
@@ -197,7 +190,8 @@ while not done:
                             music.shuffle()
                         if action == "Normal":
                             music.unshuffle()
-
+                else:
+                    print("No match")
         # The next line gets executed every time a key was pressed.
         pass
 

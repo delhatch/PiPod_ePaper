@@ -7,7 +7,7 @@ alphaList = list(string.ascii_uppercase)
 class menu():
     menuDict = {
         "selectedItem": 0,
-        "Main": ["Songs", "Albums","Artists","Genres","Play Mode","Settings", "Queue"],
+        "Main": ["Songs", "Shutdown", "Albums","Artists","Genres","Play Mode","Settings", "Queue"],
         "Songs": [],
         "Artists": [],
         "Albums": [],
@@ -330,6 +330,8 @@ class menu():
             #print("Exiting 'else' with 'current' screen =", self.menuDict["current"] )
             if self.menuDict["current"] == "Songs":
                 return "setSongSelectedItem"          # Clicked on "Songs". If one is playing, change index so it is centered later.
+            if self.menuDict["current"] == "Shutdown":
+                return "shutdown"
             if self.menuDict["current"] == "Albums":
                 return "setAlbumSelectedItem"         # Clicked on "Albums". Set index so this album is centered later.
             if self.menuDict["current"] == "Artists":
