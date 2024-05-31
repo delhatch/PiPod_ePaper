@@ -2,6 +2,10 @@
 This project takes the github.com/delhatch/PiPod project (which was derived from github.com/BramRausch/PiPod) and replaces the LCD screen with an e-Paper screen.
 <table border="1">
   <tr>
+   <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/case1.jpg" width="500" /></td>
+   <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/case2.jpg" width="500" /></td>
+  </tr>
+  <tr>
    <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/front_quarter_playing.jpg" width="500" /></td>
    <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/front_led.jpg" width="500" /></td>
   </tr>
