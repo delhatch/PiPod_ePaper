@@ -6,7 +6,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
    <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/front_led.jpg" width="500" /></td>
   </tr>
   <tr>
-   <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/PCB_parts_top.JPG" /></td>
+   <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/PCB_parts_top.JPG" width="500" /></td>
    <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/back1.jpg" width="400" /></td>
   </tr>
   <tr>
