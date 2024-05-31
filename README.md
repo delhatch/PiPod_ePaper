@@ -29,7 +29,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <p>Also moved from Pygame to Pillow for the screen graphics.</p>
 <p>Then I got rid of Pygame completely, since I was only using it for the key stroke buffer, and the Python keypad library was already taking care of that. Eliminating Pygame reduced power consumption by 9.2% when idle, and by 5.2% when playing music.</p>
 <h3>Status</h3>
-<p>As of 24 May 2024, I have created a new PCB that hosts the e-Paper screen, and everything works well (see Known Bugs). The case parts are now being fabricated -- there will probably be fixes needed and I will update the case files in the future.</p>
+<p>31 May 2024: I built a unit with the Rev1 parts (see pics). It works great now, but required pysically re-locating 2 capacitors on the PCB (clash with a navigation push-button, see below), and some minor filing of the case parts so that some of the side buttons moved more easily. The Rev2 files are now in this github repository, and I am fabricating those right now, but have not received them yet.</p>
 <h3>Power Savings</h3>
 <p>With the LCD screen, with the backlight on, during playback, the current draw is <b>266 mA</b>.</p>
 <p>With the LCD screen, with the backlight off, during playback, the current draw is <b>220 mA</b>.</p>
