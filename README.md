@@ -37,13 +37,11 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <p>Having eliminated Pygame, the current draw is down to only <b>166 mA</b>.</p>
 <p>So the e-Paper screen is definitely a major improvement in battery life (playback time), and also useability because there is no anxiety about leaving an LCD backlight on.</p>
 <h3>Known Bugs</h3>
-<p>In Rev1 of the PCB, the locations of C28 and C29 interfere with the push-buttons. Fix: Solder one end of the caps directly to the headphone jack terminal, and use a short jumper wire (28-30 gauge wire) on the other end of the capacitor to connect it to the (now unused) pad of C29.</p>
-<p>This has been fixed in Rev2 PCB files, and those files are under the "Hardware" folder of this repository.</p>
-<table border="1">
-  <tr>
-   <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/patch.jpg" width="400" /></td>
-  </tr>
-</table>
+<p>None.</p>
+<h3>Features TODO</h3>
+<ul>
+  <li>Eliminate flashing screen on sub-menus.</li>
+</ul>
 <h3>Instructions</h3>
 <p>Completion of these instructions takes about 40 minutes, not including the time transferring the music files.</p>
 <p>The bare PC board and case parts can be ordered via this link at <a href="https://www.pcbway.com/project/shareproject/ePaper_PiPod_MP3_music_player_a6adf3e1.html">PCBWay</a>. The BoM is part of this repository, under "Hardware." For the case parts (top, bottom and frame parts) I specified 3D printing in Nylon: PA-12 with 35% glass fill. For the navigation and side buttons, any cheap white plastic will do.</p>
