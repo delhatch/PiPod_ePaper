@@ -46,7 +46,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 </table>
 <h3>Instructions</h3>
 <p>Completion of these instructions takes about 40 minutes, not including the time transferring the music files.</p>
-<p>The bare PC board and case parts can be ordered via this link at <a href="https://www.pcbway.com/project/shareproject/ePaper_PiPod_MP3_music_player_a6adf3e1.html">PCBWay</a>. The BoM is part of this repository, under "Hardware."  I specified 3D printing in Nylon: PA-12 with 35% glass fill.</p>
+<p>The bare PC board and case parts can be ordered via this link at <a href="https://www.pcbway.com/project/shareproject/ePaper_PiPod_MP3_music_player_a6adf3e1.html">PCBWay</a>. The BoM is part of this repository, under "Hardware." For the case parts (top, bottom and frame parts) I specified 3D printing in Nylon: PA-12 with 35% glass fill. For the navigation and side buttons, any cheap white plastic will do.</p>
 <ul>
   <li>Download the OS file "2024-03-15-raspios-bookworm-arm64-lite.img.xz" or newer.</li>
   <li>Using rufus-3.22.exe (or similar), burn the image to a 128GB micro-SD card.</li>
