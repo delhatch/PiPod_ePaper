@@ -37,7 +37,9 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <p>Having eliminated Pygame, the current draw is down to only <b>166 mA</b>.</p>
 <p>So the e-Paper screen is definitely a major improvement in battery life (playback time), and also useability because there is no anxiety about leaving an LCD backlight on.</p>
 <h3>Known Bugs</h3>
-<p>None.</p>
+<ul>
+<li>None.</li>
+</ul>
 <h3>Features TODO</h3>
 <ul>
   <li>Eliminate flashing screen on sub-menus.</li>
