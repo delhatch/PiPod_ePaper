@@ -45,12 +45,6 @@ class PiPod:
         self.pressedKey = -1
         return
 
-    def lowpassBattery(self):
-        self.adc1 = self.adc.read_adc(1, gain=1) * Vadj * 1.005
-        self.lp.append(self.adc1)  # put new battery voltage reading at end of list.
-        self.lp.pop(0)        # delete/remove the oldest value
-        self.adc1 = sum(self.lp) / len(self.lp)  # calculate the average value.
-
     def getStatus(self):
         status = [0, 0]
         #Note: adc0 = external USB voltage. Never used.
