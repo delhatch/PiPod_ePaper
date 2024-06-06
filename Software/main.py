@@ -114,6 +114,10 @@ while True:
                 if action == "play":
                     music.loadList(menu.menuDict["Queue"])
                     music.play()
+                elif action == "playGotoTop":
+                    music.loadList(menu.menuDict["Queue"])
+                    music.play()
+                    menu.upTree(2)
                 elif action == "clearQueue":
                     menu.menuDict["Queue"] = []
                     music.clearQueue()

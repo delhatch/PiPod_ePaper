@@ -38,6 +38,17 @@ class menu():
     def setSelectedItem( self, value ):
         self.menuDict["selectedItem"] = value
 
+    def upTree(self, numLevels):
+        self.changedScreen = True
+        self.menuDict["selectedItem"] = 0  # Select the first item on the upcoming list.
+        for i in range( numLevels ):
+            if self.menuDict["history"]:  # If the menu history is not empty, back up one
+                self.menuDict["current"] = self.menuDict["history"][-1::][0]
+                self.menuDict["history"].pop()
+            else:
+                self.menuDict["current"] = "musicController"  # If no history, set to top screen
+        return None
+
     def escape(self):
         self.changedScreen = True
         self.menuDict["selectedItem"] = 0  # Select the first item on whatever list will be relevant.
@@ -235,8 +246,10 @@ class menu():
     def select(self, playMode):
         # The only use of 'playMode' is that if the list of songs is currently on the screen, then build the
         #     song list que appropriate to the playback mode currently in place.
-        #print("Entering select with", self.menuDict["current"] )
+        print("Entering select with", self.menuDict["current"] )
         if self.menuDict["current"] == "Artists":
+            # Screen is showing a list of artists, and one was just clicked on.
+            self.changedScreen = True
             tempList = []
             for item in self.menuDict["Songs"]:
                 if item[1] == self.menuDict["Artists"][self.menuDict["selectedItem"]]:
@@ -246,6 +259,8 @@ class menu():
             self.menuDict["selectedItem"] = 0
 
         elif self.menuDict["current"] == "Albums":
+            # Screen is showing a list of albums, and one was just clicked on.
+            self.changedScreen = True
             tempList = []
             for item in self.menuDict["Songs"]:
                 if item[2] == self.menuDict["Albums"][self.menuDict["selectedItem"]]:
@@ -255,6 +270,8 @@ class menu():
             self.menuDict["selectedItem"] = 0
 
         elif self.menuDict["current"] == "Genres":
+            # Screen is showing a list of genres, and one was just clicked on.
+            self.changedScreen = True
             tempList = []
             for item in self.menuDict["Songs"]:
                 if item[4] == self.menuDict["Genres"][self.menuDict["selectedItem"]]:
@@ -275,7 +292,7 @@ class menu():
             tempList = list(self.menuDict[self.menuDict["current"]])
             indexOfSelected = self.menuDict["selectedItem"]
             self.menuDict["Queue"] = tempList[indexOfSelected::]
-            return "play"
+            return "playGotoTop"
 
         elif self.menuDict["current"] == "Songs":
             # Screen is showing a list of all the Songs, and a song was clicked on.
@@ -295,7 +312,7 @@ class menu():
                 self.menuDict["Queue"].insert(0, self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]])
 
             #print("Put Songs on the que. Here's how many:", len(self.menuDict["Queue"]) )
-            return "play"
+            return "playGotoTop"
 
         elif self.menuDict["current"] == "Settings":
             if self.menuDict["Settings"][self.menuDict["selectedItem"]] == "Update library":
