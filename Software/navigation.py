@@ -13,7 +13,7 @@ class menu():
         "Albums": [],
         "Genres": [],
         "Play Mode":["Normal","Shuffle","Repeat 1 Song"],
-        "Settings": ["Turn EQ On","Turn EQ Off","Sleep", "Shutdown", "Update library", "Exit"],
+        "Settings": ["Turn EQ On","Turn EQ Off","Sleep", "Shutdown", "Update library"],
         "current": "musicController",
         "Queue": [],
         "history": [],
@@ -308,8 +308,6 @@ class menu():
                 return "EQOn"
             elif self.menuDict["Settings"][self.menuDict["selectedItem"]] == "Turn EQ Off":
                 return "EQOff"
-            elif self.menuDict["Settings"][self.menuDict["selectedItem"]] == "Exit":
-                return "exit"
 
         elif self.menuDict["current"] == "Play Mode":
             if self.menuDict["Play Mode"][self.menuDict["selectedItem"]] == "Normal":

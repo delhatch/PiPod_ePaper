@@ -22,7 +22,7 @@ KEY_PINS = (
 class PiPod:
     # Create a list of battery voltage values. Will use to low-pass filter the ADC values.
     lp=[]
-    for i in range(15):
+    for i in range(3):
         lp.append(0.0)
     pressedKey = -1
 
@@ -45,16 +45,23 @@ class PiPod:
         self.pressedKey = -1
         return
 
+    def lowpassBattery(self):
+        self.adc1 = self.adc.read_adc(1, gain=1) * Vadj * 1.005
+        self.lp.append(self.adc1)  # put new battery voltage reading at end of list.
+        self.lp.pop(0)        # delete/remove the oldest value
+        self.adc1 = sum(self.lp) / len(self.lp)  # calculate the average value.
+
     def getStatus(self):
         status = [0, 0]
-        #Note: adc0 = external USB voltage
+        #Note: adc0 = external USB voltage. Never used.
         #Note: adc1 = internal battery voltage
-        adc0 = self.adc.read_adc(0, gain=1) * Vadj * 1.005 #observed adjustment
+        # adc0 = self.adc.read_adc(0, gain=1) * Vadj * 1.005 #observed adjustment
         adc1 = self.adc.read_adc(1, gain=1) * Vadj * 1.005
         self.lp.append(adc1)  # put new battery voltage reading at end of list.
         self.lp.pop(0)        # delete/remove the oldest value
         adc1 = sum(self.lp) / len(self.lp)  # calculate the average value.
-        status[0] = adc0 > 4.5
+        #status[0] = adc0 > 4.5
+        status[0] = True
         status[1] = "%.2f" % round(adc1, 2)
         return status
 

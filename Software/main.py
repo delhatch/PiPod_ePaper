@@ -6,6 +6,9 @@ import sys
 import os
 import time
 
+# How often to update the top screen, in tenths of a second (50 = 5 seconds).
+refreshTime = 50
+
 # Provide a name for the values that PiPod.getKeyPressed() will return
 K_u = 0
 K_d = 1
@@ -20,13 +23,10 @@ def needToUpdate():
     # Call every Class's method to see if they modified the screen
     need = False
     if( view.query4Update() ):
-        #print("display.py asked")
         need = True
     if( music.query4Update() ):
-        #print("playback.py asked")
         need = True
     if( menu.query4Update() ):
-        #print("navigation.py asked")
         need = True
     return need
 
@@ -36,7 +36,6 @@ def clearUpdateFlags():
     view.clearUpdateFlag()
     return
 
-done = False
 music = playback.music()
 music.enableEQ()
 view = display.view()
@@ -44,7 +43,10 @@ menu = navigation.menu()
 PiPod = device.PiPod()
 
 updateScreenCounter = 0
+refreshNow = False
+stopRefreshing = False
 
+# Check to see if a music metadata file has been created. If not, create one.
 try:
     with open("/home/pi/info.csv", "r") as myFile:
         myFile.close()
@@ -55,19 +57,19 @@ menu.loadMetadata()   # This reads the info.csv file
 status = PiPod.getStatus()
 songMetadata = music.getStatus()
 
-#Set the display of the playback mode to match the actual playback mode.
+# Set the display of the playback mode to match the actual playback mode.
 view.setPlayMode( music.getPlaybackMode() )
-
+# Cause the screen to be drawn immediately.
 menu.setUpdateFlag()
 
-while not done:
-    PiPod.scan_switches()
+while True:
     music.loop()    # Checks if song has ended, and starts playing next song on que (if not empty).
+    PiPod.scan_switches()
     pressed = PiPod.getKeyPressed()   # If no key was pressed, returns -1.
     if( pressed != -1 ):
+        # Only run this code if a key was pressed.
         PiPod.clearKeyPressed()
-        # The following code only runs if a key was pressed.
-        if pressed == K_ESCAPE:
+        if pressed == K_ESCAPE:    # Button on the top upper left. Moves UP the menu tree.
             if menu.menuDict["current"] != "musicController":
                 action = menu.escape()
 
@@ -77,7 +79,7 @@ while not done:
         elif pressed == K_d:
             music.volumeDown()
 
-        elif pressed == K_UP:
+        elif pressed == K_UP:      # "up" arrow on the front navigation button array.
             if menu.menuDict["current"] == "musicController":
                 menu.gotomenu()
             else:
@@ -86,11 +88,8 @@ while not done:
         elif pressed == K_DOWN:
             if menu.menuDict["current"] == "musicController":
                 music.backup( 5000 ) # Back up this many milliseconds
-                menu.setUpdateFlag() # Indicate that the screen needs to be updated.
-                for event in pygame.event.get():
-                    if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_DOWN:
-                            music.backup( 5000 ) # Back up this many milliseconds
+                # menu.setUpdateFlag() # Indicate that the screen needs to be updated.
+                refreshNow = True
             else:
                 action = menu.down()
 
@@ -106,7 +105,7 @@ while not done:
             else:
                 action = menu.right()
 
-        elif pressed == K_RETURN:
+        elif pressed == K_RETURN:    # Center navigation button
             if menu.menuDict["current"] == "musicController":
                 music.playPause()
             else:
@@ -127,11 +126,8 @@ while not done:
                 elif action == "shutdown":
                     #view.popUp("Shutting down now\nThank You\nFor Playing.")
                     view.shutdownImage()
+                    stopRefreshing = True
                     os.system("sudo shutdown now")
-                elif action == "exit":
-                    view.clearAndDisplay()
-                    view.shutdownScreen()
-                    sys.exit(0)
                 elif action == "playAtIndex":
                     if menu.menuDict["selectedItem"] == 0:
                         music.clearQueue()
@@ -191,14 +187,15 @@ while not done:
                         if action == "Normal":
                             music.unshuffle()
                 else:
-                    print("No match")
+                    print("No command found for that keypress")
         # The next line gets executed every time a key was pressed.
         pass
 
     # Done handling key presses, so continue.
     updateScreenCounter += 1
-    if( updateScreenCounter >= 50 ):
-        # This code only runs once every 5 seconds.
+    if( ((updateScreenCounter >= refreshTime) or (refreshNow)) and (stopRefreshing == False) ):
+        # This code only runs once every 5 seconds, or if some code specifically requested it.
+        refreshNow = False
         updateScreenCounter = 0
         if ( menu.menuDict["current"] == "musicController" ):
             status = PiPod.getStatus()         # Reads battery voltage
@@ -208,7 +205,7 @@ while not done:
             view.partialRefresh()
 
     # Now we check to see if any Class has modified the screen.
-    if( needToUpdate() ):
+    if( needToUpdate() and (stopRefreshing == False) ):
         clearUpdateFlags()
         status = PiPod.getStatus()         # Reads battery voltage
         songMetadata = music.getStatus()   # Get song length, how far in, song info, vol, playlist, index of current song

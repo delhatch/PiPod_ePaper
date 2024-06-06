@@ -4,6 +4,7 @@ import alsaaudio
 import os
 import csv
 import taglib
+import time
 
 # 32 Hz, 64, 128, 256, 512, 1 kHz, 2 kHz, 4, 8, 16 kHz
 MY_EQ = [10,8,3,0,0,0,0,0,7,10]  # gain, in dB, for each band.
@@ -131,6 +132,10 @@ class music():
         self.player.set_media(self.vlcInstance.media_new_path(self.playlist[self.currentSongIndex][0]))
         #print("About to play:", self.playlist[self.currentSongIndex][0] )
         self.player.play()
+        # When starting a new song, VLC takes a bit of time to return the proper length.
+        temp = self.player.get_length()
+        if temp == 0:
+            time.sleep(0.06)
 
     def playAtIndex(self, index):
         self.currentSongIndex = index

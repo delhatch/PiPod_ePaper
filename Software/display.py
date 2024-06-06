@@ -23,7 +23,7 @@ class view():
 
         self.dispWidth, self.dispHeight = (250,122)
         self.textHeight15 = 15
-        self.textHeight19 = 18
+        self.textHeight19 = 19
         self.font15 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), self.textHeight15 )
         self.font19 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), self.textHeight19 )
         self.noRefresh = False
