@@ -246,7 +246,7 @@ class menu():
     def select(self, playMode):
         # The only use of 'playMode' is that if the list of songs is currently on the screen, then build the
         #     song list que appropriate to the playback mode currently in place.
-        print("Entering select with", self.menuDict["current"] )
+        #print("Entering select with", self.menuDict["current"] )
         if self.menuDict["current"] == "Artists":
             # Screen is showing a list of artists, and one was just clicked on.
             self.changedScreen = True
