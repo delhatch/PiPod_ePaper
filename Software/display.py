@@ -1,5 +1,6 @@
 import os
 import sys
+import time
 
 picdir = '/home/pi/e-Paper/RaspberryPi_JetsonNano/python/pic/'
 libdir = '/home/pi/e-Paper/RaspberryPi_JetsonNano/python/lib/'
@@ -41,6 +42,9 @@ class view():
         return
 
     def setBaseImage(self):
+        # Wait for the screen to be available
+        self.epd.ReadBusy()
+        time.sleep(0.2)
         self.epd.displayPartBaseImage( self.epd.getbuffer(self.Himage) )
 
     def query4Update(self):
@@ -78,6 +82,10 @@ class view():
         elif menuDict["current"] == "list":  # This means I am looking at a list of Artists/Albums/Genres.
             self.listView(list(map(lambda x: x[3], menuDict["list"])), menuDict["selectedItem"] )
         else:
+            #print("In update, about to send a list to listView")
+            #my_list2 = menuDict[menuDict["current"]]
+            #my_short = my_list2[:3]
+            #print(my_short)
             self.listView(menuDict[menuDict["current"]], menuDict["selectedItem"] )
 
         return None
@@ -98,6 +106,7 @@ class view():
     def refresh(self):
         # Wait for the screen to be available
         self.epd.ReadBusy()
+        #time.sleep(0.2)
         # Refresh the e-Paper screen
         self.epd.display(self.epd.getbuffer(self.Himage))
         return
@@ -105,6 +114,7 @@ class view():
     def partialRefresh(self):
         # Wait for the screen to be available
         self.epd.ReadBusy()
+        #time.sleep(0.2)
         # Refresh the e-Paper screen
         self.epd.displayPartial(self.epd.getbuffer(self.Himage))
         return
@@ -144,6 +154,8 @@ class view():
         self.refresh()
 
     def listView(self, menu, selectedItem):
+        #print("In listView")
+        #self.changedScreen = True
         self.clear()
         color = primaryColor
         index = 0

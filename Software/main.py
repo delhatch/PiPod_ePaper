@@ -9,6 +9,8 @@ import time
 # How often to update the top screen, in tenths of a second (50 = 5 seconds).
 refreshTime = 50
 
+willWork = True
+
 # Provide a name for the values that PiPod.getKeyPressed() will return
 K_u = 0
 K_d = 1
@@ -80,9 +82,14 @@ while True:
             music.volumeDown()
 
         elif pressed == K_UP:      # "up" arrow on the front navigation button array.
+            #print("-------------------")
+            #print("UP")
+            #print( menu.menuDict["current"] )
             if menu.menuDict["current"] == "musicController":
+                #print("Going to gotomenu")
                 menu.gotomenu()
             else:
+                #print("Going to menu.up")
                 action = menu.up()
 
         elif pressed == K_DOWN:
@@ -190,8 +197,8 @@ while True:
                             music.shuffle()
                         if action == "Normal":
                             music.unshuffle()
-                else:
-                    print("No command found for that keypress")
+                #else:
+                    #print("No command found for that keypress")
         # The next line gets executed every time a key was pressed.
         pass
 
@@ -202,22 +209,36 @@ while True:
         refreshNow = False
         updateScreenCounter = 0
         if ( menu.menuDict["current"] == "musicController" ):
+            #print(willWork)
+            #if( willWork == True):
+                #print("Buttons work now")
+                #willWork = False
+            #else:
+                #print("Buttons will NOT work now")
+                #willWork = True
             status = PiPod.getStatus()         # Reads battery voltage
             songMetadata = music.getStatus()   # Get song length, how far in, song info, vol, playlist, index of current song
             temp = view.update(status, menu.menuDict, songMetadata) # Creates the screen and writes to frame buffer
             temp = view.partialUpdate(status, menu.menuDict, songMetadata) # Only upates the time into song, and the bar.
-            view.partialRefresh()
+            view.partialRefresh()   # No screen flash, but causes buttons to not work half the time.
+            #view.setBaseImage()    # Causes screen flash
 
     # Now we check to see if any Class has modified the screen.
     if( needToUpdate() and (stopRefreshing == False) ):
+        willWork = False
         clearUpdateFlags()
         status = PiPod.getStatus()         # Reads battery voltage
         songMetadata = music.getStatus()   # Get song length, how far in, song info, vol, playlist, index of current song
+        #if( menu.menuDict["current"] == "Main" ):
+            #my_list = menu.menuDict[menu.menuDict["current"]]
+            #first3 = my_list[:3]
+            #print( first3 )
         temp = view.update(status, menu.menuDict, songMetadata) # Creates the screen and writes to frame buffer
-        view.refresh()
+        #view.refresh()
+        view.setBaseImage()
         # If just drew the top screen, set it as the base image for later partial updates.
-        if( menu.menuDict["current"] == "musicController"):
-            view.setBaseImage()
-        pass
+        #if( menu.menuDict["current"] == "musicController"):
+            #print("Setting top as base image" )
+            #view.setBaseImage()
 
     time.sleep(0.1) # Pause 0.1 seconds. No need to check for key presses faster than that.

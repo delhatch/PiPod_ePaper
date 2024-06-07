@@ -13,7 +13,7 @@ class menu():
         "Albums": [],
         "Genres": [],
         "Play Mode":["Normal","Shuffle","Repeat 1 Song"],
-        "Settings": ["Turn EQ On","Turn EQ Off","Sleep", "Shutdown", "Update library"],
+        "Settings": ["Shutdown", "Turn EQ On","Turn EQ Off","Sleep", "Update library"],
         "current": "musicController",
         "Queue": [],
         "history": [],
@@ -237,10 +237,10 @@ class menu():
         return "updateList"
 
     def gotomenu(self):
-        if self.menuDict["current"] == "musicController":
-            self.changedScreen = True
-            self.menuDict["selectedItem"] = 0
-            self.menuDict["current"] = "Main"
+        #if self.menuDict["current"] == "musicController":
+        self.changedScreen = True
+        self.menuDict["selectedItem"] = 0
+        self.menuDict["current"] = "Main"
         return None
 
     def select(self, playMode):
