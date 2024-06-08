@@ -73,10 +73,11 @@ class menu():
             self.menuDict["selectedItem"] += 1
         return None
 
-    def left(self):
+    def left(self, downButton):
+        # downButton is the state of the navigation Down button at the instant of a Left keypress. 0 = pressed, 1 = not pressed
         # TODO: Show letters across top of screen.
         #print("Left. Screen =", self.menuDict["current"])
-        if self.menuDict["current"] == "list" or self.menuDict["current"] == "Songs":  # move to previous letter in the alphabet
+        if( (self.menuDict["current"] == "list" or self.menuDict["current"] == "Songs") and (downButton == 1) ):  # move to previous letter in the alphabet
             self.changedScreen = True
             songInfo = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
             # Get first letter of selected song.
@@ -97,8 +98,15 @@ class menu():
             else:
                 # Selected song title did not start with a letter in B-Z. So just go to top of list.
                 self.menuDict["selectedItem"] = 0
+        elif( (self.menuDict["current"] == "list" or self.menuDict["current"] == "Songs") and (downButton == 0) ):  # DOWN was pressed, jump up 10 songs
+            self.changedScreen = True
+            index = self.menuDict["selectedItem"]
+            index -= 10
+            if( index < 0 ):
+                index = 0
+            self.menuDict["selectedItem"] = index
 
-        elif self.menuDict["current"] == "Artists":  # Jump to next artist whos name is alphabetically greater.
+        elif( (self.menuDict["current"] == "Artists") and (downButton == 1) ):  # Jump to next artist whos name is alphabetically greater.
             # Get first letter of the currently selected artist's name.
             self.changedScreen = True
             artistName = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
@@ -119,8 +127,15 @@ class menu():
             else:
                 # Selected Artist did not start with a letter in B-Z. So just go to top of list.
                 self.menuDict["selectedItem"] = 0
+        elif( (self.menuDict["current"] == "Artists") and (downButton == 0) ):  # DOWN button was pressed, so jump up 8 artists
+            self.changedScreen = True
+            index = self.menuDict["selectedItem"]
+            index -= 8
+            if( index < 0 ):
+                index = 0
+            self.menuDict["selectedItem"] = index
 
-        elif self.menuDict["current"] == "Albums":  # Jump to next Album whos name is alphabetically greater.
+        elif( (self.menuDict["current"] == "Albums") and (downButton == 1) ):  # Jump to next Album whos name is alphabetically greater.
             # Get first letter of the currently selected Album's name.
             self.changedScreen = True
             albumName = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
@@ -141,13 +156,20 @@ class menu():
             else:
                 # Selected Album title did not start with a letter in B-Z. So just go to top of list.
                 self.menuDict["selectedItem"] = 0
+        elif( (self.menuDict["current"] == "Albums") and (downButton == 0) ):  # DOWN button was pressed, so jump up 8 albums
+            self.changedScreen = True
+            index = self.menuDict["selectedItem"]
+            index -= 8
+            if( index < 0 ):
+                index = 0
+            self.menuDict["selectedItem"] = index
 
         return "updateList"
 
-    def right(self):
+    def right(self, downButton ):
         # TODO: Show letters across top of screen.
         #print("Right. Screen =", self.menuDict["current"])
-        if self.menuDict["current"] == "list" or self.menuDict["current"] == "Songs":  # move to next letter in the alphabet
+        if( (self.menuDict["current"] == "list" or self.menuDict["current"] == "Songs") and (downButton == 1) ):  # move to next letter in the alphabet
             self.changedScreen = True
             songInfo = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
             #songTitle = songInfo[3]
@@ -177,8 +199,15 @@ class menu():
                     nextSong = self.menuDict[self.menuDict["current"]][index]
                     nextSongFirstL = nextSong[3][0]
                 self.menuDict["selectedItem"] = index
+        elif( (self.menuDict["current"] == "list" or self.menuDict["current"] == "Songs") and (downButton == 0) ):  # DOWN was pressed, jump down 10 songs
+            self.changedScreen = True
+            index = self.menuDict["selectedItem"]
+            index += 10
+            if( index > len(self.menuDict[self.menuDict["current"]]) ):
+                index = len(self.menuDict[self.menuDict["current"]])
+            self.menuDict["selectedItem"] = index
 
-        elif self.menuDict["current"] == "Artists":  # Jump to next artist whos name is alphabetically greater.
+        elif( (self.menuDict["current"] == "Artists") and (downButton == 1) ):  # Jump to next artist whos name is alphabetically greater.
             # Get first letter of the currently selected artist's name.
             self.changedScreen = True
             artistName = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
@@ -205,8 +234,15 @@ class menu():
                     nextArtist = self.menuDict[self.menuDict["current"]][index]
                     nextArtistFirstL = nextArtist[0]
                 self.menuDict["selectedItem"] = index
+        elif( (self.menuDict["current"] == "Artists") and (downButton == 0) ):  # DOWN was pressed, jump down 8 artists
+            self.changedScreen = True
+            index = self.menuDict["selectedItem"]
+            index += 8
+            if( index > len(self.menuDict[self.menuDict["current"]]) ):
+                index = len(self.menuDict[self.menuDict["current"]])
+            self.menuDict["selectedItem"] = index
 
-        elif self.menuDict["current"] == "Albums":  # move songs on the selected album to queue
+        elif( (self.menuDict["current"] == "Albums") and (downButton == 1) ):  # move songs on the selected album to queue
             # Get first letter of the currently selected artist's name.
             self.changedScreen = True
             albumName = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
@@ -233,6 +269,13 @@ class menu():
                     nextAlbum = self.menuDict[self.menuDict["current"]][index]
                     nextAlbumFirstL = nextAlbum[0]
                 self.menuDict["selectedItem"] = index
+        elif( (self.menuDict["current"] == "Albums") and (downButton == 0) ):  # DOWN was pressed, jump down 8 albums
+            self.changedScreen = True
+            index = self.menuDict["selectedItem"]
+            index += 8
+            if( index > len(self.menuDict[self.menuDict["current"]]) ):
+                index = len(self.menuDict[self.menuDict["current"]])
+            self.menuDict["selectedItem"] = index
 
         return "updateList"
 

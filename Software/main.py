@@ -104,13 +104,17 @@ while True:
             if menu.menuDict["current"] == "musicController":
                 music.prev()
             else:
-                action = menu.left()
+                # Before calling the code to handle the keypress, check the status of the K_DOWN button.
+                state17 = PiPod.isPressed(17) # state17 = 'HIGH' (not pressed) or 'LOW' (pressed).
+                action = menu.left( state17 )
 
         elif pressed == K_RIGHT:
             if menu.menuDict["current"] == "musicController":
                 music.next()
             else:
-                action = menu.right()
+                # Before calling the code to handle the keypress, check the status of the K_DOWN button.
+                state17 = PiPod.isPressed(17) # state17 = 'HIGH' (not pressed) or 'LOW' (pressed).
+                action = menu.right( state17 )
 
         elif pressed == K_RETURN:    # Center navigation button
             if menu.menuDict["current"] == "musicController":
@@ -225,7 +229,6 @@ while True:
 
     # Now we check to see if any Class has modified the screen.
     if( needToUpdate() and (stopRefreshing == False) ):
-        willWork = False
         clearUpdateFlags()
         status = PiPod.getStatus()         # Reads battery voltage
         songMetadata = music.getStatus()   # Get song length, how far in, song info, vol, playlist, index of current song

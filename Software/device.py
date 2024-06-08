@@ -45,6 +45,9 @@ class PiPod:
         self.pressedKey = -1
         return
 
+    def isPressed(self, keyGPIO):
+        return GPIO.input( keyGPIO )
+
     def getStatus(self):
         status = [0, 0]
         #Note: adc0 = external USB voltage. Never used.
