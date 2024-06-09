@@ -123,11 +123,11 @@ while True:
                 currentMode = music.getPlaybackMode()
                 action = menu.select( currentMode )
                 if action == "play":
-                    music.loadList(menu.menuDict["Queue"])
-                    music.play()
+                    songSelectedItem = menu.getSelectedItem()
+                    music.loadList(menu.menuDict["Queue"], songSelectedItem )
                 elif action == "playGotoTop":
-                    music.loadList(menu.menuDict["Queue"])
-                    music.play()
+                    songSelectedItem = menu.getSelectedItem()
+                    music.loadList(menu.menuDict["Queue"], songSelectedItem )
                     menu.upTree(2)
                 elif action == "clearQueue":
                     menu.menuDict["Queue"] = []

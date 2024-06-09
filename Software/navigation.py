@@ -38,6 +38,9 @@ class menu():
     def setSelectedItem( self, value ):
         self.menuDict["selectedItem"] = value
 
+    def getSelectedItem( self ):
+        return self.menuDict["selectedItem"]
+
     def upTree(self, numLevels):
         self.changedScreen = True
         self.menuDict["selectedItem"] = 0  # Select the first item on the upcoming list.
@@ -331,10 +334,10 @@ class menu():
         elif self.menuDict["current"] == "list": # Not 'Songs' list, not 'Queue' list
             # Executed when a list (eg, songs by album/artist/genre) is shown and
             #    upon a song being selected by hitting ENTER.
-            #print("Selected a song on a list")
             tempList = list(self.menuDict[self.menuDict["current"]])
             indexOfSelected = self.menuDict["selectedItem"]
-            self.menuDict["Queue"] = tempList[indexOfSelected::]
+            #self.menuDict["Queue"] = tempList[indexOfSelected::]
+            self.menuDict["Queue"] = tempList
             return "playGotoTop"
 
         elif self.menuDict["current"] == "Songs":

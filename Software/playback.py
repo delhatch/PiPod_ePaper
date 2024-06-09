@@ -15,9 +15,9 @@ class music():
     UseMeta = False  # If False, use MP3 filename as the source of title/artist metadata.
                      # If True,  use the metadata inside the MP3 file.
     volume = 50      # alsaaudio volume
-    playlist = [["", "", "", "", ""]]
+    playlist = [["", "", "", "", ""]]   # data: path to MP3 file, Artist, Album, Title, Genre
     volVLC = 0
-    currentSongIndex = 0
+    currentSongIndex = 0   # This is the source-of-truth about which song on the "playlist[]" will get played.
     flagEQ = False
     AlbumNoKey = 0
     AlbumEmptyField = 0
@@ -72,6 +72,10 @@ class music():
     def getPlaybackMode(self):
         return self.playbackMode
 
+    #def setCurrentSongIndex( self, index )
+        #self.currentSongIndex = index
+        #return
+
     def enableEQ(self):
         if self.flagEQ:
             pass   # Do nothing if EQ was already enabled.
@@ -105,14 +109,16 @@ class music():
 
     def loop(self):
         if self.player.get_state() == vlc.State.Ended:
-            if (self.currentSongIndex < len(self.playlist)-1) and (self.playbackMode != "Repeat1"):
+            if( self.playbackMode != "Repeat1" ):
                 self.currentSongIndex += 1
+                if( self.currentSongIndex == len(self.playlist) ):  # If it's just played final song on playlist, start over.
+                    self.currentSongIndex = 0
             self.play()
         return None
 
-    def loadList(self, songList):
+    def loadList(self, songList, songIndex ):
         self.playlist = songList
-        self.currentSongIndex = 0
+        self.currentSongIndex = songIndex
         self.play()
 
     def updateList(self, newList):
@@ -127,15 +133,12 @@ class music():
             self.playlist = newList
 
     def play(self):
-        #print(currentSong)
         self.changedScreen = True    # About to start playing a song, so update the screen.
         self.player.set_media(self.vlcInstance.media_new_path(self.playlist[self.currentSongIndex][0]))
         #print("About to play:", self.playlist[self.currentSongIndex][0] )
         self.player.play()
         # When starting a new song, VLC takes a bit of time to return the proper length.
-        temp = self.player.get_length()
-        if temp == 0:
-            time.sleep(0.06)
+        time.sleep(0.06)
 
     def playAtIndex(self, index):
         self.currentSongIndex = index
@@ -170,8 +173,13 @@ class music():
         self.changedScreen = True
 
     def next(self):
-        if (self.currentSongIndex < len(self.playlist)-1) and (self.playbackMode != "Repeat1"):
+        #if (self.currentSongIndex < len(self.playlist)-1) and (self.playbackMode != "Repeat1"):
+            #self.currentSongIndex += 1
+        #self.play()
+        if( self.playbackMode != "Repeat1" ):
             self.currentSongIndex += 1
+            if( self.currentSongIndex == len(self.playlist) ):  # If it's just played final song on playlist, start over.
+                self.currentSongIndex = 0
         self.play()
 
     def prev(self):
