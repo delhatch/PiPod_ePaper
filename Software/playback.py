@@ -72,10 +72,6 @@ class music():
     def getPlaybackMode(self):
         return self.playbackMode
 
-    #def setCurrentSongIndex( self, index )
-        #self.currentSongIndex = index
-        #return
-
     def enableEQ(self):
         if self.flagEQ:
             pass   # Do nothing if EQ was already enabled.
@@ -124,7 +120,6 @@ class music():
     def updateList(self, newList):
         if self.playlist[0] == ["", "", "", "", ""]:
             self.playlist.pop(0)
-            #print("Here in updateList. Size of newList", len(newList) )
             self.playlist = list(newList)
             self.currentSongIndex = 0
             self.play()
@@ -173,9 +168,6 @@ class music():
         self.changedScreen = True
 
     def next(self):
-        #if (self.currentSongIndex < len(self.playlist)-1) and (self.playbackMode != "Repeat1"):
-            #self.currentSongIndex += 1
-        #self.play()
         if( self.playbackMode != "Repeat1" ):
             self.currentSongIndex += 1
             if( self.currentSongIndex == len(self.playlist) ):  # If it's just played final song on playlist, start over.
@@ -191,19 +183,15 @@ class music():
         if self.volume <= 95:
             self.volume += 5
             self.alsa.setvolume(self.volume)
-            #self.changedScreen = True    # Changed the volume, so update the screen.
-            #print(self.volume)
 
     def volumeDown(self):
         if self.volume > 5:
             self.volume -= 5
             self.alsa.setvolume(self.volume)
-            #self.changedScreen = True    # Changed the volume, so update the screen.
 
     def updateLibrary(self):
         self.playPause()
         fileList = []
-        #print("Updating metadata")
         musicPath = "/home/pi/Music/"
 
         for path, dirs, files in os.walk(musicPath):

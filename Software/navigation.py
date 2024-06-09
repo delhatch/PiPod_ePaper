@@ -294,25 +294,27 @@ class menu():
         #     song list que appropriate to the playback mode currently in place.
         #print("Entering select with", self.menuDict["current"] )
         if self.menuDict["current"] == "Artists":
-            # Screen is showing a list of artists, and one was just clicked on.
+            # Screen is showing a list of Artists, and one was just clicked on,
+            #    so build a list of all songs by that Artist, then exit.
             self.changedScreen = True
             tempList = []
             for item in self.menuDict["Songs"]:
                 if item[1] == self.menuDict["Artists"][self.menuDict["selectedItem"]]:
                     tempList.append(item)
             self.menuDict["list"] = tempList
-            self.menuDict["current"] = "list"
+            self.menuDict["current"] = "list"  # Says "the next thing to do is to display this list"
             self.menuDict["selectedItem"] = 0
 
         elif self.menuDict["current"] == "Albums":
-            # Screen is showing a list of albums, and one was just clicked on.
+            # Screen is showing a list of Albums, and one was just clicked on,
+            #    so build a list of all songs on that Album, then exit.
             self.changedScreen = True
             tempList = []
             for item in self.menuDict["Songs"]:
                 if item[2] == self.menuDict["Albums"][self.menuDict["selectedItem"]]:
                     tempList.append(item)
             self.menuDict["list"] = tempList   # Puts into list
-            self.menuDict["current"] = "list"  # Says "display this list"
+            self.menuDict["current"] = "list"  # Says "the next thing to do is to display this list"
             self.menuDict["selectedItem"] = 0
 
         elif self.menuDict["current"] == "Genres":
@@ -335,8 +337,6 @@ class menu():
             # Executed when a list (eg, songs by album/artist/genre) is shown and
             #    upon a song being selected by hitting ENTER.
             tempList = list(self.menuDict[self.menuDict["current"]])
-            indexOfSelected = self.menuDict["selectedItem"]
-            #self.menuDict["Queue"] = tempList[indexOfSelected::]
             self.menuDict["Queue"] = tempList
             return "playGotoTop"
 
