@@ -341,7 +341,7 @@ class menu():
             if( playMode == "Normal" ):
                 tempList = list(self.menuDict[self.menuDict["current"]]) # List of all Songs, sorted alphabetically.
                 indexOfSelected = self.menuDict["selectedItem"]
-                self.menuDict["Queue"] = tempList[indexOfSelected::] # Put all songs from there, down onto Queue.
+                self.menuDict["Queue"] = tempList   # Put all songs onto the Queue.
             elif( playMode == "Shuffle" ):
                 indexOfSelected = self.menuDict["selectedItem"]
                 self.menuDict["Queue"] = self.menuDict[self.menuDict["current"]]
