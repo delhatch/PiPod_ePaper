@@ -18,6 +18,7 @@ class music():
     playlist = [["", "", "", "", ""]]   # data: path to MP3 file, Artist, Album, Title, Genre
     volVLC = 0
     currentSongIndex = 0   # This is the source-of-truth about which song on the "playlist[]" will get played.
+        # NOTE: The variable menu.menuDict["selectedItem"] is only for displaying lists; the selected item on that list.
     flagEQ = False
     AlbumNoKey = 0
     AlbumEmptyField = 0
@@ -49,10 +50,7 @@ class music():
         self.changedScreen = False
 
     def query4Update(self):
-        if( self.changedScreen == True ):
-            return True
-        else:
-            return False
+        return self.changedScreen
 
     def clearUpdateFlag(self):
         self.changedScreen = False
