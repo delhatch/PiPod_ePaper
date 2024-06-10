@@ -339,9 +339,9 @@ class menu():
         elif self.menuDict["current"] == "Songs":
             # Screen is showing a list of all the Songs, and a song was clicked on.
             if( playMode == "Normal" ):
-                tempList = list(self.menuDict[self.menuDict["current"]]) # List of all Songs, sorted alphabetically.
-                indexOfSelected = self.menuDict["selectedItem"]
-                self.menuDict["Queue"] = tempList   # Put all songs onto the Queue.
+                #tempList = list(self.menuDict[self.menuDict["current"]]) # List of all Songs, sorted alphabetically.
+                #indexOfSelected = self.menuDict["selectedItem"]
+                self.menuDict["Queue"] = list(self.menuDict[self.menuDict["current"]])   # Put all songs onto the Queue, sorted alpha
             elif( playMode == "Shuffle" ):
                 indexOfSelected = self.menuDict["selectedItem"]
                 self.menuDict["Queue"] = self.menuDict[self.menuDict["current"]]
