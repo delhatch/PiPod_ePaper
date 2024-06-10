@@ -119,11 +119,11 @@ class view():
         self.epd.displayPartial(self.epd.getbuffer(self.Himage))
         return
 
-    def setNoRefresh(self):
-        self.noRefresh = True
+    #def setNoRefresh(self):
+        #self.noRefresh = True
 
-    def setDoRefresh(self):
-        self.noRefresh = False
+    #def setDoRefresh(self):
+        #self.noRefresh = False
 
     def clear(self):
         # Sets all of the pixels in the Himage frame buffer to white.
@@ -133,9 +133,9 @@ class view():
         self.epd.Clear()
         return
 
-    def shutdownScreen(self):
+    #def shutdownScreen(self):
         #TODO: Put any shutdown code here
-        pass
+        #pass
 
     def popUp(self, text):
         self.clear()
@@ -257,5 +257,4 @@ class view():
             currentTimeText = str("00:00")
 
         self.draw.text( (1,self.dispHeight-16), currentTimeText, font=self.font15, fill=0 )
-
         return
