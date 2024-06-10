@@ -9,8 +9,6 @@ import time
 # How often to update the top screen, in tenths of a second (50 = 5 seconds).
 refreshTime = 50
 
-willWork = True
-
 # Provide a name for the values that PiPod.getKeyPressed() will return
 K_u = 0
 K_d = 1
@@ -26,17 +24,14 @@ def needToUpdate():
     need = False
     if( view.query4Update() ):
         need = True
+        view.clearUpdateFlag()
     if( music.query4Update() ):
         need = True
+        music.clearUpdateFlag()
     if( menu.query4Update() ):
         need = True
+        menu.clearUpdateFlag()
     return need
-
-def clearUpdateFlags():
-    music.clearUpdateFlag()
-    menu.clearUpdateFlag()
-    view.clearUpdateFlag()
-    return
 
 music = playback.music()
 music.enableEQ()
@@ -69,7 +64,7 @@ while True:
     PiPod.scan_switches()
     pressed = PiPod.getKeyPressed()   # If no key was pressed, returns -1.
     if( pressed != -1 ):
-        # Only run this code if a key was pressed.
+        # This code only runs if a key was pressed.
         PiPod.clearKeyPressed()
         if pressed == K_ESCAPE:    # Button on the top upper left. Moves UP the menu tree.
             if menu.menuDict["current"] != "musicController":
@@ -82,20 +77,14 @@ while True:
             music.volumeDown()
 
         elif pressed == K_UP:      # "up" arrow on the front navigation button array.
-            #print("-------------------")
-            #print("UP")
-            #print( menu.menuDict["current"] )
             if menu.menuDict["current"] == "musicController":
-                #print("Going to gotomenu")
                 menu.gotomenu()
             else:
-                #print("Going to menu.up")
                 action = menu.up()
 
         elif pressed == K_DOWN:
             if menu.menuDict["current"] == "musicController":
                 music.backup( 5000 ) # Back up this many milliseconds
-                # menu.setUpdateFlag() # Indicate that the screen needs to be updated.
                 refreshNow = True
             else:
                 action = menu.down()
@@ -105,6 +94,7 @@ while True:
                 music.prev()
             else:
                 # Before calling the code to handle the keypress, check the status of the K_DOWN button.
+                # DOWN+LEFT and DOWN+RIGHT do small jumps up/down a list.
                 state17 = PiPod.isPressed(17) # state17 = 'HIGH' (not pressed) or 'LOW' (pressed).
                 action = menu.left( state17 )
 
@@ -113,6 +103,7 @@ while True:
                 music.next()
             else:
                 # Before calling the code to handle the keypress, check the status of the K_DOWN button.
+                # DOWN+LEFT and DOWN+RIGHT do small jumps up/down a list.
                 state17 = PiPod.isPressed(17) # state17 = 'HIGH' (not pressed) or 'LOW' (pressed).
                 action = menu.right( state17 )
 
@@ -122,16 +113,16 @@ while True:
             else:
                 currentMode = music.getPlaybackMode()
                 action = menu.select( currentMode )
-                if action == "play":
-                    songSelectedItem = menu.getSelectedItem()
-                    music.loadList(menu.menuDict["Queue"], songSelectedItem )
+                #if action == "play":
+                    #songSelectedItem = menu.getSelectedItem()
+                    #music.loadList(menu.menuDict["Queue"], songSelectedItem )
                 elif action == "playGotoTop":
                     songSelectedItem = menu.getSelectedItem()
                     music.loadList(menu.menuDict["Queue"], songSelectedItem )
                     menu.upTree(2)
-                elif action == "clearQueue":
-                    menu.menuDict["Queue"] = []
-                    music.clearQueue()
+                #elif action == "clearQueue":
+                    #menu.menuDict["Queue"] = []
+                    #music.clearQueue()
                 elif action == "updateLibrary":
                     view.popUp("Updating Library")
                     music.player.stop
@@ -213,35 +204,18 @@ while True:
         refreshNow = False
         updateScreenCounter = 0
         if ( menu.menuDict["current"] == "musicController" ):
-            #print(willWork)
-            #if( willWork == True):
-                #print("Buttons work now")
-                #willWork = False
-            #else:
-                #print("Buttons will NOT work now")
-                #willWork = True
             status = PiPod.getStatus()         # Reads battery voltage
             songMetadata = music.getStatus()   # Get song length, how far in, song info, vol, playlist, index of current song
             temp = view.update(status, menu.menuDict, songMetadata) # Creates the screen and writes to frame buffer
             temp = view.partialUpdate(status, menu.menuDict, songMetadata) # Only upates the time into song, and the bar.
-            view.partialRefresh()   # No screen flash, but causes buttons to not work half the time.
+            view.partialRefresh()   # No screen flash
             #view.setBaseImage()    # Causes screen flash
 
     # Now we check to see if any Class has modified the screen.
     if( needToUpdate() and (stopRefreshing == False) ):
-        clearUpdateFlags()
         status = PiPod.getStatus()         # Reads battery voltage
         songMetadata = music.getStatus()   # Get song length, how far in, song info, vol, playlist, index of current song
-        #if( menu.menuDict["current"] == "Main" ):
-            #my_list = menu.menuDict[menu.menuDict["current"]]
-            #first3 = my_list[:3]
-            #print( first3 )
         temp = view.update(status, menu.menuDict, songMetadata) # Creates the screen and writes to frame buffer
-        #view.refresh()
         view.setBaseImage()
-        # If just drew the top screen, set it as the base image for later partial updates.
-        #if( menu.menuDict["current"] == "musicController"):
-            #print("Setting top as base image" )
-            #view.setBaseImage()
 
     time.sleep(0.1) # Pause 0.1 seconds. No need to check for key presses faster than that.
