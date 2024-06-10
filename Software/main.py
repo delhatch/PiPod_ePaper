@@ -116,7 +116,7 @@ while True:
                 #if action == "play":
                     #songSelectedItem = menu.getSelectedItem()
                     #music.loadList(menu.menuDict["Queue"], songSelectedItem )
-                elif action == "playGotoTop":
+                if action == "playGotoTop":
                     songSelectedItem = menu.getSelectedItem()
                     music.loadList(menu.menuDict["Queue"], songSelectedItem )
                     menu.upTree(2)

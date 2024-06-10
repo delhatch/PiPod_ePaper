@@ -195,6 +195,8 @@ class menu():
                 nextSongFirstL = nextSong[3][0]
                 while( nextSongFirstL != 'A' ):
                     index += 1
+                    if( index > (len(self.menuDict[self.menuDict["current"]]) - 1) ):
+                        index = len(self.menuDict[self.menuDict["current"]]) - 1
                     nextSong = self.menuDict[self.menuDict["current"]][index]
                     nextSongFirstL = nextSong[3][0]
                 self.menuDict["selectedItem"] = index
@@ -343,15 +345,17 @@ class menu():
                 #indexOfSelected = self.menuDict["selectedItem"]
                 self.menuDict["Queue"] = list(self.menuDict[self.menuDict["current"]])   # Put all songs onto the Queue, sorted alpha
             elif( playMode == "Shuffle" ):
-                indexOfSelected = self.menuDict["selectedItem"]
+                #indexOfSelected = self.menuDict["selectedItem"]
                 self.menuDict["Queue"] = self.menuDict[self.menuDict["current"]]
                 self.menuDict["Queue"] = random.sample( self.menuDict["Queue"], len(self.menuDict["Queue"]) )
                 # Now put the selected song at the beginning of the que, so it plays first.
                 self.menuDict["Queue"].insert(0, self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]])
+                self.menuDict["selectedItem"] = 0   # The song to play is now the first one on the queue.
                 #print("Que was empty. Filled SHUFFLE. Size:", len(self.menuDict["Queue"] ) )
             else:
                 # Play mode is "Repeat1" so put just that song onto the play que. After it plays, main.py will figure it out.
                 self.menuDict["Queue"].insert(0, self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]])
+                self.menuDict["selectedItem"] = 0   # The song to play is now the first one on the queue.
             return "playGotoTop"
 
         elif self.menuDict["current"] == "Settings":
