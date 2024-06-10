@@ -82,10 +82,6 @@ class view():
         elif menuDict["current"] == "list":  # This means I am looking at a list of Artists/Albums/Genres.
             self.listView(list(map(lambda x: x[3], menuDict["list"])), menuDict["selectedItem"] )
         else:
-            #print("In update, about to send a list to listView")
-            #my_list2 = menuDict[menuDict["current"]]
-            #my_short = my_list2[:3]
-            #print(my_short)
             self.listView(menuDict[menuDict["current"]], menuDict["selectedItem"] )
 
         return None
