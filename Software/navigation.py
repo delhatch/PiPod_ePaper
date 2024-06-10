@@ -78,8 +78,6 @@ class menu():
 
     def left(self, downButton):
         # downButton is the state of the navigation Down button at the instant of a Left keypress. 0 = pressed, 1 = not pressed
-        # TODO: Show letters across top of screen.
-        #print("Left. Screen =", self.menuDict["current"])
         if( (self.menuDict["current"] == "list" or self.menuDict["current"] == "Songs") and (downButton == 1) ):  # move to previous letter in the alphabet
             self.changedScreen = True
             songInfo = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
@@ -170,8 +168,6 @@ class menu():
         return "updateList"
 
     def right(self, downButton ):
-        # TODO: Show letters across top of screen.
-        #print("Right. Screen =", self.menuDict["current"])
         if( (self.menuDict["current"] == "list" or self.menuDict["current"] == "Songs") and (downButton == 1) ):  # move to next letter in the alphabet
             self.changedScreen = True
             songInfo = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
@@ -206,8 +202,8 @@ class menu():
             self.changedScreen = True
             index = self.menuDict["selectedItem"]
             index += 10
-            if( index > len(self.menuDict[self.menuDict["current"]]) ):
-                index = len(self.menuDict[self.menuDict["current"]])
+            if( index > (len(self.menuDict[self.menuDict["current"]])-1) ):
+                index = len(self.menuDict[self.menuDict["current"]]) - 1
             self.menuDict["selectedItem"] = index
 
         elif( (self.menuDict["current"] == "Artists") and (downButton == 1) ):  # Jump to next artist whos name is alphabetically greater.
@@ -241,8 +237,8 @@ class menu():
             self.changedScreen = True
             index = self.menuDict["selectedItem"]
             index += 8
-            if( index > len(self.menuDict[self.menuDict["current"]]) ):
-                index = len(self.menuDict[self.menuDict["current"]])
+            if( index > (len(self.menuDict[self.menuDict["current"]])-1) ):
+                index = len(self.menuDict[self.menuDict["current"]]) - 1
             self.menuDict["selectedItem"] = index
 
         elif( (self.menuDict["current"] == "Albums") and (downButton == 1) ):  # move songs on the selected album to queue
@@ -276,8 +272,8 @@ class menu():
             self.changedScreen = True
             index = self.menuDict["selectedItem"]
             index += 8
-            if( index > len(self.menuDict[self.menuDict["current"]]) ):
-                index = len(self.menuDict[self.menuDict["current"]])
+            if( index > (len(self.menuDict[self.menuDict["current"]])-1) ):
+                index = len(self.menuDict[self.menuDict["current"]]) - 1
             self.menuDict["selectedItem"] = index
 
         return "updateList"
@@ -356,8 +352,6 @@ class menu():
             else:
                 # Play mode is "Repeat1" so put just that song onto the play que. After it plays, main.py will figure it out.
                 self.menuDict["Queue"].insert(0, self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]])
-
-            #print("Put Songs on the que. Here's how many:", len(self.menuDict["Queue"]) )
             return "playGotoTop"
 
         elif self.menuDict["current"] == "Settings":
@@ -399,7 +393,6 @@ class menu():
                 return "setArtistSelectedItem"        # Clicked on "Artists". As above.
             if self.menuDict["current"] == "Genres":
                 return "setGenreSelectedItem"         # Clicked on "Genre". As above.
-
         return None
 
     def loadMetadata(self):
