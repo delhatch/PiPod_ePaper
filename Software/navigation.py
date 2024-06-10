@@ -125,9 +125,13 @@ class menu():
                 nextArtist = self.menuDict[self.menuDict["current"]][index]
                 nextArtistFirstL = nextArtist[0]
                 while( nextArtistFirstL >= nextL ):
-                    index -= 1
-                    nextArtist = self.menuDict[self.menuDict["current"]][index]
-                    nextArtistFirstL = nextArtist[0]
+                    if( index <= 0 ):
+                        index = -1
+                        break
+                    else:
+                        index -= 1
+                        nextArtist = self.menuDict[self.menuDict["current"]][index]
+                        nextArtistFirstL = nextArtist[0]
                 self.menuDict["selectedItem"] = index + 1
             else:
                 # Selected Artist did not start with a letter in B-Z. So just go to top of list.
@@ -154,9 +158,13 @@ class menu():
                 nextAlbum = self.menuDict[self.menuDict["current"]][index]
                 nextAlbumFirstL = nextAlbum[0]
                 while( nextAlbumFirstL >= nextL ):
-                    index -= 1
-                    nextAlbum = self.menuDict[self.menuDict["current"]][index]
-                    nextAlbumFirstL = nextAlbum[0]
+                    if( index <= 0 ):
+                        index = -1
+                        break
+                    else:
+                        index -= 1
+                        nextAlbum = self.menuDict[self.menuDict["current"]][index]
+                        nextAlbumFirstL = nextAlbum[0]
                 self.menuDict["selectedItem"] = index + 1
             else:
                 # Selected Album title did not start with a letter in B-Z. So just go to top of list.
