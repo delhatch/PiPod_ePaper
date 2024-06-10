@@ -92,9 +92,13 @@ class menu():
                 nextSong = self.menuDict[self.menuDict["current"]][index]
                 nextSongFirstL = nextSong[3][0]
                 while( nextSongFirstL >= nextL ):
-                    index -= 1
-                    nextSong = self.menuDict[self.menuDict["current"]][index]
-                    nextSongFirstL = nextSong[3][0]
+                    if( index <= 0 ):
+                        index = -1
+                        break
+                    else:
+                        index -= 1
+                        nextSong = self.menuDict[self.menuDict["current"]][index]
+                        nextSongFirstL = nextSong[3][0]
                 self.menuDict["selectedItem"] = index + 1
             else:
                 # Selected song title did not start with a letter in B-Z. So just go to top of list.
