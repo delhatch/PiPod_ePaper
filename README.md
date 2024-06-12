@@ -70,7 +70,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
       <li>comment-out the <tt>dtparam=audio=on</tt> line</li>
       <li>If necessary, un-comment out the line <tt>dtparam=12c_arm=on</tt></li>
       <li>At the end of the file, add a line: <tt>dtoverlay=hifiberry-dac</tt></li>
-      <li><tt>CTRL-O</tt> and <tt>ENTER</tt> and <tt>CCTRL-X</tt> to save and exit.</li>
+      <li><tt>CTRL-O</tt> and <tt>ENTER</tt> and <tt>CTRL-X</tt> to save and exit.</li>
   </ul>
 </li>
   <li><code>sudo reboot</code></li>
