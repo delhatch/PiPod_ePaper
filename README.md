@@ -99,6 +99,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
     <li>type: <code>amixer set Master 50%</code></li>
     <li>type: <code>speaker-test -c2</code></li>
     <li>Verify that audio is coming from the headphones and not the HDMI monitor.</li>
+    <li><tt>CTRL-C</tt> to finish and quit.</li>
   </ul>
 </li>
 <li>Install the Adafruit_GPIO library:
