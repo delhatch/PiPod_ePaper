@@ -58,7 +58,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   <li>Power-up and go through the configuration screens. Create the user "pi" with a password of your choosing. Reboot and log in.</li>
   <li>At the prompt: <code>sudo raspi-config</code>
     <ul>
-      <li>Go into Menu Item #1, then select S2. Enter the SSID and passphrase for your wi-fi.</li>
+      <li>Go into Menu Item #1, then select S1. Enter the SSID and passphrase for your wi-fi.</li>
       <li>Select menu item #1, then select S5 (Boot/Auto-login) select and enable "Console Autologin".</li>
       <li>From the top menu, select #3 "Interface Options" then select and enable I1 "Enable SSH".</li>
       <li>From the top menu, select #3 "Interface Options" then select and enable I4 "Enable I2C".</li>
