@@ -145,7 +145,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
         <li>After copying, <code>sudo umount /mnt/usb</code> then remove the USB stick.</li>
       </ul>
     </li>
-    <li>Method 2 (this is easiest): Type: <code>ifconfig</code> and note the IP address. Use the application WinSCP, and use the SFTP protocol, to copy media files from a Windows computer to the PiPod.</li>
+    <li>Method 2: Type: <code>ifconfig</code> and note the IP address. Use the application WinSCP, and use the SFTP protocol, to copy media files from a Windows computer to the PiPod.</li>
   </ul>
 </li>
 <li>You should now be able to launch the PiPod software, with everything working.
@@ -161,13 +161,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
     <li>Reboot. If there are problems, type: <code>systemctl --user status pipod.service</code> to see if the service launched.</li>
   </ul>
 </li>
-  <li>At this point, you probably want to disable wifi, bluetooth, and reduce the CPU speed to save power. To do this you can just use the config.txt file I use, which I provide in this repository:
-    <ul>
-      <li>Note that the next line will over-write your /boot/firmware/config.txt file. If you want to make a backup copy, do so now.</li>
-      <li><code>cd ~/PiPod_ePaper</code></li>
-      <li><code>sudo mv -f config.txt /boot/firmware/.</code></li>
-    </ul></li>
-  <li>Or make those changes manually:
+  <li>At this point, you'll probably want to disable wifi, bluetooth, and reduce the CPU speed, in order to save power.
   <ul>
     <li><code>sudo nano /boot/firmware/config.txt</code></li>
     <li>After the line "dtparam=spi=on add these new lines:
