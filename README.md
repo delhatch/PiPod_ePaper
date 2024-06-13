@@ -20,7 +20,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 </table>
 <h3>Motivation</h3>
 <p>The goal of this project was switching from a 2.2" 320x240 LCD screen to a 2.13" 250x122 e-Paper screen (from Waveshare) in order to extend the battery run-time.</p>
-<p>Using the project's standard 1200 mAh battery, the continuous play time is now <b>4 hours, 48 minutes</b>.</p>
+<p>Using the project's standard 1200 mAh battery, the continuous play time is now <b>4 hours, 48 minutes</b>. Since I am never far from a USB power supply for charging, even on an airplane, this seems more than sufficient.</p>
 <p>In addition to using an e-paper screen, I also added a headphone amplifier based on the TP6113 IC. Note: This amplifier is rated at 40 mW, which does not sound like a lot of power, but even with inefficient headphones this equates to 108 dBSPL (equivalent to a gas lawn mower at 1m), which is far too loud for sustained listening. Watch your volume setting!</p>
 <h3>Project Derivation</h3>
 <p>This project is derived from github.com/delhatch/PiPod_Zero2W. This repository has changes to impliment the use of the e-Paper screen, along with other minor bug fixes.</p>
