@@ -15,7 +15,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   </tr>
   <tr>
    <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/back_bare.jpg" width="400" /></td>
-   <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/bot_w_batt_v2.jpg" width="400" /></td>
+   <td><img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/back_quarter_v2.jpg" width="400" /></td>
   </tr>
 </table>
 <h3>Motivation</h3>
