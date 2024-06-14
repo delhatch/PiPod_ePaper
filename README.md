@@ -161,7 +161,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
     <li>Reboot. If there are problems, type: <code>systemctl --user status pipod.service</code> to see if the service launched.</li>
   </ul>
 </li>
-  <li>At this point, you'll probably want to disable wifi, bluetooth, and reduce the CPU speed, in order to save power.
+  <li>To minimize battery power consumption, disable wifi, bluetooth, and reduce the CPU clock speed.
   <ul>
     <li><code>sudo nano /boot/firmware/config.txt</code></li>
     <li>After the line "dtparam=spi=on add these new lines:
