@@ -133,13 +133,10 @@ class music():
         # When starting a new song, VLC takes a bit of time to return the proper length.
         count = 0
         temp = self.player.get_length()
-        while( temp == 0 ):
+        while( (temp == 0) and (count <= 20) ):
             count += 1
-            if( count >= 20 ):
-                break
             time.sleep( 0.06 )
             temp = self.player.get_length()
-
 
     def playAtIndex(self, index):
         self.currentSongIndex = index
