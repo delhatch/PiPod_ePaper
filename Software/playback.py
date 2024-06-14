@@ -131,7 +131,15 @@ class music():
         #print("About to play:", self.playlist[self.currentSongIndex][0] )
         self.player.play()
         # When starting a new song, VLC takes a bit of time to return the proper length.
-        time.sleep(0.06)
+        count = 0
+        temp = self.player.get_length()
+        while( temp == 0 ):
+            count += 1
+            if( count >= 20 ):
+                break
+            time.sleep( 0.06 )
+            temp = self.player.get_length()
+
 
     def playAtIndex(self, index):
         self.currentSongIndex = index
