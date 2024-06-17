@@ -417,7 +417,6 @@ class menu():
         self.menuDict["Albums"] = []
         self.menuDict["Songs"] = []
         self.menuDict["Genres"] = []
-        self.menuDict["TrackNumber"] = []
         metadata = []
         try:
             reader = csv.reader(file)

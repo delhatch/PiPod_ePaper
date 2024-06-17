@@ -208,7 +208,6 @@ class music():
 
         file = open("/home/pi/info.csv", "w", newline="")
         writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
-        loopCounter = 0
 
         for i in fileList:
             #TODO: .wav files are not handled well(?). Must use metadata derived from filename, only.(?)
