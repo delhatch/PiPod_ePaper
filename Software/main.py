@@ -144,14 +144,14 @@ while True:
                     # Change menuDict["selectedItem"] so that the currently-playing Song is centered on the list.
                     songList = list( menu.menuDict["Songs"] )
                     thisSong = music.playlist[music.currentSongIndex]
-                    if thisSong != ['', '', '', '', '']:
+                    if thisSong != ['', '', '', '', '', '']:
                         thisIndex = songList.index( thisSong )
                         menu.setSelectedItem( thisIndex )
                 elif action == "setAlbumSelectedItem":
                     # Change menuDict["selectedItem"] so that the currently-playing song's Album is centered.
                     # Find the album of the current song.
                     thisSong = music.playlist[music.currentSongIndex]
-                    if thisSong != ['', '', '', '', '']:
+                    if thisSong != ['', '', '', '', '', '']:
                         thisAlbum = thisSong[2]   # [2] points to the Album name for this song
                         # Now get the index of that album on the list of Albums.
                         albumList = list( menu.menuDict["Albums"] )
@@ -161,7 +161,7 @@ while True:
                     # Change menuDict["selectedItem"] so that the currently-playing song's Artist is centered.
                     # Find the artist of the current song.
                     thisSong = music.playlist[music.currentSongIndex]
-                    if thisSong != ['', '', '', '', '']:
+                    if thisSong != ['', '', '', '', '', '']:
                         thisArtist = thisSong[1]   # [1] points to the Artist name of the song
                         # Now get the index of that artist on the list of Artists.
                         artistList = list( menu.menuDict["Artists"] )
@@ -171,7 +171,7 @@ while True:
                     # Change menuDict["selectedItem"] so that the currently-playing song's Album is centered.
                     # Find the album of the current song.
                     thisSong = music.playlist[music.currentSongIndex]
-                    if thisSong != ['', '', '', '', '']:
+                    if thisSong != ['', '', '', '', '', '']:
                         thisGenre = thisSong[4]     # [4] points to the Genre of the song
                         # Now get the index of that genre on the list of Genres.
                         genreList = list( menu.menuDict["Genres"] )

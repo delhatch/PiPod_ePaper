@@ -7,7 +7,7 @@ alphaList = list(string.ascii_uppercase)
 class menu():
     menuDict = {
         "selectedItem": 0,
-        "Main": ["Songs", "Shutdown", "Albums","Artists","Genres","Play Mode","Settings", "Queue"],
+        "Main": ["Songs", "Shutdown", "Albums", "Artists", "Genres", "Play Mode", "Settings", "Queue"],
         "Songs": [],
         "Artists": [],
         "Albums": [],
@@ -417,6 +417,7 @@ class menu():
         self.menuDict["Albums"] = []
         self.menuDict["Songs"] = []
         self.menuDict["Genres"] = []
+        self.menuDict["TrackNumber"] = []
         metadata = []
         try:
             reader = csv.reader(file)
@@ -434,9 +435,9 @@ class menu():
                 if genreClear != "":
                     if genreClear not in self.menuDict["Genres"]:
                         self.menuDict["Genres"].append(genreClear)
-                if row[3].lstrip() != "":
+                if row[3].lstrip() != "":    # If the Title string is not empty:
                     metadata.append(
-                        [row[0], artistClear, albumClear, row[3].lstrip(), genreClear])  # [filename, artist, album, title, genre]
+                        [row[0], artistClear, albumClear, row[3].lstrip(), genreClear, row[5] ] )  # [filename, artist, album, title, genre, track]
         finally:
             file.close()
 

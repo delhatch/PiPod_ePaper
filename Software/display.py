@@ -150,7 +150,6 @@ class view():
         self.refresh()
 
     def listView(self, menu, selectedItem):
-        #print("In listView")
         #self.changedScreen = True
         self.clear()
         color = primaryColor
@@ -215,10 +214,20 @@ class view():
         # Current song information
         if currentSong:
             artist = str( currentSong[1] )
+            album = str( currentSong[2] )
             title = str( currentSong[3] )
-            #print(currentSong[4])
-            self.draw.text( (2,30), title, font=self.font19, fill=0 )
-            self.draw.text( (2,51), artist, font=self.font19, fill=0 )
+            genre = str( currentSong[4] )
+            track = str( currentSong[5] )
+            self.draw.text( (2,25), title, font=self.font19, fill=0 )
+            self.draw.text( (2,46), artist, font=self.font19, fill=0 )
+            albumLine = "Album: " + album
+            genreLine = "Genre: " + genre
+            self.draw.text( (2,70), albumLine, font=self.font15, fill=0 )
+            self.draw.text( (2,86), genreLine, font=self.font15, fill=0 )
+            if( track != '0/0' ):
+                trackLine = "Track: " + track
+                lengthTrackLine = self.draw.textlength( trackLine, self.font15 ) # How many pixels needed for this text
+                self.draw.text( (self.dispWidth - (lengthTrackLine+2), 86), trackLine, font=self.font15, fill=0 ) # Right justify
 
         # Time bar
         self.draw.rectangle( [(40,self.dispHeight-15),(self.dispWidth-40,self.dispHeight-1)], outline=0 )  # No fill. Border rectangle.

@@ -15,7 +15,7 @@ class music():
     UseMeta = False  # If False, use MP3 filename as the source of title/artist metadata.
                      # If True,  use the metadata inside the MP3 file.
     volume = 50      # alsaaudio volume
-    playlist = [["", "", "", "", ""]]   # data: path to MP3 file, Artist, Album, Title, Genre
+    playlist = [["", "", "", "", "", ""]]   # data: path to MP3 file, Artist, Album, Title, Genre, Track
     volVLC = 0
     currentSongIndex = 0   # This is the source-of-truth about which song on the "playlist[]" will get played.
         # NOTE: The variable menu.menuDict["selectedItem"] is only for displaying lists; the selected item on that list.
@@ -28,6 +28,8 @@ class music():
     TitleEmptyField = 0
     GenreNoKey = 0
     GenreEmptyField = 0
+    TrackNoKey = 0
+    TrackEmptyField = 0
 
     def __init__(self):
         self.vlcInstance = vlc.Instance('--no-video --quiet')
@@ -116,7 +118,7 @@ class music():
         self.play()
 
     def updateList(self, newList):
-        if self.playlist[0] == ["", "", "", "", ""]:
+        if self.playlist[0] == ["", "", "", "", "", ""]:
             self.playlist.pop(0)
             self.playlist = list(newList)
             self.currentSongIndex = 0
@@ -165,7 +167,7 @@ class music():
         self.playlist = self.playlist[:self.currentSongIndex + 1] + tempPlaylist
 
     def clearQueue(self):
-        self.playlist = [["", "", "", "", ""]]
+        self.playlist = [["", "", "", "", "", ""]]
         self.currentSongIndex = 0
         #self.player.stop()
         self.changedScreen = True
@@ -199,11 +201,14 @@ class music():
 
         for path, dirs, files in os.walk(musicPath):
             for file in files:
-                if file.endswith('.mp3') or file.endswith('.MP3') or file.endswith('.Mp3') or file.endswith('.m4a') or file.endswith('.wav') or file.endswith('.wma'):
+                if file.endswith('.mp3') or file.endswith('.MP3') or file.endswith('.Mp3') or \
+                    file.endswith('.m4a') or file.endswith('.wav') or file.endswith('.wma') or \
+                    file.endswith('.WAV'):
                     fileList.append(os.path.join(path, file))
 
         file = open("/home/pi/info.csv", "w", newline="")
         writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
+        loopCounter = 0
 
         for i in fileList:
             #TODO: .wav files are not handled well(?). Must use metadata derived from filename, only.(?)
@@ -215,23 +220,23 @@ class music():
                 if( 'ARTIST' in song ):
                     if( song['ARTIST'] == [] ):  # Key exists, but points to empty field.
                         self.ArtistEmptyField += 1
-                        song['ARTIST'] = ['NOT SURE ARTIST']  # Found none of these
+                        song['ARTIST'] = ['Unknown ARTIST']  # Found none of these
                     else:
                         pass  # Artist field was filled in. Is legit.
                 else:
                     self.ArtistNoKey += 1
-                    song['ARTIST'] = ['Not Sure ARTIST']   # Found 26 of these
+                    song['ARTIST'] = ['Unknown ARTIST']   # Found 26 of these
 
                 # Check to see if the "TITLE" field is empty, or does not exist.
                 if( 'TITLE' in song ):
                     if( song['TITLE'] == [] ):  # Key exists, but points to empty field.
                         self.TitleEmptyField += 1
-                        song['TITLE'] = ['NOT SURE TITLE']  # Found none of these
+                        song['TITLE'] = ['Unknown TITLE']  # Found none of these
                     else:
                         pass  # Album field was filled in. Is legit.
                 else:
                     self.TitleNoKey += 1
-                    song['TITLE'] = ['Not Sure TITLE']   # Found 41 of these
+                    song['TITLE'] = ['Unknown TITLE']   # Found 41 of these
 
             else:   # Metadata source = the MP3 filename string.
                 # MP3 filenames must look exactly like this:
@@ -257,29 +262,40 @@ class music():
             if( 'ALBUM' in song ):
                 if( song['ALBUM'] == [] ):  # Key exists, but points to empty field.
                     self.AlbumEmptyField += 1
-                    song['ALBUM'] = ['NOT SURE ALBUM']  # Found 1635 of these
+                    song['ALBUM'] = ['Unknown ALBUM']  # Found 1635 of these
                 else:
                     pass  # Album field was filled in. Is legit.
             else:
                 self.AlbumNoKey += 1
-                song['ALBUM'] = ['Not Sure ALBUM']   # Found 174 of these
+                song['ALBUM'] = ['Unknown ALBUM']   # Found 174 of these
 
             # Check to see if the "GENRE" field is empty, or does not exist.
             if( 'GENRE' in song ):
                 if( song['GENRE'] == [] ):  # Key exists, but points to empty field.
                     self.GenreEmptyField += 1
-                    song['GENRE'] = ['NOT SURE GENRE']  # Found ? of these
+                    song['GENRE'] = ['Unknown GENRE']  # Found 16 of these
                 else:
                     pass  # Genre field was filled in. Is legit.
             else:
                 self.GenreNoKey += 1
-                song['GENRE'] = ['Not Sure GENRE']   # Found ? of these
+                song['GENRE'] = ['Unknown GENRE']   # Found 52 of these
+
+            # Now do the 'TRACK' information
+            if( 'TRACKNUMBER' in song ):
+                if( song['TRACKNUMBER'] == [] ):  # Key exists, but points to empty field.
+                    self.TrackEmptyField += 1
+                    song['TRACKNUMBER'] = ['0/0']  # Found 2146 of these
+                else:
+                    pass  # Genre field was filled in. Is legit.
+            else:
+                self.TrackNoKey += 1
+                song['TRACKNUMBER'] = ['0/0']   # Found 158 of these
 
             # At this point, the following writer call should never fail.
             try:
-                writer.writerow((i, song["ARTIST"][0], song["ALBUM"][0], song["TITLE"][0], song["GENRE"][0]))
+                writer.writerow( (i, song["ARTIST"][0], song["ALBUM"][0], song["TITLE"][0], song["GENRE"][0], song["TRACKNUMBER"][0]) )
             except:
-                #print("Unknown write error",i)
+                print("Unknown write error",i)
                 pass
                 try:
                     pass
@@ -287,18 +303,19 @@ class music():
                     #print(song["ALBUM"][0])
                     #print(song["TITLE"][0])
                     #print(song["GENRE"][0])
+                    #print(song["TRACKNUMBER"][0])
                 except:
                     pass
         file.close()
         #print("Done writing metadata file.")
+        #print("ArtistNoKey = ", self.ArtistNoKey)
+        #print("ArtistEmptyField = ", self.ArtistEmptyField)
+        #print("TitleNoKey = ", self.TitleNoKey)
+        #print("TitleEmptyField = ", self.TitleEmptyField)
         #print("AlbumNoKey = ", self.AlbumNoKey)
         #print("AlbumEmptyField = ", self.AlbumEmptyField)
         #print("GenreNoKey = ", self.GenreNoKey)
         #print("GenreEmptyField = ", self.GenreEmptyField)
-        if self.UseMeta:
-            #print("ArtistNoKey = ", self.ArtistNoKey)
-            #print("ArtistEmptyField = ", self.ArtistEmptyField)
-            #print("TitleNoKey = ", self.TitleNoKey)
-            #print("TitleEmptyField = ", self.TitleEmptyField)
-            pass
+        #print("TrackNoKey = ", self.TrackNoKey)
+        #print("TrackEmptyField = ", self.TrackEmptyField)
         return 1
