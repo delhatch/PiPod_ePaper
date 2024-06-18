@@ -300,12 +300,11 @@ class menu():
         return None
 
     def select(self, playMode):
-        # The only use of 'playMode' is that if the list of songs is currently on the screen, then build the
-        #     song list que appropriate to the playback mode currently in place.
-        #print("Entering select with", self.menuDict["current"] )
+        # The only use of 'playMode' is to build a song list que according to the playback mode currently in place.
         if self.menuDict["current"] == "Artists":
             # Screen is showing a list of Artists, and one was just clicked on,
             #    so build a list of all songs by that Artist, then exit.
+            # The User Story is "I know the artist, and I want to play a specific song by that artist."
             self.changedScreen = True
             tempList = []
             for item in self.menuDict["Songs"]:
@@ -316,27 +315,37 @@ class menu():
             self.menuDict["selectedItem"] = 0
 
         elif self.menuDict["current"] == "Albums":
-            # Screen is showing a list of Albums, and one was just clicked on,
-            #    so build a list of all songs on that Album, then exit.
+            # Screen is showing a list of Albums, and an album item was just clicked on,
+            #    so build a list of all songs on that Album, in track order, then call for immediate play.
+            # The User Story is "I know the name of an album, and I want to play that album, in track order."
             self.changedScreen = True
             tempList = []
             for item in self.menuDict["Songs"]:
                 if item[2] == self.menuDict["Albums"][self.menuDict["selectedItem"]]:
                     tempList.append(item)
-            self.menuDict["list"] = tempList   # Puts into list
-            self.menuDict["current"] = "list"  # Says "the next thing to do is to display this list"
+            # Now sort that list by track number
+            sortedList = sorted( tempList, key=lambda meta: int(meta[5]) )
+            self.menuDict["Queue"] = sortedList   # Put songs onto the que, so they can be played.
+            #self.menuDict["list"] = sortedList   # Puts into list, to show/display the list.
+            #self.menuDict["current"] = "list"  # Says "the next thing to do is to display this list"
             self.menuDict["selectedItem"] = 0
+            return "playGotoTop"
 
         elif self.menuDict["current"] == "Genres":
-            # Screen is showing a list of genres, and one was just clicked on.
+            # Screen is showing a list of genres, and a genre item was just clicked on.
+            #    so build a list of songs matching that genre, and play those songs in random order.
+            # The User Story is "I have a genre in mind, and I want to play songs of that genre."
             self.changedScreen = True
             tempList = []
             for item in self.menuDict["Songs"]:
                 if item[4] == self.menuDict["Genres"][self.menuDict["selectedItem"]]:
                     tempList.append(item)
-            self.menuDict["list"] = tempList
-            self.menuDict["current"] = "list"
+            sortedList = random.sample( tempList, len(tempList) )
+            self.menuDict["Queue"] = sortedList   # Put songs onto the que, so they can be played.
+            #self.menuDict["list"] = sortedList   # Puts into list, to show/display the list.
+            #self.menuDict["current"] = "list"  # Says "the next thing to do is to display this list"
             self.menuDict["selectedItem"] = 0
+            retun "playGotoTop"
 
         elif self.menuDict["current"] == "Queue": # Screen shows "Clear queue" + songs on the que.
             # And, user clicked on a song. So start playing that song.
@@ -348,7 +357,7 @@ class menu():
             #    upon a song being selected by hitting ENTER.
             tempList = list(self.menuDict[self.menuDict["current"]])
             self.menuDict["Queue"] = tempList
-            return "playGotoTop"
+            return "play"
 
         elif self.menuDict["current"] == "Songs":
             # Screen is showing a list of all the Songs, and a song was clicked on.
@@ -368,7 +377,7 @@ class menu():
                 # Play mode is "Repeat1" so put just that song onto the play que. After it plays, main.py will figure it out.
                 self.menuDict["Queue"].insert(0, self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]])
                 self.menuDict["selectedItem"] = 0   # The song to play is now the first one on the queue.
-            return "playGotoTop"
+            return "play"
 
         elif self.menuDict["current"] == "Settings":
             if self.menuDict["Settings"][self.menuDict["selectedItem"]] == "Update library":
@@ -391,24 +400,23 @@ class menu():
                 return "Repeat1"
 
         else:
+            # To get here, the user had clicked "select" on a list of menu items, not a list of songs/albums/genres, etc...
             self.changedScreen = True
-            #print("In 'else' with 'current' screen =", self.menuDict["current"] )
             if self.menuDict[self.menuDict["current"]]:  # Does current menu screen has sub-screens? If so, do:
                 self.menuDict["history"].append(self.menuDict["current"])  # update history
                 self.menuDict["current"] = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]  # go to next menu
-                #print(self.menuDict["current"])
-            self.menuDict["selectedItem"] = 0
-            #print("Exiting 'else' with 'current' screen =", self.menuDict["current"] )
-            if self.menuDict["current"] == "Songs":
-                return "setSongSelectedItem"          # Clicked on "Songs". If one is playing, change index so it is centered later.
-            if self.menuDict["current"] == "Shutdown":
+                self.menuDict["selectedItem"] = 0
+                return None
+            elif self.menuDict["current"] == "Songs":
+                return "setSongSelectedItem"          # Clicked on "Songs" from the list. If one is playing, change index so it is centered later.
+            elif self.menuDict["current"] == "Shutdown":
                 return "shutdown"
-            if self.menuDict["current"] == "Albums":
-                return "setAlbumSelectedItem"         # Clicked on "Albums". Set index so this album is centered later.
-            if self.menuDict["current"] == "Artists":
-                return "setArtistSelectedItem"        # Clicked on "Artists". As above.
-            if self.menuDict["current"] == "Genres":
-                return "setGenreSelectedItem"         # Clicked on "Genre". As above.
+            elif self.menuDict["current"] == "Albums":
+                return "setAlbumSelectedItem"         # Clicked on "Albums" from the list. Set index so this album is centered later.
+            elif self.menuDict["current"] == "Artists":
+                return "setArtistSelectedItem"        # Clicked on "Artists" from the menu list. As above.
+            elif self.menuDict["current"] == "Genres":
+                return "setGenreSelectedItem"         # Clicked on "Genre" from the menu list. As above.
         return None
 
     def loadMetadata(self):
