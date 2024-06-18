@@ -324,6 +324,13 @@ class menu():
                 if item[2] == self.menuDict["Albums"][self.menuDict["selectedItem"]]:
                     tempList.append(item)
             # Now sort that list by track number
+            # Fix the track number string prior to sorting. Sometimes the track number is like "4/11" instead of just "4"
+            whichItem = 0
+            for item in tempList:
+                if( '/' in item[5] ):
+                    before_slash = item[5].split('/')[0]   # The [0] means "up to the first instance of a slash"
+                    tempList[whichItem][5] = before_slash  # Replace the "4/11" with just "4"
+                whichItem += 1
             sortedList = sorted( tempList, key=lambda meta: int(meta[5]) )
             self.menuDict["Queue"] = sortedList   # Put songs onto the que, so they can be played.
             #self.menuDict["list"] = sortedList   # Puts into list, to show/display the list.
@@ -345,7 +352,7 @@ class menu():
             #self.menuDict["list"] = sortedList   # Puts into list, to show/display the list.
             #self.menuDict["current"] = "list"  # Says "the next thing to do is to display this list"
             self.menuDict["selectedItem"] = 0
-            retun "playGotoTop"
+            return "playGotoTop"
 
         elif self.menuDict["current"] == "Queue": # Screen shows "Clear queue" + songs on the que.
             # And, user clicked on a song. So start playing that song.

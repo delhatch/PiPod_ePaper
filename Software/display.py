@@ -224,7 +224,7 @@ class view():
             genreLine = "Genre: " + genre
             self.draw.text( (2,70), albumLine, font=self.font15, fill=0 )
             self.draw.text( (2,86), genreLine, font=self.font15, fill=0 )
-            if( track != '0/0' ):
+            if( track != '0' ):
                 trackLine = "Track: " + track
                 lengthTrackLine = self.draw.textlength( trackLine, self.font15 ) # How many pixels needed for this text
                 self.draw.text( (self.dispWidth - (lengthTrackLine+2), 86), trackLine, font=self.font15, fill=0 ) # Right justify

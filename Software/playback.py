@@ -283,12 +283,15 @@ class music():
             if( 'TRACKNUMBER' in song ):
                 if( song['TRACKNUMBER'] == [] ):  # Key exists, but points to empty field.
                     self.TrackEmptyField += 1
-                    song['TRACKNUMBER'] = ['0/0']  # Found 2146 of these
+                    song['TRACKNUMBER'] = ['0']  # Found 2146 of these
                 else:
+                    #print(song['TRACKNUMBER'] )
+                    #if( '/' in str(song['TRACKNUMBER']) ):
+                        #print(song['ALBUM'])
                     pass  # Genre field was filled in. Is legit.
             else:
                 self.TrackNoKey += 1
-                song['TRACKNUMBER'] = ['0/0']   # Found 158 of these
+                song['TRACKNUMBER'] = ['0']   # Found 158 of these
 
             # At this point, the following writer call should never fail.
             try:
