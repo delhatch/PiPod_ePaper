@@ -412,17 +412,16 @@ class menu():
             if self.menuDict[self.menuDict["current"]]:  # Does current menu screen has sub-screens? If so, do:
                 self.menuDict["history"].append(self.menuDict["current"])  # update history
                 self.menuDict["current"] = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]  # go to next menu
-                self.menuDict["selectedItem"] = 0
-                return None
-            elif self.menuDict["current"] == "Songs":
+            self.menuDict["selectedItem"] = 0
+            if self.menuDict["current"] == "Songs":
                 return "setSongSelectedItem"          # Clicked on "Songs" from the list. If one is playing, change index so it is centered later.
-            elif self.menuDict["current"] == "Shutdown":
+            if self.menuDict["current"] == "Shutdown":
                 return "shutdown"
-            elif self.menuDict["current"] == "Albums":
+            if self.menuDict["current"] == "Albums":
                 return "setAlbumSelectedItem"         # Clicked on "Albums" from the list. Set index so this album is centered later.
-            elif self.menuDict["current"] == "Artists":
+            if self.menuDict["current"] == "Artists":
                 return "setArtistSelectedItem"        # Clicked on "Artists" from the menu list. As above.
-            elif self.menuDict["current"] == "Genres":
+            if self.menuDict["current"] == "Genres":
                 return "setGenreSelectedItem"         # Clicked on "Genre" from the menu list. As above.
         return None
 
