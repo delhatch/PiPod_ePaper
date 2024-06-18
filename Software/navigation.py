@@ -7,7 +7,8 @@ alphaList = list(string.ascii_uppercase)
 class menu():
     menuDict = {
         "selectedItem": 0,
-        "Main": ["Songs", "Shutdown", "Albums", "Artists", "Genres", "Play Mode", "Settings", "Queue"],
+        "Main": ["Songs", "Shutdown", "Play More by this Artist", "Artists", "Genres", "Play More of this Genre", \
+                  "Albums", "Play Mode", "Settings", "Play More from this Album", "Queue"],
         "Songs": [],
         "Artists": [],
         "Albums": [],
@@ -299,8 +300,9 @@ class menu():
         self.menuDict["current"] = "Main"
         return None
 
-    def select(self, playMode):
+    def select(self, playMode, selectCurrentSong):
         # The only use of 'playMode' is to build a song list que according to the playback mode currently in place.
+        # 'selectCurrentSong' is used to do "Play More by this Artist" etc...
         if self.menuDict["current"] == "Artists":
             # Screen is showing a list of Artists, and one was just clicked on,
             #    so build a list of all songs by that Artist, then exit.
@@ -423,6 +425,24 @@ class menu():
                 return "setArtistSelectedItem"        # Clicked on "Artists" from the menu list. As above.
             if self.menuDict["current"] == "Genres":
                 return "setGenreSelectedItem"         # Clicked on "Genre" from the menu list. As above.
+            if self.menuDict["current"] == "Play More by this Artist":
+                # Get current Artist
+                currentArtist = selectCurrentSong[1]
+                # Create list of all songs by that artist
+                tempList = [["", "", "", "", "", ""]]
+                for item in self.menuDict["Songs"]:
+                    if item[1] == currentArtist:
+                        tempList.append(item)
+                tempList.pop(0)            # Remove the first item, which is the null/empty item.
+                # Now remove the currently playing song from that list
+                while selectCurrentSong in tempList:
+                    tempList.remove(selectCurrentSong)
+                self.menuDict["Queue"] = tempList   # Put songs onto the que, so they can be played.
+                #self.menuDict["selectedItem"] = 0
+                # Now insert this list into the list of songs that is currently playing
+                #insertPoint = int( self.menuDict["selectedItem"] )
+                #self.playlist[ insertPoint:insertPoint ] = tempList
+                return "insertQueue"
         return None
 
     def loadMetadata(self):

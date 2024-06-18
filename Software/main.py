@@ -112,7 +112,8 @@ while True:
                 music.playPause()
             else:
                 currentMode = music.getPlaybackMode()
-                action = menu.select( currentMode )
+                currentSongInformation = music.getSong()
+                action = menu.select( currentMode, currentSongInformation )
                 if action == "playGotoTop":
                     songSelectedItem = 0     # Play starting at the top of the list
                     music.loadList(menu.menuDict["Queue"], songSelectedItem )
@@ -193,6 +194,9 @@ while True:
                             music.shuffle()
                         if action == "Normal":
                             music.unshuffle()
+                elif action == "insertQueue":
+                    music.insertList( menu.menuDict["Queue"] )
+                    menu.upTree(2)     # Set screen back at top-level screen
                 #else:
                     #print("No command found for that keypress")
         # The next line gets executed every time a key was pressed.

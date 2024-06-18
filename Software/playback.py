@@ -103,6 +103,9 @@ class music():
         }
         return status
 
+    def getSong(self):
+        return self.playlist[self.currentSongIndex]
+
     def loop(self):
         if self.player.get_state() == vlc.State.Ended:
             if( self.playbackMode != "Repeat1" ):
@@ -112,10 +115,16 @@ class music():
             self.play()
         return None
 
-    def loadList(self, songList, songIndex ):
+    def loadList( self, songList, songIndex ):
         self.playlist = songList
         self.currentSongIndex = songIndex
         self.play()
+
+    def insertList( self, list2Insert ):
+        insertPoint = int( self.currentSongIndex + 1 )
+        if( insertPoint >= len( self.playlist ) ):
+            insertPoint = 0
+        self.playlist[ insertPoint:insertPoint ] = list2Insert
 
     def updateList(self, newList):
         if self.playlist[0] == ["", "", "", "", "", ""]:
