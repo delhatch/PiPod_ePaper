@@ -8,7 +8,7 @@ class menu():
     menuDict = {
         "selectedItem": 0,
         "Main": ["Songs", "Shutdown", "Play More by this Artist", "Artists", "Genres", "Play More of this Genre", \
-                  "Albums", "Play Mode", "Settings", "Play More from this Album", "Queue"],
+                  "Albums", "Play Mode", "Settings", "Play this Album", "Queue"],
         "Songs": [],
         "Artists": [],
         "Albums": [],
@@ -428,21 +428,43 @@ class menu():
             if self.menuDict["current"] == "Play More by this Artist":
                 # Get current Artist
                 currentArtist = selectCurrentSong[1]
-                # Create list of all songs by that artist
-                tempList = [["", "", "", "", "", ""]]
-                for item in self.menuDict["Songs"]:
-                    if item[1] == currentArtist:
-                        tempList.append(item)
-                tempList.pop(0)            # Remove the first item, which is the null/empty item.
-                # Now remove the currently playing song from that list
-                while selectCurrentSong in tempList:
-                    tempList.remove(selectCurrentSong)
-                self.menuDict["Queue"] = tempList   # Put songs onto the que, so they can be played.
-                #self.menuDict["selectedItem"] = 0
-                # Now insert this list into the list of songs that is currently playing
-                #insertPoint = int( self.menuDict["selectedItem"] )
-                #self.playlist[ insertPoint:insertPoint ] = tempList
-                return "insertQueue"
+                if( (str(currentArtist) == "") or (str(currentArtist) == "Unknown Artist") ):
+                    return "showTopScreen"   # Just ignore this command and go back to the top player screen.
+                else:
+                    # Create list of all songs by that artist
+                    tempList = []
+                    for item in self.menuDict["Songs"]:
+                        if item[1] == currentArtist:
+                            tempList.append(item)
+                    # Now remove the currently playing song from that list
+                    while selectCurrentSong in tempList:
+                        tempList.remove(selectCurrentSong)
+                    sortedList = random.sample( tempList, len(tempList) )
+                    self.menuDict["Queue"] = sortedList   # Put songs onto the que, so they can be played.
+                    # Now insert this song list into the list of currently playing songs.
+                    return "insertQueue"
+            if self.menuDict["current"] == "Play this Album":
+                currentAlbum = selectCurrentSong[2]
+                if( (str(currentAlbum) == "") or (str(currentAlbum) == "Unknown Album") ):
+                    return "showTopScreen"   # Just ignore this command and go back to the top player screen.
+                else:
+                    tempList = []
+                    for item in self.menuDict["Songs"]:
+                        if item[2] == currentAlbum:
+                            tempList.append(item)
+                    # Now sort the Album tracks by track number
+                    # Fix the track number string prior to sorting. Sometimes the track number is like "4/11" instead of just "4"
+                    whichItem = 0
+                    for item in tempList:
+                        if( '/' in item[5] ):
+                            before_slash = item[5].split('/')[0]   # The [0] means "up to the first instance of a slash"
+                            tempList[whichItem][5] = before_slash  # Replace the "4/11" with just "4"
+                        whichItem += 1
+                    sortedList = sorted( tempList, key=lambda meta: int(meta[5]) )
+                    self.menuDict["Queue"] = sortedList   # Put songs onto the que, so they can be played.
+                    # Now insert this song list into the list of currently playing songs.
+                    return "insertQueue"
+
         return None
 
     def loadMetadata(self):

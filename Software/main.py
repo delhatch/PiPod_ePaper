@@ -194,9 +194,11 @@ while True:
                             music.shuffle()
                         if action == "Normal":
                             music.unshuffle()
-                elif action == "insertQueue":
+                elif action == "insertQueue":    # Take the list of currently-playing songs, and insert the Queue into it.
                     music.insertList( menu.menuDict["Queue"] )
                     menu.upTree(2)     # Set screen back at top-level screen
+                elif action == "showTopScreen":
+                    menu.upTree(2)
                 #else:
                     #print("No command found for that keypress")
         # The next line gets executed every time a key was pressed.
