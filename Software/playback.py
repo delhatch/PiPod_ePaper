@@ -122,9 +122,18 @@ class music():
 
     def insertList( self, list2Insert ):
         insertPoint = int( self.currentSongIndex + 1 )
-        if( insertPoint >= len( self.playlist ) ):
-            insertPoint = 0
+        #if( insertPoint >= len( self.playlist ) ):
+            #insertPoint = 0
         self.playlist[ insertPoint:insertPoint ] = list2Insert
+
+    def wipePrior(self):
+        # Put current song at the top of the playlist
+        self.playlist.insert( 0, self.playlist.pop( self.currentSongIndex ) )
+        # Keep playing current song, keep displaying the current song on top screen, etc...
+        self.currentSongIndex = 0
+        # Delete the rest of the playlist, keeping only the current song at the top of the list.
+        del self.playlist[1:]
+        return
 
     def updateList(self, newList):
         if self.playlist[0] == ["", "", "", "", "", ""]:

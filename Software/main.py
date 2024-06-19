@@ -122,6 +122,10 @@ while True:
                     songSelectedItem = menu.getSelectedItem()    # Play the list starting at the highlighted item
                     music.loadList(menu.menuDict["Queue"], songSelectedItem )
                     menu.upTree(2)
+                elif action == "switch2Genre":    # Keep playing current song. Wipe list of prior songs. Append Que.
+                    music.wipePrior()
+                    music.insertList( menu.menuDict["Queue"] )
+                    menu.upTree(2)
                 #elif action == "clearQueue":
                     #menu.menuDict["Queue"] = []
                     #music.clearQueue()

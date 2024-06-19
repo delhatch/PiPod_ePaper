@@ -7,7 +7,7 @@ alphaList = list(string.ascii_uppercase)
 class menu():
     menuDict = {
         "selectedItem": 0,
-        "Main": ["Songs", "Shutdown", "Play More by this Artist", "Artists", "Genres", "Play More of this Genre", \
+        "Main": ["Songs", "Shutdown", "Play More by this Artist", "Artists", "Genres", "Switch to this Genre", \
                   "Albums", "Play Mode", "Settings", "Play this Album", "Queue"],
         "Songs": [],
         "Artists": [],
@@ -178,6 +178,39 @@ class menu():
                 index = 0
             self.menuDict["selectedItem"] = index
 
+        elif( (self.menuDict["current"] == "Genres") and (downButton == 1) ):  # Jump to next Genre that is alphabetically greater.
+            # Get first letter of the currently selected Genre.
+            self.changedScreen = True
+            genreName = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
+            firstL = genreName[0]
+            # Now scan up until find a Genre who's first letter is smaller than this one. Save that letter.
+            if (firstL in alphaList) and (firstL != 'A') and (self.menuDict["selectedItem"] != 0):
+                nextL = chr(ord(firstL) - 1)
+                # Find index of the first Genre that starts with a letter LESS THAN this one
+                index = self.menuDict["selectedItem"]
+                index -= 1
+                nextGenre = self.menuDict[self.menuDict["current"]][index]
+                nextGenreFirstL = nextGenre[0]
+                while( nextGenreFirstL >= nextL ):
+                    if( index <= 0 ):
+                        index = -1
+                        break
+                    else:
+                        index -= 1
+                        nextGenre = self.menuDict[self.menuDict["current"]][index]
+                        nextGenreFirstL = nextGenre[0]
+                self.menuDict["selectedItem"] = index + 1
+            else:
+                # Selected Genre did not start with a letter in B-Z. So just go to top of list.
+                self.menuDict["selectedItem"] = 0
+        elif( (self.menuDict["current"] == "Genre") and (downButton == 0) ):  # DOWN button was pressed, so jump up 5 Genres
+            self.changedScreen = True
+            index = self.menuDict["selectedItem"]
+            index -= 5
+            if( index < 0 ):
+                index = 0
+            self.menuDict["selectedItem"] = index
+
         return "updateList"
 
     def right(self, downButton ):
@@ -256,7 +289,7 @@ class menu():
                 index = len(self.menuDict[self.menuDict["current"]]) - 1
             self.menuDict["selectedItem"] = index
 
-        elif( (self.menuDict["current"] == "Albums") and (downButton == 1) ):  # move songs on the selected album to queue
+        elif( (self.menuDict["current"] == "Albums") and (downButton == 1) ):  # Jump to the next Album that is alphabetically greater.
             # Get first letter of the currently selected artist's name.
             self.changedScreen = True
             albumName = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
@@ -287,6 +320,41 @@ class menu():
             self.changedScreen = True
             index = self.menuDict["selectedItem"]
             index += 8
+            if( index > (len(self.menuDict[self.menuDict["current"]])-1) ):
+                index = len(self.menuDict[self.menuDict["current"]]) - 1
+            self.menuDict["selectedItem"] = index
+
+        elif( (self.menuDict["current"] == "Genres") and (downButton == 1) ):  # Jump to the next Genre that is alphabetically greater.
+            # Get first letter of the currently selected Genre.
+            self.changedScreen = True
+            genreName = self.menuDict[self.menuDict["current"]][self.menuDict["selectedItem"]]
+            firstL = genreName[0]
+            if (firstL in alphaList) and (firstL != 'Z'):
+                nextL = chr(ord(firstL) + 1)
+                # Find index of the first song that starts with that letter, or greater.
+                index = self.menuDict["selectedItem"]
+                index += 1
+                nextGenre = self.menuDict[self.menuDict["current"]][index]
+                nextGenreFirstL = nextGenre[0]
+                while( nextGenreFirstL <= firstL ):
+                    index += 1
+                    nextGenre = self.menuDict[self.menuDict["current"]][index]
+                    nextGenreFirstL = nextGenre[0]
+                self.menuDict["selectedItem"] = index
+            elif ( firstL != 'Z'):
+                index = self.menuDict["selectedItem"]
+                index += 1
+                nextGenre = self.menuDict[self.menuDict["current"]][index]
+                nextGenreFirstL = nextGenre[0]
+                while( nextGenreFirstL != 'A' ):
+                    index += 1
+                    nextGenre = self.menuDict[self.menuDict["current"]][index]
+                    nextGenreFirstL = nextGenre[0]
+                self.menuDict["selectedItem"] = index
+        elif( (self.menuDict["current"] == "Genre") and (downButton == 0) ):  # DOWN was pressed, jump down 5 Genres
+            self.changedScreen = True
+            index = self.menuDict["selectedItem"]
+            index += 5
             if( index > (len(self.menuDict[self.menuDict["current"]])-1) ):
                 index = len(self.menuDict[self.menuDict["current"]]) - 1
             self.menuDict["selectedItem"] = index
@@ -439,7 +507,7 @@ class menu():
                     # Now remove the currently playing song from that list
                     while selectCurrentSong in tempList:
                         tempList.remove(selectCurrentSong)
-                    sortedList = random.sample( tempList, len(tempList) )
+                    sortedList = random.sample( tempList, len(tempList) )    # Put the Artist's songs in random order.
                     self.menuDict["Queue"] = sortedList   # Put songs onto the que, so they can be played.
                     # Now insert this song list into the list of currently playing songs.
                     return "insertQueue"
@@ -464,6 +532,24 @@ class menu():
                     self.menuDict["Queue"] = sortedList   # Put songs onto the que, so they can be played.
                     # Now insert this song list into the list of currently playing songs.
                     return "insertQueue"
+            if self.menuDict["current"] == "Switch to this Genre":
+                # Get current Genre
+                currentGenre = selectCurrentSong[4]
+                if( (str(currentGenre) == "") or (str(currentGenre) == "Unknown Genre") ):
+                    return "showTopScreen"   # Just ignore this command and go back to the top player screen.
+                else:
+                    # Create list of all songs in this Genre
+                    tempList = []
+                    for item in self.menuDict["Songs"]:
+                        if item[4] == currentGenre:
+                            tempList.append(item)
+                    # Now remove the currently playing song from that list
+                    while selectCurrentSong in tempList:
+                        tempList.remove(selectCurrentSong)
+                    sortedList = random.sample( tempList, len(tempList) )    # Put this Genre's songs in random order.
+                    self.menuDict["Queue"] = sortedList   # Put songs onto the que, so they can be played.
+                    # Now insert this song list into the list of currently playing songs.
+                    return "switch2Genre"
 
         return None
 
