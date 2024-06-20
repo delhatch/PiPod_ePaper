@@ -83,28 +83,38 @@ while True:
                 action = menu.up()
 
         elif pressed == K_DOWN:
-            if menu.menuDict["current"] == "musicController":
-                music.backup( 5000 ) # Back up this many milliseconds
-                refreshNow = True
-            else:
+            #if menu.menuDict["current"] == "musicController":
+                #music.backup( 5000 ) # Back up this many milliseconds
+                #refreshNow = True
+            #else:
+                #action = menu.down()
+            if menu.menuDict["current"] != "musicController":
                 action = menu.down()
 
         elif pressed == K_LEFT:
-            if menu.menuDict["current"] == "musicController":
-                music.prev()
+            # Before calling the code to handle the keypress, check the status of the K_DOWN button.
+            state17 = PiPod.isPressed(17)     # state17 = 1 (DOWN button NOT pressed) or 0 (DOWN button IS pressed).
+            if( menu.menuDict["current"] == "musicController" ):
+                if( state17 == 1 ):
+                    music.prev()
+                else:
+                    music.backup( 5000 )   # Back up 5 seconds
+                    refreshNow = True
             else:
-                # Before calling the code to handle the keypress, check the status of the K_DOWN button.
                 # DOWN+LEFT and DOWN+RIGHT do small jumps up/down a list.
-                state17 = PiPod.isPressed(17) # state17 = 'HIGH' (not pressed) or 'LOW' (pressed).
                 action = menu.left( state17 )
 
         elif pressed == K_RIGHT:
-            if menu.menuDict["current"] == "musicController":
-                music.next()
+            # Before calling the code to handle the keypress, check the status of the K_DOWN button.
+            state17 = PiPod.isPressed(17)     # state17 = 1 (DOWN button NOT pressed) or 0 (DOWN button IS pressed).
+            if( menu.menuDict["current"] == "musicController" ):
+                if( state17 == 1 ):
+                    music.next()
+                else:
+                    music.jumpForward( 5000 )   # Jump forward 5 seconds
+                    refreshNow = True
             else:
-                # Before calling the code to handle the keypress, check the status of the K_DOWN button.
                 # DOWN+LEFT and DOWN+RIGHT do small jumps up/down a list.
-                state17 = PiPod.isPressed(17) # state17 = 'HIGH' (not pressed) or 'LOW' (pressed).
                 action = menu.right( state17 )
 
         elif pressed == K_RETURN:    # Center navigation button

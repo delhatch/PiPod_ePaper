@@ -65,6 +65,14 @@ class music():
             mtime = 0
         self.player.set_time( mtime )
 
+    def jumpForward( self, forwardAmount ):
+        currentTime = self.player.get_time()
+        maxTime = self.player.get_length()
+        jumpTo = currentTime + forwardAmount
+        if( jumpTo <= (maxTime - 1000) ):
+            self.player.set_time( jumpTo )
+        return
+
     def setPlaybackMode(self, pmode):
         self.playbackMode = pmode
         return 1
