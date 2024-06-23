@@ -46,6 +46,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   <li>Eliminate flashing screen on sub-menus.</li>
   <li>Impliment an "Adjust Audio EQ" screen.</li>
   <li>Restore playback state on power-up (restore the play list, and the currently-playing song).</li>
+  <li>Automatic safe-shutdown when battery is almost depleted (at ~3.2 volts).</li>
 </ul>
 <h3>Instructions</h3>
 <p>Completion of these instructions takes about 40 minutes, not including the time transferring the music files.</p>
