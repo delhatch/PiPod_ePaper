@@ -42,10 +42,10 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 </ul>
 <h3>Features TODO</h3>
 <ul>
-  <li>Test "current draw vs. various refresh rates" for the top screen</li> 
+  <li>Test "current draw vs. various refresh rates" for the top (Playing) screen. It updates every 5 seconds, which isn't bad actually, but if this can be reduced without costing too much power, it might be worth it. TBD.</li> 
   <li>Eliminate flashing screen on sub-menus.</li>
   <li>Impliment an "Adjust Audio EQ" screen.</li>
-  <li>Restore playback state on power-up (restore the play list, and currently-playing song).</li>
+  <li>Restore playback state on power-up (restore the play list, and the currently-playing song).</li>
 </ul>
 <h3>Instructions</h3>
 <p>Completion of these instructions takes about 40 minutes, not including the time transferring the music files.</p>
