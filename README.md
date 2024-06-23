@@ -189,6 +189,6 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <h3>Operating Procedure</h3>
 <p>To charge the battery, slide the top power switch to the left. Connect a USB power supply to the USB jack at the bottom of the PiPod. Applying power will start charging the battery, and will also boot the PiPod.</p>
 <p>To shutdown the PiPod, press the up arrow to get into the menu tree. Press the down arrow to "Shutdown". Press the middle button.</p>
-<p>To operate from battery power, slide the top power switch to the right. Wait for it to boot.</p>
+<p>To operate from battery power, you MUST start with the ePiPod in the shutdown state. Do not run from USB power (power switch to the left) and then slide the power switch to the right (battery power). This causes a power glitch. Simply start with an ePiPod in the shutdown state, and slide the power switch to the right. Wait for it to boot.</p>
 <p>While operating from battery power, you can plug (and unplug) the bottom USB jack into a power source to charge the battery.</p>
 <p>To shutdown from battery power, find and press the "Shutdown" command as above. After 5 seconds (and with the bottom USB jack <b>NOT</b> connected to a power source), slide the top power switch to the left.</p>
