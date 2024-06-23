@@ -49,7 +49,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 </ul>
 <h3>Instructions</h3>
 <p>Completion of these instructions takes about 40 minutes, not including the time transferring the music files.</p>
-<p>The bare PC board and case parts can be ordered via this link at <a href="https://www.pcbway.com/project/shareproject/ePaper_PiPod_MP3_music_player_a6adf3e1.html">PCBWay</a>. For the case parts (top, bottom and frame parts) I specified 3D printing in Nylon: PA-12 with 35% glass fill. For the navigation and side buttons, any cheap white plastic will do.</p>
+<p>The bare PC board and case parts can be ordered via this link at <a href="https://www.pcbway.com/project/shareproject/ePaper_PiPod_MP3_music_player_a6adf3e1.html">PCBWay</a>. For the case parts (top, bottom and frame parts) I specified 3D printing in Nylon: PA-12 with 35% glass fill. For the navigation and side buttons, 3D printing in any cheap white plastic will do.</p>
 <a href="https://www.pcbway.com/project/shareproject/ePaper_PiPod_MP3_music_player_a6adf3e1.html"><img src="https://www.pcbway.com/project/img/images/frompcbway-1220.png" alt="PCB from PCBWay" /></a>
 <p>Instructions:</p>
 <ul>
