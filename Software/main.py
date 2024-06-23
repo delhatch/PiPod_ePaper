@@ -72,9 +72,11 @@ while True:
 
         elif pressed == K_u:
             music.volumeUp()
+            refreshNow = True
 
         elif pressed == K_d:
             music.volumeDown()
+            refreshNow = True
 
         elif pressed == K_UP:      # "up" arrow on the front navigation button array.
             if menu.menuDict["current"] == "musicController":
@@ -83,11 +85,6 @@ while True:
                 action = menu.up()
 
         elif pressed == K_DOWN:
-            #if menu.menuDict["current"] == "musicController":
-                #music.backup( 5000 ) # Back up this many milliseconds
-                #refreshNow = True
-            #else:
-                #action = menu.down()
             if menu.menuDict["current"] != "musicController":
                 action = menu.down()
 

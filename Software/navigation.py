@@ -8,13 +8,13 @@ class menu():
     menuDict = {
         "selectedItem": 0,
         "Main": ["Songs", "Shutdown", "Play More by this Artist", "Artists", "Genres", "Switch to this Genre", \
-                  "Albums", "Play Mode", "Settings", "Play this Album", "Queue"],
+                  "Albums", "Play this Album", "Play Mode", "Settings"],
         "Songs": [],
         "Artists": [],
         "Albums": [],
         "Genres": [],
         "Play Mode":["Normal","Shuffle","Repeat 1 Song"],
-        "Settings": ["Shutdown", "Turn EQ On","Turn EQ Off","Sleep", "Update library"],
+        "Settings": ["Turn EQ On","Turn EQ Off", "Update library"],
         "current": "musicController",
         "Queue": [],
         "history": [],
