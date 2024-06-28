@@ -60,7 +60,7 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
 <ul>
   <li>Download the OS file "2024-03-15-raspios-bookworm-arm64-lite.img.xz" or newer.</li>
   <li>Using rufus-3.22.exe (or similar), burn the image to a 128GB micro-SD card.</li>
-  <li>Assuming you have a fully-assembled PiPod hardware: Connect an HDMI monitor to the Pi Zero 2 W. Also connect a USB expander hub such as the SmartQ H302S to the Pi Zero usb connector. Connect a USB keyboard and mouse to the hub.</li>
+  <li>Assuming you have a fully-assembled PiPod hardware: Connect an HDMI monitor to the Pi Zero 2 W. Also connect a USB expander hub such as the SmartQ H302S to the Pi Zero usb connector. Connect a USB keyboard to the hub.</li>
   <img src="https://github.com/delhatch/PiPod_ePaper/blob/main/Pictures/epipod_setup2.jpg" width="500" />
   <li>Insert the SD card into the Pi Zero 2 W slot.</li>
   <li>Apply power (from a plug-in USB power supply) to the USB connector at the bottom of the PiPod.</li>
