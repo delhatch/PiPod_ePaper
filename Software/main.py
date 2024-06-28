@@ -223,6 +223,11 @@ while True:
         updateScreenCounter = 0
         if ( menu.menuDict["current"] == "musicController" ):
             status = PiPod.getStatus()         # Reads battery voltage
+            if( float(status[1]) <= 3.15 ):
+                # If battery voltage is too low, shutdown the unit.
+                view.shutdownImage()
+                stopRefreshing = True
+                os.system("sudo shutdown now")
             songMetadata = music.getStatus()   # Get song length, how far in, song info, vol, playlist, index of current song
             temp = view.update(status, menu.menuDict, songMetadata) # Creates the screen and writes to frame buffer
             temp = view.partialUpdate(status, menu.menuDict, songMetadata) # Only upates the time into song, and the bar.

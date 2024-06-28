@@ -30,6 +30,8 @@ class PiPod:
         # Initialize ADC
         self.adc = Adafruit_ADS1x15.ADS1115(address=0x48,busnum=1)
         self.keys = keypad.Keys( KEY_PINS, value_when_pressed = False, pull = True )
+        adc1 = self.adc.read_adc(1, gain=1) * Vadj * 1.005
+        self.lp = [ adc1 ] * len( self.lp )   # Initialize the low-pass filter to the current battery voltage.
 
     def scan_switches(self):
         event = self.keys.events.get()
@@ -56,7 +58,8 @@ class PiPod:
         adc1 = self.adc.read_adc(1, gain=1) * Vadj * 1.005
         self.lp.append(adc1)  # put new battery voltage reading at end of list.
         self.lp.pop(0)        # delete/remove the oldest value
-        adc1 = sum(self.lp) / len(self.lp)  # calculate the average value.
+        #adc1 = sum(self.lp) / len(self.lp)  # calculate the average value.
+        adc1 = sum(self.lp) / 3  # calculate the average value.
         #status[0] = adc0 > 4.5
         status[0] = True
         status[1] = "%.2f" % round(adc1, 2)

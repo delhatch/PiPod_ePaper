@@ -200,15 +200,21 @@ class view():
         volumeText = str(volume) + "%"
         self.draw.text( (3,1), volumeText, font=self.font15, fill=0 )
 
+        chargeText = str(batLevel) + " V"
+        self.draw.text( (self.dispWidth - 45, 1), chargeText, font=self.font15, fill=0 )
+
         if currentSong[1] == "":  # If there is no song being played, show 0/0
             queText = str(queIndex) + "/" + str(queLength-1)
         else:
             queText = str(queIndex+1) + "/" + str(queLength)
-        self.draw.text( ((self.dispWidth/2)-15,1), queText, font=self.font15, fill=0 )
+        #lengthQueText = self.draw.textlength( queText, self.font15 ) # How many pixels needed for this text (to center)
+        lengthQueText = self.draw.textlength( (str(queIndex+1) + "/"), self.font15 ) # How many pixels needed (to center '/')
 
-        chargeText = str(batLevel) + " V"
-        self.draw.text( (self.dispWidth - 45, 1), chargeText, font=self.font15, fill=0 )
+        # Now center the queText
+        #start = 125 - int( (lengthQueText / 2) )   # Screen is 250 pixels wide, so mid-point = 125. (to center text)
+        start = (125 - int( lengthQueText )) + 5   # Screen is 250 pixels wide, so mid-point = 125. (to center the '/')
 
+        self.draw.text( (int(start),1), queText, font=self.font15, fill=0 )
         self.draw.line( [(0,20),(self.dispWidth,20)], fill=0, width=2 )
 
         # Current song information
