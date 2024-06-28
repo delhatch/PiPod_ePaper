@@ -46,9 +46,6 @@ This project takes the github.com/delhatch/PiPod project (which was derived from
   <li>Eliminate flashing screen on sub-menus.</li>
   <li>Impliment an "Adjust Audio EQ" screen.</li>
   <li>Restore playback state on power-up (restore the play list, and the currently-playing song).</li>
-  <li>Automatic safe-shutdown when battery is almost depleted (at ~3.2 volts).</li>
-  <li>Have first voltage readout be accurate. (Pre-populate the low-pass filter array with a single ADC reading.)</li>
-  <li>Center the X/Y display of the queue level.</li>
   <li>Add the use of a GPIO to mute the headphone amp on power-up?</li>
   <li>Determine if there is a need to install all of the waveshare github. Just need the 2 files in this repo?</li>
 </ul>
